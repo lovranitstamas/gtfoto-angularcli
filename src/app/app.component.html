@@ -1,20 +1,201 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<nav class="navbar navbar-expand-lg sticky-top">
+  <!--navbar-dark bg-dark-->
+  <a class="navbar-brand gt-photo" href="index.html">GT FOTO</a>
+  <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          class="navbar-toggler"
+          data-target="#navbarSupportedContent"
+          data-toggle="collapse" type="button">
+    <div class="navbar-toggler-icon">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle font-weight-bold"
+           data-toggle="dropdown"
+           href="#" id="navbarDropdown"
+           role="button">
+          PORTFOLIO
+        </a>
+        <div aria-labelledby="navbarDropdown" class="dropdown-menu">
+          <a class="dropdown-item" href="engagement.html">Jegyesfotók</a>
+          <a class="dropdown-item" href="#">Esküvő</a>
+          <a class="dropdown-item" href="#">Portré</a>
+          <a class="dropdown-item" href="#">Család</a>
+          <a class="dropdown-item" href="#">Rendezvény</a>
+          <a class="dropdown-item" href="#">Tájak, városok</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Egyéb</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold" href="service.html">SZOLGÁLTATÁSOK</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold" href="profile.html">RÓLAM</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold" href="contact.html">KAPCSOLAT</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<carousel>
+  <slide [ngStyle]="{ 'background-image': 'url(assets/carousel1.jpg)' }">
+    <div class="carousel-caption d-none d-md-block">
+      <h3>Second slide label</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+  </slide>
+  <slide [ngStyle]="{ 'background-image': 'url(assets/carousel2.jpg)' }">
+    <div class="carousel-caption d-none d-md-block">
+      <h3>Second slide label</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+  </slide>
+  <slide [ngStyle]="{ 'background-image': 'url(assets/carousel3.jpg)' }">
+    <div class="carousel-caption d-none d-md-block">
+      <h3>Third slide label</h3>
+      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+    </div>
+  </slide>
+</carousel>
+
+<main>
+  <div class="main-page">
+
+    <section class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe allowfullscreen
+                    class="embed-responsive-item"
+                    src="https://www.youtube.com/embed/8V9Hx3Vscrg?fbclid=IwAR1SoocsSH7xVP1DSxs0c3qZUrnIz_fY_ogA2GwTXY42S8aEgiKXR3KvHT0"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container reservation mt-4">
+      <div class="row">
+        <div class="col-12 col-md-5">
+          <div class="card py-3">
+            <div class="card-body mx-auto">
+              <!--<h3 class="card-title mb-4 text-warning">ADATOK</h3>-->
+              <!--<ol>
+                <li class="py-2 font-weight-bold">Esküvő dátuma:</li>
+                <li class="py-2 font-weight-bold">2012 év 05 hónap 01 nap</li>
+                <li class="py-2 font-weight-bold">Esküvő helyszínének az irányítószáma: 9400</li>
+                <li class="py-2 font-weight-bold">E-mail cím:</li>
+                <li class="py-2 font-weight-bold">Név:</li>
+              </ol>-->
+              <!--<div class="text-center">
+                <a class="btn btn-success px-3 font-weight-bold w-50" href="#">FOGLALÁS</a>
+              </div>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-7 my-auto big-day">
+          <h3 class="mb-3 mt-4 mt-md-0">Ti mikorra tervezitek a nagy napot?</h3>
+          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam alias modi
+            repellendus eos accusantium officiis
+            dicta quam minus qui dignissimos.</p>
+          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos officiis, est
+            quam ducimus possimus animi
+            autem. Ullam ducimus, veniam aut et, quisquam fugit animi ea repellendus voluptatum totam sequi quod
+            excepturi.
+            Aperiam nostrum officiis soluta!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid portfolio mt-4">
+      <div class="container">
+        <div class="row py-5">
+          <div class="card-deck">
+            <div class="card mb-4 mb-sm-0">
+              <img alt="Card image cap" class="card-img-top w-25 mx-auto" src="assets/engagement.png">
+              <div class="card-body">
+                <h2 class="card-title text-center">JEGYESFOTÓ</h2>
+                <hr>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                  content. This content
+                  is a little bit longer.</p>
+              </div>
+              <div class="card-footer text-center">
+                <button class="btn btn-outline-warning" type="button">Tovább
+                  <i class="fa fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card mb-4 mb-sm-0">
+              <img alt="Card image cap" class="card-img-top w-25 mx-auto" src="assets/wedding.png">
+              <div class="card-body">
+                <h2 class="card-title text-center">ESKÜVŐ</h2>
+                <hr>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              <div class="card-footer text-center">
+                <button class="btn btn-outline-warning" type="button">Tovább
+                  <i class="fa fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card mb-4 mb-sm-0">
+              <img alt="Card image cap" class="card-img-top w-25 mx-auto" src="assets/photography.png">
+              <div class="card-body">
+                <h2 class="card-title text-center">WERK</h2>
+                <hr>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                  content. This card has
+                  even longer content than the first to show that equal height action.</p>
+              </div>
+              <div class="card-footer text-center">
+                <button class="btn btn-outline-warning" type="button">Tovább
+                  <i class="fa fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="mt-5">
+  <div class="container">
+    <div class="row py-4">
+      <div class="col-10">
+        <h3>GT FOTÓ</h3>
+        © 2018 | Minden jog fenntartva! - Örökítsük meg a legszebb pillanatokat!
+      </div>
+      <div class="col-2">
+        <a href="https://www.facebook.com/gal.tibiphoto/">
+          <i class="fa fa-facebook-square mt-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="d-none d-sm-block" id="menuIndicator">K
+  <br>E
+  <br>Z
+  <br>D
+  <br>Ő
+  <br>L
+  <br>A
+  <br>P
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<app-scroll-top></app-scroll-top>
+
 
