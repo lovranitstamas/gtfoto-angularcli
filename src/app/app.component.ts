@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {CarouselConfig} from 'ngx-bootstrap/carousel';
 
 @Component({
@@ -20,6 +20,14 @@ export class AppComponent {
     'Rendezvény',
     'Tájak, városok'
   ];
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const target = event.target;
+    if (target.innerWidth > 576) {
+      this.isCollapsed = true;
+    }
+  }
 
   onHidden(): void {
     console.log('Dropdown is hidden');
