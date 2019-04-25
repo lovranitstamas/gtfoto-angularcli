@@ -11,5 +11,6 @@ import { CarouselConfig } from 'ngx-bootstrap/carousel';
 })
 export class AppComponent {
   title = 'gtfoto-angular';
+  public isCollapsed = false;
 
 }

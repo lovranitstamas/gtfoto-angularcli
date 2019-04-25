@@ -3,7 +3,8 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
-import { ScrollTopComponent } from './scroll-top/scroll-top.component';
+import {ScrollTopComponent} from './scroll-top/scroll-top.component';
+import {CollapseModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ScrollTopComponent } from './scroll-top/scroll-top.component';
   ],
   imports: [
     BrowserModule,
-    CarouselModule
+    CarouselModule,
+    CollapseModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
