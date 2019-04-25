@@ -44,6 +44,12 @@ nav {
         color: #504f68;
         font-size: 1.2rem;
       }
+      .dropdown-item:hover {
+        background-color: $light-grey;
+        color: $dark-grey;
+        text-shadow: 0 0 2px $yellow;
+        font-size: 1.3rem;
+      }
     }
   }
 }
@@ -119,7 +125,6 @@ carousel .carousel {
 }
 
 
-
 /* index */
 .main-page {
   .reservation {
@@ -189,6 +194,7 @@ carousel .carousel {
   font-weight: bold;
   border: 1px double $light-grey;
 }
+
 /* end indicator*/
 
 

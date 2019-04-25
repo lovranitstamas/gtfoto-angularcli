@@ -13,4 +13,22 @@ export class AppComponent {
   title = 'gtfoto-angular';
   public isCollapsed = false;
 
+  items: string[] = [
+    'Esküvő',
+    'Portré',
+    'Család',
+    'Rendezvény',
+    'Tájak, városok'
+  ];
+
+  onHidden(): void {
+    console.log('Dropdown is hidden');
+  }
+  onShown(): void {
+    console.log('Dropdown is shown');
+  }
+  isOpenChange(): void {
+    console.log('Dropdown state is changed');
+  }
+
 }

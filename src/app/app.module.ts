@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {ScrollTopComponent} from './scroll-top/scroll-top.component';
-import {CollapseModule} from 'ngx-bootstrap';
+import {CollapseModule, BsDropdownModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import {CollapseModule} from 'ngx-bootstrap';
   imports: [
     BrowserModule,
     CarouselModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top">
   <!--navbar-dark bg-dark-->
-  <a class="navbar-brand gt-photo" href="index.html">GT FOTO</a>
+  <img alt="gtfoto" src="assets/gtfoto.png">
   <button (click)="isCollapsed = !isCollapsed"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
@@ -16,22 +16,21 @@
 
   <div [collapse]="isCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle font-weight-bold"
-           data-toggle="dropdown"
-           href="#" id="navbarDropdown" role="button">
-          PORTFOLIO
-        </a>
-        <div aria-labelledby="navbarDropdown" class="dropdown-menu">
-          <a class="dropdown-item" href="engagement.html">Jegyesfotók</a>
-          <a class="dropdown-item" href="#">Esküvő</a>
-          <a class="dropdown-item" href="#">Portré</a>
-          <a class="dropdown-item" href="#">Család</a>
-          <a class="dropdown-item" href="#">Rendezvény</a>
-          <a class="dropdown-item" href="#">Tájak, városok</a>
+      <li (isOpenChange)="isOpenChange()" (onHidden)="onHidden()" (onShown)="onShown()" class="nav-item" dropdown>
+        <a (click)="false"
+           aria-controls="basic-link-dropdown"
+           class="nav-link dropdown-toggle font-weight-bold"
+           dropdownToggle
+           href
+           id="basic-link">PORTFOLIO</a>
+        <ul *dropdownMenu aria-labelledby="basic-link" class="dropdown-menu"
+            id="basic-link-dropdown" role="menu">
+          <li *ngFor="let subMenuItem of items">
+            <a class="dropdown-item" href="#">{{subMenuItem}}</a>
+          </li>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Egyéb</a>
-        </div>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link font-weight-bold" href="service.html">SZOLGÁLTATÁSOK</a>
