@@ -129,15 +129,6 @@ carousel .carousel {
 /* index */
 .main-page {
   .reservation {
-    padding: 20px;
-    border-top: 3px solid #ffff00;
-    border-bottom: 3px solid #ff0000;
-    background-image: linear-gradient(#ffff00, #ff0000),
-    linear-gradient(#ffff00, #ff0000);
-    background-size: 3px 100%;
-    background-position: 0 0, 100% 0;
-    background-repeat: no-repeat;
-
     .card {
       background-image: url("../src/assets/reservation.jpg");
       background-position: center center;
@@ -165,8 +156,6 @@ carousel .carousel {
           height: 1px;
         }
       }
-
-
     }
 
     .card:nth-child(2) {
@@ -215,5 +204,20 @@ footer {
 @media only screen and (max-width: 575px) {
   carousel .carousel-control{
     display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .main-page {
+    .reservation {
+      padding: 20px;
+      border-top: 3px solid #ffff00;
+      border-bottom: 3px solid #ff0000;
+      background-image: linear-gradient(#ffff00, #ff0000),
+      linear-gradient(#ffff00, #ff0000);
+      background-size: 3px 100%;
+      background-position: 0 0, 100% 0;
+      background-repeat: no-repeat;
+    }
   }
 }
