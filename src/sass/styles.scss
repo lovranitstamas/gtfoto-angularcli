@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "variables";
+
+body {
+  background-color: $body-background;
+  background-image: url("../../src/assets/transparent_flower.png");
+  background-position: bottom center;
+  background-attachment: fixed;
+  color: $yellow;
+  overflow-x: hidden;
+}
+
+.content-container {
+  margin-top: 60px;
+}
+
+/* start indicator */
+#menuIndicator {
+  background-color: $yellow;
+  padding: 15px;
+  position: fixed;
+  top: 200px;
+  left: 0;
+  z-index: 1000;
+  color: $black;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-weight: bold;
+  border: 1px double $light-grey;
+}

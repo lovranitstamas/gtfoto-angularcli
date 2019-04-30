@@ -1,0 +1,11 @@
+@import "../../../sass/variables";
+
+footer {
+  background-color: $dark-grey;
+  color: $yellow;
+
+  .fa-facebook-square {
+    color: $yellow;
+    font-size: xx-large;
+  }
+}

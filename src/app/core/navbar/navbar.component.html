@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+  <a routerLink="/home"><img alt="gtfoto" src="assets/gtfoto.png"></a>
+  <button (click)="isCollapsed = !isCollapsed"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          class="navbar-toggler"
+          type="button">
+    <div class="navbar-toggler-icon">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </button>
+
+  <div [collapse]="isCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li (isOpenChange)="isOpenChange()" (onHidden)="onHidden()" (onShown)="onShown()" class="nav-item" dropdown>
+        <a (click)="false"
+           aria-controls="basic-link-dropdown"
+           class="nav-link dropdown-toggle font-weight-bold"
+           dropdownToggle
+           href
+           id="basic-link">PORTFOLIO</a>
+        <ul *dropdownMenu aria-labelledby="basic-link" class="dropdown-menu"
+            id="basic-link-dropdown" role="menu">
+          <li *ngFor="let subMenuItem of items">
+            <a class="dropdown-item" href="#">{{subMenuItem}}</a>
+          </li>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Egyéb</a>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold" routerLink="/myservice">SZOLGÁLTATÁSOK</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold" routerLink="/about">RÓLAM</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold" routerLink="/contact">KAPCSOLAT</a>
+      </li>
+    </ul>
+  </div>
+</nav>
