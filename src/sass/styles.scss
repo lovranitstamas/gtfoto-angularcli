@@ -11,7 +11,10 @@ body {
 }
 
 .content-container {
-  margin-top: 60px;
+  padding-top: 60px;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 130px;
 }
 
 /* start indicator */

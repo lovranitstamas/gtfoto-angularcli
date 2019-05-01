@@ -1,8 +1,10 @@
 @import '../../sass/variables';
 
 /deep/ carousel .carousel {
+  margin-top: -60px;
+
   .carousel-indicators {
-    bottom: 60px;
+    bottom: 50px;
 
     li {
       width: 15px;
@@ -34,7 +36,7 @@
       background-size: cover;
 
       .carousel-caption {
-        bottom: 80px;
+        bottom: 70px;
       }
     }
   }
@@ -71,7 +73,7 @@
 
 .reservation {
   .card {
-    background-image: url("../../../src/assets/reservation.jpg");
+    background-image: url('../../../src/assets/reservation.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     min-height: 400px;
@@ -120,7 +122,7 @@
     border-top: 3px solid $basic-yellow;
     border-bottom: 3px solid $red;
     background-image: linear-gradient($basic-yellow, $red),
-    linear-gradient($basic-yellow, $red);
+      linear-gradient($basic-yellow, $red);
     background-size: 3px 100%;
     background-position: 0 0, 100% 0;
     background-repeat: no-repeat;

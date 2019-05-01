@@ -3,6 +3,13 @@
 footer {
   background-color: $dark-grey;
   color: $yellow;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  .container .row {
+    height: 130px;
+  }
 
   .fa-facebook-square {
     color: $yellow;
