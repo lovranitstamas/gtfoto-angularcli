@@ -18,6 +18,7 @@ import {FooterComponent} from './core/footer/footer.component';
 import {ScrollTopComponent} from './core/scroll-top/scroll-top.component';
 import {NavbarComponent} from './core/navbar/navbar.component';
 import {AppRoutingModule} from './app-routing.module';
+import {MasonryGalleryModule} from 'ngx-masonry-gallery';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {AppRoutingModule} from './app-routing.module';
     CarouselModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    MasonryGalleryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

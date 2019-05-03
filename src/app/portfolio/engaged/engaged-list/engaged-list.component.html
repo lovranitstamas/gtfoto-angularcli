@@ -1,3 +1,25 @@
-<p>
-  engaged-list works!
-</p>
+<div class="container">
+  <div class="row header-row py-4">
+    <div class="col-12 title text-center rounded p-3">
+      <h1>ESKÜVŐK - JEGYESFOTÓK</h1>
+      <p>
+        Megörökítem életetek egyik legfontosabb napjának legszebb pillanatait.
+      </p>
+    </div>
+  </div>
+  <div class="row py-4">
+    <div class="col-12 col-md-11 order-2 order-md-1 text-center">
+      <ngx-masonry-gallery
+        [width]="320"
+        [images]="images"
+        class="masonry"
+      ></ngx-masonry-gallery>
+    </div>
+    <div class="col-12 col-md-1 order-1 text-center">Lorem ipsum</div>
+  </div>
+</div>
+
+<div id="menuIndicator" class="d-none d-sm-block">
+  J <br>E <br>G <br>Y <br>E <br>S <br>F <br>O <br>T <br>Ó
+  <br>K
+</div>
