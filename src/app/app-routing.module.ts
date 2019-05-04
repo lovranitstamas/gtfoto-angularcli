@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'portfolio',
     children: [
       {path: 'engaged-list', component: EngagedListComponent},
-      {path: 'photogallery', component: PhotogalleryPicturesComponent}
+      {path: 'photogallery-pictures', component: PhotogalleryPicturesComponent}
     ]
   },
   {path: 'myservice', component: MyserviceComponent},

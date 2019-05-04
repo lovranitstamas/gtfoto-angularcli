@@ -13,7 +13,7 @@ export class NavbarComponent {
     {
       name: 'Képgaléria',
       mainMenu: 'portfolio',
-      subMenu: 'photogallery'
+      subMenu: 'photogallery-pictures'
     },
     {
       name: 'Jegyesfotók',
