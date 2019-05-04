@@ -2,10 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {CollapseModule, BsDropdownModule} from 'ngx-bootstrap';
-
 import {AppComponent} from './app.component';
-import {EngagedComponent} from './portfolio/engaged/engaged.component';
-import {EngagedListComponent} from './portfolio/engaged/engaged-list/engaged-list.component';
 import {PortfoliocardComponent} from './portfolio/portfoliocard/portfoliocard.component';
 import {PortfolioDetailComponent} from './portfolio/portfolio-detail/portfolio-detail.component';
 import {StatisticsComponent} from './statement/statistics/statistics.component';
@@ -19,12 +16,11 @@ import {ScrollTopComponent} from './core/scroll-top/scroll-top.component';
 import {NavbarComponent} from './core/navbar/navbar.component';
 import {AppRoutingModule} from './app-routing.module';
 import {MasonryGalleryModule} from 'ngx-masonry-gallery';
+import {NgxGalleryModule} from 'ngx-gallery';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EngagedComponent,
-    EngagedListComponent,
     PortfoliocardComponent,
     PortfolioDetailComponent,
     StatisticsComponent,
@@ -44,7 +40,8 @@ import {MasonryGalleryModule} from 'ngx-masonry-gallery';
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AppRoutingModule,
-    MasonryGalleryModule
+    MasonryGalleryModule,
+    NgxGalleryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

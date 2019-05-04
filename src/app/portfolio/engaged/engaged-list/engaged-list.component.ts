@@ -7,10 +7,16 @@ import * as $ from 'jquery';
   templateUrl: './engaged-list.component.html',
   styleUrls: ['./engaged-list.component.scss']
 })
-export class EngagedListComponent {
+export class EngagedListComponent implements AfterViewInit {
+  private _urls: string[] = [
+    'assets/carousel1.jpg',
+    'assets/carousel1.jpg',
+    'assets/carousel1.jpg',
+    'assets/carousel1.jpg'
+  ];
   public ngAfterViewInit() {
-    $(document).ready(function() {
-      setTimeout(function() {
+    $(document).ready(() => {
+      setTimeout(() => {
         $('.masonry div img').each(function() {
           $(this).wrap('<div class="hover-zoom-box"></div>');
         });
@@ -18,15 +24,9 @@ export class EngagedListComponent {
     });
   }
 
-  private urls: string[] = [
-    'assets/carousel1.jpg',
-    'assets/carousel1.jpg',
-    'assets/carousel1.jpg',
-    'assets/carousel1.jpg'
-  ];
 
   public get images(): IMasonryGalleryImage[] {
-    return this.urls.map(
+    return this._urls.map(
       m =>
         <IMasonryGalleryImage>{
           imageUrl: m

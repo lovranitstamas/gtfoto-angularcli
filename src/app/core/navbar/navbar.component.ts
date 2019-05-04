@@ -9,12 +9,21 @@ export class NavbarComponent {
 
   public isCollapsed = true;
 
-  items: string[] = [
-    'Esküvő',
-    'Portré',
-    'Család',
-    'Rendezvény',
-    'Tájak, városok'
+  items = [
+    {
+      name: 'Képgaléria',
+      mainMenu: 'portfolio',
+      subMenu: 'photogallery'
+    },
+    {
+      name: 'Jegyesfotók',
+      mainMenu: 'portfolio',
+      subMenu: 'engaged-list'
+    }
+    // 'Portré',
+    // 'Család',
+    // 'Rendezvény',
+    // 'Tájak, városok'
   ];
 
   @HostListener('window:resize', ['$event'])
