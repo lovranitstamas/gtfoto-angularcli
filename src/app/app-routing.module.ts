@@ -9,6 +9,10 @@ import {MyserviceComponent} from './myservice/myservice.component';
 import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
 import {PageNotFoundComponent} from './core/page-not-found/page-not-found.component';
+import {ProfileComponent} from './user/profile/profile.component';
+import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
+import {LoginComponent} from './user/login/login.component';
+import {RegistrationComponent} from './user/registration/registration.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -22,6 +26,15 @@ const routes: Routes = [
   {path: 'myservice', component: MyserviceComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
+  {
+    path: 'user',
+    children: [
+      {path: '', component: ProfileComponent},
+      {path: 'edit', component: ProfileEditComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'registration', component: RegistrationComponent}
+    ]
+  },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
@@ -38,6 +51,10 @@ export class AppRoutingModule {
     MyserviceComponent,
     AboutComponent,
     ContactComponent,
+    LoginComponent,
+    RegistrationComponent,
+    ProfileComponent,
+    ProfileEditComponent,
     PageNotFoundComponent
   ];
 }
