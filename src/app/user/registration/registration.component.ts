@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {UserService} from "../../shared/user.service";
 
 @Component({
   selector: 'app-registration',
@@ -6,4 +7,10 @@ import {Component} from '@angular/core';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
+  constructor(private _userService: UserService) { }
+
+
+  register() {
+    this._userService.register();
+  }
 }

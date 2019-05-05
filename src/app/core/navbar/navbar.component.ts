@@ -1,4 +1,5 @@
 import {Component, HostListener} from '@angular/core';
+import {UserService} from "../../shared/user.service";
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,9 @@ import {Component, HostListener} from '@angular/core';
 export class NavbarComponent {
 
   public isCollapsed = true;
+
+  constructor(public userService: UserService) {
+  }
 
   items = [
     {
@@ -44,6 +48,10 @@ export class NavbarComponent {
 
   isOpenChange(): void {
     console.log('Dropdown state is changed');
+  }
+
+  logout() {
+    this.userService.logout();
   }
 
 }

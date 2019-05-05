@@ -21,6 +21,25 @@ export class UserService {
 
     }
 
+    console.log('Login: ' + this.isLoggedIn);
     return false;
+  }
+
+  register(param?: UserModel) {
+    if (param) {
+      this._user = new UserModel(param);
+    } else {
+      this._user = new UserModel(UserModel.exampleUser);
+    }
+    this.isLoggedIn = true;
+    console.log('Login: ' + this.isLoggedIn);
+    this._router.navigate(['/user']);
+  }
+
+  logout() {
+    this._user = new UserModel();
+    this.isLoggedIn = false;
+    console.log('Login: ' + this.isLoggedIn);
+    this._router.navigate(['/home']);
   }
 }
