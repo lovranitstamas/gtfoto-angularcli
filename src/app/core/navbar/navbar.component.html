@@ -40,15 +40,19 @@
       <li class="nav-item">
         <a class="nav-link font-weight-bold" routerLink="/contact">KAPCSOLAT</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link font-weight-bold" routerLink="/user/login">BELÉPÉS</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-weight-bold" routerLink="/user/registration">REGISZTRÁCIÓ</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-weight-bold" (click)="logout()">KIJELENTKEZÉS</a>
-      </li>
+      <ng-container *ngIf="!userService.isLoggedIn; else loggedInBlock">
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" routerLink="/user/login">BELÉPÉS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" routerLink="/user/registration">REGISZTRÁCIÓ</a>
+        </li>
+      </ng-container>
+      <ng-template #loggedInBlock>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" (click)="logout()">KIJELENTKEZÉS</a>
+        </li>
+      </ng-template>
     </ul>
   </div>
 </nav>

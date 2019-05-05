@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
-import {CollapseModule, BsDropdownModule} from 'ngx-bootstrap';
+import {AlertModule, CollapseModule, BsDropdownModule} from 'ngx-bootstrap';
 import {AppComponent} from './app.component';
 import {PortfoliocardComponent} from './portfolio/portfoliocard/portfoliocard.component';
 import {PortfolioDetailComponent} from './portfolio/portfolio-detail/portfolio-detail.component';
@@ -38,6 +38,7 @@ import {UserService} from './shared/user.service';
   imports: [
     BrowserModule,
     CarouselModule,
+    AlertModule.forRoot(),
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AppRoutingModule,
