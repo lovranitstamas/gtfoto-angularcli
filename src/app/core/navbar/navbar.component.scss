@@ -1,7 +1,7 @@
 @import "../../../sass/variables";
 
 nav {
-  background-color: $dark-grey;
+  background-color: $dark-blue;
 
   background-repeat: repeat-x;
   background-position-x: center;
@@ -28,7 +28,7 @@ nav {
       }
       .dropdown-item:hover {
         background-color: $light-grey;
-        color: $dark-grey;
+        color: $dark-blue;
         text-shadow: 0 0 2px $yellow;
         font-size: 1.3rem;
       }
