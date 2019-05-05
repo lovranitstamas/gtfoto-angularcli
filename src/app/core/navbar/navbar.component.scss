@@ -9,12 +9,12 @@ nav {
     1px 1px 0 $white;
 
   button.navbar-toggler {
-    border: 2px solid $light-grey;
+    border: 2px solid $light-blue;
     border-radius: 5px;
 
     div.navbar-toggler-icon div {
       width: 30px;
-      border-bottom: solid 5px $light-grey;
+      border-bottom: solid 5px $light-blue;
       height: 9px;
     }
   }
@@ -27,7 +27,7 @@ nav {
         font-size: 1.2rem;
       }
       .dropdown-item:hover {
-        background-color: $light-grey;
+        background-color: $light-blue;
         color: $dark-blue;
         text-shadow: 0 0 2px $yellow;
         font-size: 1.3rem;
