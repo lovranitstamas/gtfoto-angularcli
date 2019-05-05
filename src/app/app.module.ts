@@ -17,6 +17,7 @@ import {NavbarComponent} from './core/navbar/navbar.component';
 import {AppRoutingModule} from './app-routing.module';
 import {MasonryGalleryModule} from 'ngx-masonry-gallery';
 import {NgxGalleryModule} from 'ngx-gallery';
+import {UserService} from './shared/user.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import {NgxGalleryModule} from 'ngx-gallery';
     MasonryGalleryModule,
     NgxGalleryModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 
