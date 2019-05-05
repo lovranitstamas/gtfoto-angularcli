@@ -5,6 +5,7 @@ import {EngagedComponent} from './portfolio/engaged/engaged.component';
 import {EngagedListComponent} from './portfolio/engaged/engaged-list/engaged-list.component';
 import {PhotogalleryComponent} from './portfolio/photogallery/photogallery.component';
 import {PhotogalleryPicturesComponent} from './portfolio/photogallery/photogallery-pictures/photogallery-pictures.component';
+import {PortfolioDetailComponent} from "./portfolio/portfolio-detail/portfolio-detail.component";
 import {MyserviceComponent} from './myservice/myservice.component';
 import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
@@ -19,8 +20,16 @@ const routes: Routes = [
   {
     path: 'portfolio',
     children: [
-      {path: 'engaged-list', component: EngagedListComponent},
-      {path: 'photogallery-pictures', component: PhotogalleryPicturesComponent}
+      {
+        path: 'photogallery', component: PhotogalleryComponent, children: [
+          {path: 'pictures', component: PhotogalleryPicturesComponent}]
+      },
+      {
+        path: 'engaged', component: EngagedComponent, children: [
+          {path: 'list', component: EngagedListComponent}]
+      },
+      {path: 'new', component: PortfolioDetailComponent},
+      {path: ':id', component: PortfolioDetailComponent}
     ]
   },
   {path: 'myservice', component: MyserviceComponent},
@@ -46,8 +55,11 @@ const routes: Routes = [
 export class AppRoutingModule {
   static routableComponents = [
     HomeComponent,
+    EngagedComponent,
     EngagedListComponent,
+    PhotogalleryComponent,
     PhotogalleryPicturesComponent,
+    PortfolioDetailComponent,
     MyserviceComponent,
     AboutComponent,
     ContactComponent,

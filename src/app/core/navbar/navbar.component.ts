@@ -17,12 +17,14 @@ export class NavbarComponent {
     {
       name: 'Képgaléria',
       mainMenu: 'portfolio',
-      subMenu: 'photogallery-pictures'
+      subMenu: 'photogallery',
+      function: 'pictures'
     },
     {
       name: 'Jegyesfotók',
       mainMenu: 'portfolio',
-      subMenu: 'engaged-list'
+      subMenu: 'engaged',
+      function: 'list'
     }
     // 'Portré',
     // 'Család',
