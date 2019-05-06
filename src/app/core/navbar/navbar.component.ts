@@ -25,6 +25,12 @@ export class NavbarComponent {
       mainMenu: 'portfolio',
       subMenu: 'engaged',
       function: 'list'
+    },
+    {
+      name: 'Teszt',
+      mainMenu: 'portfolio',
+      subMenu: 'test',
+      function: 'list'
     }
     // 'Portré',
     // 'Család',

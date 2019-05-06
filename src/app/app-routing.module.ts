@@ -1,10 +1,12 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {HomeComponent} from './home/home.component';
-import {EngagedComponent} from './portfolio/engaged/engaged.component';
-import {EngagedListComponent} from './portfolio/engaged/engaged-list/engaged-list.component';
 import {PhotogalleryComponent} from './portfolio/photogallery/photogallery.component';
 import {PhotogalleryPicturesComponent} from './portfolio/photogallery/photogallery-pictures/photogallery-pictures.component';
+import {EngagedComponent} from './portfolio/engaged/engaged.component';
+import {EngagedListComponent} from './portfolio/engaged/engaged-list/engaged-list.component';
+import {TestComponent} from "./portfolio/test/test.component";
+import {TestListComponent} from "./portfolio/test/test-list/test-list.component";
 import {PortfolioDetailComponent} from "./portfolio/portfolio-detail/portfolio-detail.component";
 import {MyserviceComponent} from './myservice/myservice.component';
 import {AboutComponent} from './about/about.component';
@@ -14,6 +16,7 @@ import {ProfileComponent} from './user/profile/profile.component';
 import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
 import {LoginComponent} from './user/login/login.component';
 import {RegistrationComponent} from './user/registration/registration.component';
+
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -27,6 +30,10 @@ const routes: Routes = [
       {
         path: 'engaged', component: EngagedComponent, children: [
           {path: 'list', component: EngagedListComponent}]
+      },
+      {
+        path: 'test', component: TestComponent, children: [
+          {path: 'list', component: TestListComponent}]
       },
       {path: 'new', component: PortfolioDetailComponent},
       {path: ':id', component: PortfolioDetailComponent}
@@ -55,10 +62,12 @@ const routes: Routes = [
 export class AppRoutingModule {
   static routableComponents = [
     HomeComponent,
-    EngagedComponent,
-    EngagedListComponent,
     PhotogalleryComponent,
     PhotogalleryPicturesComponent,
+    EngagedComponent,
+    EngagedListComponent,
+    TestComponent,
+    TestListComponent,
     PortfolioDetailComponent,
     MyserviceComponent,
     AboutComponent,
