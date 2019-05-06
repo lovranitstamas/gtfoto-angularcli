@@ -17,6 +17,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {MasonryGalleryModule} from 'ngx-masonry-gallery';
 import {NgxGalleryModule} from 'ngx-gallery';
 import {UserService} from './shared/user.service';
+import {PortfolioService} from "./shared/portfolio.service";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import {UserService} from './shared/user.service';
     MasonryGalleryModule,
     NgxGalleryModule
   ],
-  providers: [UserService],
+  providers: [UserService,PortfolioService],
   bootstrap: [AppComponent]
 })
 
