@@ -19,6 +19,7 @@ import {NgxGalleryModule} from 'ngx-gallery';
 import {UserService} from './shared/user.service';
 import {PortfolioService} from "./shared/portfolio.service";
 import {LoggedInGuard} from './shared/logged-in.guard';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {LoggedInGuard} from './shared/logged-in.guard';
     BsDropdownModule.forRoot(),
     AppRoutingModule,
     MasonryGalleryModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    FormsModule
   ],
   providers: [UserService,PortfolioService,LoggedInGuard],
   bootstrap: [AppComponent]

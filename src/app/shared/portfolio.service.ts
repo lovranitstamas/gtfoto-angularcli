@@ -6,10 +6,10 @@ import {PortfolioPictureModel} from "./portfolio-picture-model";
 })
 export class PortfolioService {
 
-  private _portfolios: PortfolioPictureModel[];
+  private _portfolioPictures: PortfolioPictureModel[];
 
   constructor() {
-    this._portfolios = [
+    this._portfolioPictures = [
       {
         id: 1,
         name: 'Sziget Fesztivál',
@@ -63,7 +63,7 @@ export class PortfolioService {
         id: 8,
         name: 'Diótörő Balett',
         date: '2017-11-23',
-        pictureURL: 'assets/diotoro.jpg',
+        pictureURL: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Pali-_Shri_Ballaleshwar.jpg',
         description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.'
       },
       {
@@ -77,12 +77,37 @@ export class PortfolioService {
   }
 
   getAllPortfolios(): PortfolioPictureModel[] {
-    return this._portfolios;
+    return this._portfolioPictures;
   }
 
   getPortfolioById(id: number) {
-    const ev = this._portfolios.filter(x => x.id === id);
-    return ev.length > 0 ? ev[0] : new PortfolioPictureModel(PortfolioPictureModel.emptyPortfolio);
+    const portfolioPicture = this._portfolioPictures.filter(x => x.id === id);
+    return portfolioPicture.length > 0 ? portfolioPicture[0] : new PortfolioPictureModel(PortfolioPictureModel.emptyPortfolio);
+  }
+
+  update(param: PortfolioPictureModel) {
+    this._portfolioPictures = this._portfolioPictures.map(portfolioPicture => {
+      /*if (portfolioPicture.id === param.id) {
+        return {...param}
+      } else {
+        return portfolioPicture;
+      }*/
+      return portfolioPicture.id === param.id ? {...param} : portfolioPicture;
+    });
+  }
+
+  create(param: PortfolioPictureModel) {
+    this._portfolioPictures = [
+      ...this._portfolioPictures,
+      {
+        id: this._getMaxId() + 1,
+        ...param
+      }
+    ]
+  }
+
+  private _getMaxId() {
+    return this._portfolioPictures.reduce((x, y) => x.id > y.id ? x : y).id;
   }
 
 }
