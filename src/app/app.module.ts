@@ -18,6 +18,7 @@ import {MasonryGalleryModule} from 'ngx-masonry-gallery';
 import {NgxGalleryModule} from 'ngx-gallery';
 import {UserService} from './shared/user.service';
 import {PortfolioService} from "./shared/portfolio.service";
+import {LoggedInGuard} from './shared/logged-in.guard';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import {PortfolioService} from "./shared/portfolio.service";
     MasonryGalleryModule,
     NgxGalleryModule
   ],
-  providers: [UserService,PortfolioService],
+  providers: [UserService,PortfolioService,LoggedInGuard],
   bootstrap: [AppComponent]
 })
 

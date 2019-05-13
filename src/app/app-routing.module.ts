@@ -16,7 +16,7 @@ import {ProfileComponent} from './user/profile/profile.component';
 import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
 import {LoginComponent} from './user/login/login.component';
 import {RegistrationComponent} from './user/registration/registration.component';
-
+import {LoggedInGuard} from './shared/logged-in.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -45,8 +45,8 @@ const routes: Routes = [
   {
     path: 'user',
     children: [
-      {path: '', component: ProfileComponent},
-      {path: 'edit', component: ProfileEditComponent},
+      {path: '', component: ProfileComponent, canActivate: [LoggedInGuard]},
+      {path: 'edit', component: ProfileEditComponent, canActivate: [LoggedInGuard]},
       {path: 'login', component: LoginComponent},
       {path: 'registration', component: RegistrationComponent}
     ]
