@@ -3,6 +3,7 @@
 .firebaserc
 firebase.json
 /.firebase
+/gtfoto-angular
 firebase-debug.log
 # compiled output
 /dist
