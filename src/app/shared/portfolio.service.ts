@@ -80,4 +80,9 @@ export class PortfolioService {
     return this._portfolios;
   }
 
+  getPortfolioById(id: number) {
+    const ev = this._portfolios.filter(x => x.id === id);
+    return ev.length > 0 ? ev[0] : new PortfolioPictureModel(PortfolioPictureModel.emptyPortfolio);
+  }
+
 }

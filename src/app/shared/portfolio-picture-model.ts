@@ -1,5 +1,5 @@
 export class PortfolioPictureModel {
-  id: number;
+  id?: number;
   name: string;
   date: string;
   pictureURL: string;
@@ -11,5 +11,14 @@ export class PortfolioPictureModel {
       Object.assign(this, param);
     }
 
+  }
+
+  static get emptyPortfolio() {
+    return {
+      name: '',
+      date: '',
+      pictureURL: '',
+      description: ''
+    };
   }
 }
