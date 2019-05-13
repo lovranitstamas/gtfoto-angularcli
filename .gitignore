@@ -3,6 +3,7 @@
 .firebaserc
 firebase.json
 /.firebase
+firebase-debug.log
 # compiled output
 /dist
 /tmp
