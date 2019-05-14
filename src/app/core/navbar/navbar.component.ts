@@ -1,17 +1,20 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import {UserService} from "../../shared/user.service";
+import {Router, NavigationStart, NavigationEnd} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {filter} from 'rxjs/operators';   
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
 
   public isCollapsed = true;
 
-  constructor(public userService: UserService) {
-  }
+  private _routerSub = Subscription.EMPTY;
+  private _routerSubEnd = Subscription.EMPTY;
 
   items = [
     {
@@ -37,6 +40,32 @@ export class NavbarComponent {
     // 'Rendezvény',
     // 'Tájak, városok'
   ];
+
+  constructor(public userService: UserService, private _router: Router){}
+
+  ngOnInit(){
+     this._routerSub = this._router.events.pipe(
+      filter(event => event instanceof NavigationStart))
+      .subscribe((value) => {
+        this.isCollapsed = true;
+     });
+
+     this._routerSubEnd = this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd))
+      .subscribe((value) => {
+        window.scrollTo(0,0);
+     });
+  }
+
+  ngOnDestroy(){
+   this._routerSub.unsubscribe();
+   this._routerSubEnd.unsubscribe();
+  }
+
+  clickOnRouterLink (){
+    this.isCollapsed = true;
+    window.scrollTo(0,0);
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {

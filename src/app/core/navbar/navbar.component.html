@@ -26,27 +26,27 @@
             id="basic-link-dropdown" role="menu">
           <li *ngFor="let subMenuItem of items">
             <a class="dropdown-item"
-               routerLink="/{{subMenuItem.mainMenu}}/{{subMenuItem.subMenu}}/{{subMenuItem.function}}">{{subMenuItem.name}}</a>
+               routerLink="/{{subMenuItem.mainMenu}}/{{subMenuItem.subMenu}}/{{subMenuItem.function}}" (click)="clickOnRouterLink()">{{subMenuItem.name}}</a>
           </li>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Egyéb</a>
         </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link font-weight-bold" routerLink="/myservice">SZOLGÁLTATÁSOK</a>
+        <a class="nav-link font-weight-bold" routerLink="/myservice" (click)="clickOnRouterLink()">SZOLGÁLTATÁSOK</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link font-weight-bold" routerLink="/about">RÓLAM</a>
+        <a class="nav-link font-weight-bold" routerLink="/about" (click)="clickOnRouterLink()">RÓLAM</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link font-weight-bold" routerLink="/contact">KAPCSOLAT</a>
+        <a class="nav-link font-weight-bold" routerLink="/contact" (click)="clickOnRouterLink()">KAPCSOLAT</a>
       </li>
       <ng-container *ngIf="!userService.isLoggedIn; else loggedInBlock">
         <li class="nav-item">
-          <a class="nav-link font-weight-bold" routerLink="/user/login">BELÉPÉS</a>
+          <a class="nav-link font-weight-bold" routerLink="/user/login" (click)="clickOnRouterLink()">BELÉPÉS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link font-weight-bold" routerLink="/user/registration">REGISZTRÁCIÓ</a>
+          <a class="nav-link font-weight-bold" routerLink="/user/registration" (click)="clickOnRouterLink()">REGISZTRÁCIÓ</a>
         </li>
       </ng-container>
       <ng-template #loggedInBlock>
