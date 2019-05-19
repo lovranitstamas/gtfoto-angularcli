@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PortfolioService} from '../../shared/portfolio.service';
 import {PortfolioPictureModel} from '../../shared/portfolio-picture-model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common'; 
 
 @Component({
   selector: 'app-portfolio-detail',
@@ -11,7 +12,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class PortfolioDetailComponent  implements OnInit {
   portfolioPicture: PortfolioPictureModel;
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _portfolioService: PortfolioService) {
+  constructor(private _route: ActivatedRoute, 
+              private _router: Router, 
+              private _portfolioService: PortfolioService,
+              private _location: Location) {
   }
 
   ngOnInit() {
@@ -34,7 +38,8 @@ export class PortfolioDetailComponent  implements OnInit {
       this._portfolioService.create(this.portfolioPicture);
     }
 
-    this._router.navigate(['/portfolio/test/list']);
+    //this._router.navigate(['/portfolio/test/list']);
+    this._location.back(); 
   };
 
 }

@@ -20,20 +20,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
     {
       name: 'Képgaléria',
       mainMenu: 'portfolio',
-      subMenu: 'photogallery',
-      function: 'pictures'
+      subMenu: 'photogallery'
     },
     {
       name: 'Jegyesfotók',
       mainMenu: 'portfolio',
-      subMenu: 'engaged',
-      function: 'list'
+      subMenu: 'engaged'
     },
     {
       name: 'Teszt',
       mainMenu: 'portfolio',
-      subMenu: 'test',
-      function: 'list'
+      subMenu: 'test'
     }
     // 'Portré',
     // 'Család',

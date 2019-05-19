@@ -1,6 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {PortfolioPictureModel} from "../../../shared/portfolio-picture-model";
 import {PortfolioService} from "../../../shared/portfolio.service";
+import {UserService} from '../../../shared/user.service'; 
 
 @Component({
   selector: 'app-test-list',
@@ -11,7 +12,8 @@ export class TestListComponent implements OnInit{
 
   public portfolioPicturesGrouppedBy3: PortfolioPictureModel[];
 
-  constructor(private _portfolioService: PortfolioService) {
+  constructor(private _portfolioService: PortfolioService,
+              public userService: UserService) {
   }
 
   ngOnInit() {

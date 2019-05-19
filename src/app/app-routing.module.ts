@@ -25,18 +25,18 @@ const routes: Routes = [
     children: [
       {
         path: 'photogallery', component: PhotogalleryComponent, children: [
-          {path: 'pictures', component: PhotogalleryPicturesComponent}]
+          {path: '', component: PhotogalleryPicturesComponent}]
       },
       {
         path: 'engaged', component: EngagedComponent, children: [
-          {path: 'list', component: EngagedListComponent}]
+          {path: '', component: EngagedListComponent}]
       },
       {
         path: 'test', component: TestComponent, children: [
-          {path: 'list', component: TestListComponent}]
+          {path: '', component: TestListComponent}]
       },
-      {path: 'new', component: PortfolioDetailComponent},
-      {path: ':id', component: PortfolioDetailComponent}
+      {path: 'new', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]},
+      {path: ':id', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]}
     ]
   },
   {path: 'myservice', component: MyserviceComponent},
