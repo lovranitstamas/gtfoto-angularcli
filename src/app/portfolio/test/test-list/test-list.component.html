@@ -17,12 +17,11 @@
 
 </div>
 
-<div class="card-deck text-dark">
-  <div *ngFor="let evg of portfolioPicturesGrouppedBy3" class="card-deck pt-5 pb-5">
-    <app-portfoliocard
-      *ngFor="let picture of evg"
-      [picture]="picture"
-      class="col col-md-6 col-lg-4">
-    </app-portfoliocard>
-  </div>
+<div *ngFor="let evg of portfolioPicturesGrouppedBy3" class="card-deck text-dark pt-5 pb-5">
+  <app-portfoliocard
+    *ngFor="let picture of evg"
+    [picture]="picture"
+    class="col col-md-6 col-lg-4">
+  </app-portfoliocard>
 </div>
+

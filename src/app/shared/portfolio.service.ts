@@ -81,7 +81,7 @@ export class PortfolioService {
   }
 
   getPortfolioById(id: number) {
-    const portfolioPicture = this._portfolioPictures.filter(x => x.id === id);
+    const portfolioPicture = this._portfolioPictures.filter(x => x.id === +id);
     return portfolioPicture.length > 0 ? portfolioPicture[0] : new PortfolioPictureModel(PortfolioPictureModel.emptyPortfolio);
   }
 
