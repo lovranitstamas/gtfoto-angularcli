@@ -36,7 +36,7 @@ const routes: Routes = [
           {path: '', component: TestListComponent}]
       },
       {path: 'new', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]},
-      {path: ':id', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]}
+      {path: ':id', component: PortfolioDetailComponent}
     ]
   },
   {path: 'myservice', component: MyserviceComponent},
