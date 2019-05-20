@@ -17,10 +17,11 @@ export class UserService {
   login(email: string, password: string): boolean {
     if (email === 'angular' && password === 'angular') {
 
-      this._user = new UserModel(UserModel.exampleUser);
+      //this._user = new UserModel(UserModel.exampleUser);
+      this._user = this._allUsers[0];
       this.isLoggedIn = true;
-      this._router.navigate(['/user']);
-
+      //this._router.navigate(['/user']);
+      return true;
     }
 
     console.log('Login: ' + this.isLoggedIn);
@@ -29,13 +30,26 @@ export class UserService {
 
   register(param?: UserModel) {
     if (param) {
+      this._user = new UserModel({
+        id: 4,
+        ...param
+      });
+
+      this._allUsers = [
+        ...this._allUsers,
+        this._user
+      ];
+    }
+
+    /*if (param) {
       this._user = new UserModel(param);
     } else {
       this._user = new UserModel(UserModel.exampleUser);
-    }
+    }*/
+
     this.isLoggedIn = true;
     console.log('Login: ' + this.isLoggedIn);
-    this._router.navigate(['/user']);
+    //this._router.navigate(['/user']);
   }
 
   logout() {

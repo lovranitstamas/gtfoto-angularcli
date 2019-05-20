@@ -15,7 +15,7 @@ import {PageNotFoundComponent} from './core/page-not-found/page-not-found.compon
 import {ProfileComponent} from './user/profile/profile.component';
 import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
 import {LoginComponent} from './user/login/login.component';
-import {RegistrationComponent} from './user/registration/registration.component';
+//import {RegistrationComponent} from './user/registration/registration.component';
 import {LoggedInGuard} from './shared/logged-in.guard';
 
 const routes: Routes = [
@@ -48,7 +48,7 @@ const routes: Routes = [
       {path: '', component: ProfileComponent, canActivate: [LoggedInGuard]},
       {path: 'edit', component: ProfileEditComponent, canActivate: [LoggedInGuard]},
       {path: 'login', component: LoginComponent},
-      {path: 'registration', component: RegistrationComponent}
+      {path: 'registration', component: ProfileEditComponent}
     ]
   },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -73,7 +73,7 @@ export class AppRoutingModule {
     AboutComponent,
     ContactComponent,
     LoginComponent,
-    RegistrationComponent,
+    //RegistrationComponent,
     ProfileComponent,
     ProfileEditComponent,
     PageNotFoundComponent
