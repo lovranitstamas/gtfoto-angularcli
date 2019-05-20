@@ -10,58 +10,100 @@
 
         <div class="card-body">
 
-          <div class="form-group">
-            <label for="editName">Név</label>
-            <input class="form-control mb-3" id="editName" name="editName" placeholder="Név" type="text">
-          </div>
+          <!--card-body-->
+          <form #profileForm="ngForm" (ngSubmit)="onSubmit()">
 
-          <div class="form-group">
-            <label for="editEmail">Email cím</label>
-            <input class="form-control mb-3" id="editEmail" name="editEmail" placeholder="Email cím" type="text">
-          </div>
-
-          <div class="form-group">
-            <label for="editBirthDate">Születési idő</label>
-            <input class="form-control mb-3" id="editBirthDate" placeholder="Születési idő" type="date" name="editBirthDate">
-          </div>
-
-          <div class="">
-            <label class="pr-5">Nemed</label>
-            <div class="custom-control custom-radio d-inline">
-              <input checked type="radio" class="custom-control-input" id="radio1" name="sex" value="1">
-              <label class="custom-control-label" for="radio1">Fiú</label>
-            </div>&nbsp;
-            <div class="custom-control custom-radio d-inline">
-              <input type="radio" class="custom-control-input" id="radio2" name="sex" value="2">
-              <label class="custom-control-label" for="radio2">Lány</label>
+            <div class="form-group">
+              <label for="nev">Név</label>
+              <input type="text" id="name"
+                    class="form-control mb-3"
+                    placeholder="név"
+                    required
+                    [(ngModel)]="user.name" name="name"
+                    #name="ngModel"
+              >
+              <alert type="danger" *ngIf="name.touched && name.invalid">
+                Kötelező mező!
+              </alert>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label for="editLocation">Település</label>
-            <select class="form-control mb-3" id="editLocation">
-              <option>Főváros</option>
-              <option>Nagyváros</option>
-              <option>Kistelepülés</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="email">Email cím</label>
+              <input type="text" id="email"
+                    class="form-control mb-3"
+                    placeholder="email cím"
+                    required
+                    [(ngModel)]="user.email" name="email"
+                    #email="ngModel"
+              >
+              <alert type="danger" *ngIf="email.touched && email.invalid">
+                Kötelező mező!
+              </alert>
+            </div>
 
-          <div class="form-group">
-            <label for="jelszo1">Jelszó</label>
-            <input class="form-control mb-3" id="jelszo1" placeholder="Jelszó" type="password">
-          </div>
+            <div class="form-group">
+              <label for="address">Lakcím</label>
+              <input type="text" id="address"
+                    class="form-control mb-3"
+                    placeholder="Lakcím"
+                    required
+                    [(ngModel)]="user.address" name="address"
+                    #address="ngModel"
+              >
+              <alert type="danger" *ngIf="address.touched && address.invalid">
+                Kötelező mező!
+              </alert>
+            </div>
 
-          <div class="form-group">
-            <label for="jelszo2">Jelszó ismét</label>
-            <input class="form-control mb-3" id="jelszo2" placeholder="Jelszó ismét" type="password">
-          </div>
+            <div class="form-group">
+              <label for="dateOfBirth">Születési idő</label>
+              <input type="date" id="dateOfBirth"
+                    class="form-control mb-3"
+                    placeholder="születési idő"
+                    required
+                    [(ngModel)]="user.dateOfBirth" name="dateOfBirth"
+                    #dateOfBirth="ngModel"
+              >
+              <alert type="danger" *ngIf="dateOfBirth.touched && dateOfBirth.invalid">
+                Kötelező mező!
+              </alert>
+            </div>        
 
-          <div class="text-center mb-3">
-            <a routerLink="../" class="btn btn-primary btn-lg btn-block"><span>Mentés</span></a>
-          </div>
+            <div class="">
+              <label class="pr-5">Nemed</label>
+              <div class="custom-control custom-radio d-inline">
+                <input checked type="radio" class="custom-control-input" id="radio1" name="gender" value="male" [(ngModel)]="user.gender">
+                <label class="custom-control-label" for="radio1">Fiú</label>
+              </div>&nbsp;
+              <div class="custom-control custom-radio d-inline">
+                <input type="radio" class="custom-control-input" id="radio2" name="gender" value="female" [(ngModel)]="user.gender">
+                <label class="custom-control-label" for="radio2">Lány</label>
+              </div>
+            </div>
+
+            <div class="form-group mt-3">
+              <label for="profilePictureUrl">Profil kép URL</label>
+              <input type="text" id="profilePictureUrl"
+                      class="form-control mb-3"
+                      placeholder="profilkepem url-je"
+                      required
+                      [(ngModel)]="user.profilePictureUrl" name="profilePictureUrl"
+                      #profilePictureUrl="ngModel"
+              >
+              <alert type="danger"
+                      *ngIf="profilePictureUrl.touched && profilePictureUrl.invalid">
+                Kötelező mező!
+              </alert>
+            </div>
+
+            <div class="text-center mb-3">      
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="profileForm.invalid">Mentés</button>
+            </div>
+      
+          </form> 
 
         </div>
-
+      
       </div>
 
     </div>
