@@ -1,5 +1,9 @@
 import {Injectable} from '@angular/core';
 import {PortfolioPictureModel} from "./portfolio-picture-model";
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +12,8 @@ export class PortfolioService {
 
   private _portfolioPictures: PortfolioPictureModel[];
 
-  constructor() {
-    this._portfolioPictures = [
+  constructor(private _http: HttpClient) {
+    /*this._portfolioPictures = [
       new PortfolioPictureModel({
         id: 1,
         name: 'Fezen',
@@ -73,11 +77,13 @@ export class PortfolioService {
         pictureURL: 'assets/macskak.jpg',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, necessitatibus.'
       })
-    ];
+    ];*/
   }
 
-  getAllPortfolios(): PortfolioPictureModel[] {
-    return this._portfolioPictures;
+  getAllPortfolios(): Observable<PortfolioPictureModel[]> {
+    //return this._portfolioPictures;
+    return this._http.get<PortfolioPictureModel[]>(`${environment.firebase.baseUrl}/events.json`).pipe(
+      map(data => Object.values(data).map(evm => new PortfolioPictureModel(evm))));
   }
 
   getPortfolioById(id: number) {
