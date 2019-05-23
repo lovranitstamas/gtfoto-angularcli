@@ -10,8 +10,6 @@ import {map} from 'rxjs/operators';
 })
 export class PortfolioService {
 
-  private _portfolioPictures: PortfolioPictureModel[];
-
   constructor(private _http: HttpClient) {
     /*this._portfolioPictures = [
       new PortfolioPictureModel({
@@ -92,29 +90,17 @@ export class PortfolioService {
     return this._http.get<PortfolioPictureModel>(`${environment.firebase.baseUrl}/events/${id}.json`); 
   }
 
-  update(param: PortfolioPictureModel) {
-    this._portfolioPictures = this._portfolioPictures.map(portfolioPicture => {
-      /*if (portfolioPicture.id === param.id) {
-        return {...param}
-      } else {
-        return portfolioPicture;
-      }*/
-      return portfolioPicture.id === param.id ? {...param} : portfolioPicture;
-    });
+  save(param: PortfolioPictureModel) {
+    //console.log(param);
+    if (param.id) {
+      return this._http.put(`${environment.firebase.baseUrl}/events/${param.id}.json`, param);
+    } else {
+      return this._http.post(`${environment.firebase.baseUrl}/events.json`, param);
+    }
   }
 
-  create(param: PortfolioPictureModel) {
-    this._portfolioPictures = [
-      ...this._portfolioPictures,
-      {
-        id: this._getMaxId() + 1,
-        ...param
-      }
-    ]
-  }
-
-  private _getMaxId() {
-    return this._portfolioPictures.reduce((x, y) => x.id > y.id ? x : y).id;
+  delete(param: PortfolioPictureModel) {
+    return this._http.delete(`${environment.firebase.baseUrl}/events/${param.id}.json`);
   }
 
 }

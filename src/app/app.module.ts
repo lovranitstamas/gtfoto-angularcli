@@ -20,7 +20,9 @@ import {UserService} from './shared/user.service';
 import {PortfolioService} from "./shared/portfolio.service";
 import {LoggedInGuard} from './shared/logged-in.guard';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'; 
+
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';  
+import {AuthInterceptor} from './shared/auth-interceptor';  
 
 @NgModule({
   declarations: [
@@ -49,7 +51,12 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     HttpClientModule 
   ],
-  providers: [UserService,PortfolioService,LoggedInGuard],
+  providers: [
+    UserService,
+    PortfolioService,
+    LoggedInGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }  
+  ],
   bootstrap: [AppComponent]
 })
 
