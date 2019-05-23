@@ -22,9 +22,9 @@ export class PortfolioDetailComponent  implements OnInit {
   }
 
   ngOnInit() {
-    const portfolioPictureId = +this._route.snapshot.params['id'];
+    const portfolioPictureId = this._route.snapshot.params['id'];
     if (portfolioPictureId) {
-      this.portfolioPicture = this._portfolioService.getPortfolioById(portfolioPictureId);
+      this._portfolioService.getPortfolioById(portfolioPictureId).subscribe(evm => (this.portfolioPicture = evm));
     } else {
       this.editForm = true; 
       this.portfolioPicture = new PortfolioPictureModel(PortfolioPictureModel.emptyPortfolio);
