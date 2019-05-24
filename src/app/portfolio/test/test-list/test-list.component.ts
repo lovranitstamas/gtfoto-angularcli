@@ -48,7 +48,7 @@ export class TestListComponent implements OnInit{
     
     this.portfolioPicturesGrouppedBy3$ = this._portfolioService.getAllPortfolios().pipe(
       map(data => {
-        return data.reduce((acc, curr: PortfolioPictureModel, ind: number) => {
+        return data.reduce((acc:Array<any>, curr: PortfolioPictureModel, ind: number) => {
           if (ind % 3 === 0) {
             // []
             acc.push([]);

@@ -1,5 +1,5 @@
 export class PortfolioPictureModel {
-  id?: number;
+  id: string;
   name: string;
   date: string;
   pictureURL: string;
@@ -13,12 +13,4 @@ export class PortfolioPictureModel {
 
   }
 
-  static get emptyPortfolio() {
-    return {
-      name: '',
-      date: '',
-      pictureURL: '',
-      description: ''
-    };
-  }
 }

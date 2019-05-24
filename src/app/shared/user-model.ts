@@ -1,5 +1,5 @@
 export class UserModel {
-  id: number;
+  id: string;
   name: string;
   email: string;
   address: string;
@@ -14,7 +14,7 @@ export class UserModel {
   }
 
   // UserModel.exapmleUser
-  static get exampleUser(): UserModel {
+  /*static get exampleUser(): UserModel {
     return {
       id: 1,
       name: 'Pista ba',
@@ -36,5 +36,5 @@ export class UserModel {
       gender: '',
       profilePictureUrl: ''
     };
-  }
+  }*/
 }

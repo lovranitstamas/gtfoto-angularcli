@@ -11,6 +11,6 @@ export class RegistrationComponent {
 
 
   register() {
-    this._userService.register();
+    //this._userService.register();
   }
 }

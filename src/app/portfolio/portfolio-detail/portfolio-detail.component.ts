@@ -30,7 +30,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
     const portfolioPictureId = this._route.snapshot.params['id'];
 
     //create an empty model while we wait for data
-    this.portfolioPicture = new PortfolioPictureModel(PortfolioPictureModel.emptyPortfolio);
+    this.portfolioPicture = new PortfolioPictureModel();
     
     //a method get true/false value in all case
     //from false to true oninit and set false from click
@@ -44,7 +44,6 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  
   ngOnDestroy() {
     //through the takeUntil function will be closed all stream
     //in this case it is not absolutely necessary because all http stream close itself
@@ -64,7 +63,6 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
       );
   };
 
-  
   delete() {
     this._portfolioService.delete(this.portfolioPicture).pipe(
       takeUntil(this._destroy$))
