@@ -1,4 +1,4 @@
-import {Component,OnInit,OnDestroy,} from '@angular/core';
+import {Component,OnInit,OnDestroy} from '@angular/core';
 import {UserModel} from '../../shared/user-model'; 
 import {UserService} from '../../shared/user.service'; 
 import {Router} from '@angular/router';
@@ -10,7 +10,7 @@ import {takeUntil} from 'rxjs/operators';
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss']
 })
-export class ProfileEditComponent implements OnInit { 
+export class ProfileEditComponent implements OnInit, OnDestroy { 
 
   user: UserModel;
   //close all subscription
@@ -23,10 +23,14 @@ export class ProfileEditComponent implements OnInit {
   ) { } 
  
   ngOnInit() { 
-    //this.user = this._userService.isLoggedIn ? this._userService.getCurrentUser() : new UserModel();
-    this._userService.getCurrentUser().pipe(
-      takeUntil(this._destroy$))
-      .subscribe(user => (this.user = user));
+    if (!this._userService.isLoggedIn){
+      this.user = new UserModel;
+    } else {
+      //this.user = this._userService.isLoggedIn ? this._userService.getCurrentUser() : new UserModel();
+      this._userService.getCurrentUser().pipe(
+        takeUntil(this._destroy$))
+        .subscribe(user => (this.user = user)); 
+    }
   }
   
   ngOnDestroy() {
@@ -54,7 +58,7 @@ export class ProfileEditComponent implements OnInit {
         takeUntil(this._destroy$)
     ) 
     .subscribe( 
-      data => this._goToProfile(), 
+      () => this._goToProfile(), 
       err => console.warn('registracio kozben problemank adodott: ', err) 
     );  
   } 
