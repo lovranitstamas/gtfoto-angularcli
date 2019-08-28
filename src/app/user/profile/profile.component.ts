@@ -1,26 +1,21 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../shared/user.service';
 import {UserModel} from '../../shared/user-model';
-import {Subscription} from 'rxjs'; 
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit,OnDestroy {
-  user: UserModel;
-  private _subs: Subscription; 
+export class ProfileComponent implements OnInit {
+  user$: Observable<UserModel>;
 
-  constructor(private _userService: UserService) { }
+  constructor(private _userService: UserService) {
+  }
 
   ngOnInit() {
-    //this.user = this._userService.getCurrentUser();
-    this._subs = this._userService.getCurrentUser().subscribe(user => this.user = user); 
+    this.user$ = this._userService.getCurrentUser();
   }
-   
-  ngOnDestroy() { 
-    //practise
-    this._subs.unsubscribe(); 
-  } 
+
 }

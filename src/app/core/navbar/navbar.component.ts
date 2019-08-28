@@ -1,8 +1,8 @@
-import {Component, HostListener, OnInit, OnDestroy } from '@angular/core';
-import {UserService} from "../../shared/user.service";
-import {Router, NavigationStart, NavigationEnd} from '@angular/router';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {UserService} from '../../shared/user.service';
+import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {filter} from 'rxjs/operators';   
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -12,10 +12,7 @@ import {filter} from 'rxjs/operators';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   public isCollapsed = true;
-
-  private _routerSub = Subscription.EMPTY;
-  private _routerSubEnd = Subscription.EMPTY;
-
+  isLoggedIn = false;
   items = [
     {
       name: 'Képgaléria',
@@ -37,31 +34,39 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // 'Rendezvény',
     // 'Tájak, városok'
   ];
+  private _routerSub = Subscription.EMPTY;
+  private _routerSubEnd = Subscription.EMPTY;
 
-  constructor(public userService: UserService, private _router: Router){}
+  constructor(public userService: UserService, private _router: Router) {
+    this.userService.isLoggedIn$.subscribe(
+      isLoggedIn => {
+        this.isLoggedIn = isLoggedIn;
+      }
+    );
+  }
 
-  ngOnInit(){
-     this._routerSub = this._router.events.pipe(
+  ngOnInit() {
+    this._routerSub = this._router.events.pipe(
       filter(event => event instanceof NavigationStart))
-      .subscribe((value) => {
+      .subscribe(() => {
         this.isCollapsed = true;
-     });
+      });
 
-     this._routerSubEnd = this._router.events.pipe(
+    this._routerSubEnd = this._router.events.pipe(
       filter(event => event instanceof NavigationEnd))
-      .subscribe((value) => {
-        window.scrollTo(0,0);
-     });
+      .subscribe(() => {
+        window.scrollTo(0, 0);
+      });
   }
 
-  ngOnDestroy(){
-   this._routerSub.unsubscribe();
-   this._routerSubEnd.unsubscribe();
+  ngOnDestroy() {
+    this._routerSub.unsubscribe();
+    this._routerSubEnd.unsubscribe();
   }
 
-  clickOnRouterLink (){
+  clickOnRouterLink() {
     this.isCollapsed = true;
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   @HostListener('window:resize', ['$event'])

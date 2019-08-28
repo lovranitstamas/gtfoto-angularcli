@@ -11,7 +11,8 @@
     <!--card-body-->
     <div class="card-body">
 
-      <form #portfolioPictureForm="ngForm" (ngSubmit)="onSubmit(portfolioPictureForm.value)">
+      <!-- portfolioPictureForm.value-->
+      <form #portfolioPictureForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="esemeny">Képhez tartozó esemény címe:</label>
           <input class="form-control mb-3"

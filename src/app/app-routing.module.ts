@@ -5,9 +5,9 @@ import {PhotogalleryComponent} from './portfolio/photogallery/photogallery.compo
 import {PhotogalleryPicturesComponent} from './portfolio/photogallery/photogallery-pictures/photogallery-pictures.component';
 import {EngagedComponent} from './portfolio/engaged/engaged.component';
 import {EngagedListComponent} from './portfolio/engaged/engaged-list/engaged-list.component';
-import {TestComponent} from "./portfolio/test/test.component";
-import {TestListComponent} from "./portfolio/test/test-list/test-list.component";
-import {PortfolioDetailComponent} from "./portfolio/portfolio-detail/portfolio-detail.component";
+import {TestComponent} from './portfolio/test/test.component';
+import {TestListComponent} from './portfolio/test/test-list/test-list.component';
+import {PortfolioDetailComponent} from './portfolio/portfolio-detail/portfolio-detail.component';
 import {MyserviceComponent} from './myservice/myservice.component';
 import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
@@ -15,7 +15,6 @@ import {PageNotFoundComponent} from './core/page-not-found/page-not-found.compon
 import {ProfileComponent} from './user/profile/profile.component';
 import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
 import {LoginComponent} from './user/login/login.component';
-//import {RegistrationComponent} from './user/registration/registration.component';
 import {LoggedInGuard} from './shared/logged-in.guard';
 
 const routes: Routes = [
@@ -73,7 +72,6 @@ export class AppRoutingModule {
     AboutComponent,
     ContactComponent,
     LoginComponent,
-    //RegistrationComponent,
     ProfileComponent,
     ProfileEditComponent,
     PageNotFoundComponent

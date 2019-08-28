@@ -1,11 +1,10 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
-import {AlertModule, CollapseModule, BsDropdownModule} from 'ngx-bootstrap';
+import {AlertModule, BsDropdownModule, CollapseModule} from 'ngx-bootstrap';
 import {AppComponent} from './app.component';
 import {StatisticsComponent} from './statement/statistics/statistics.component';
 import {SurveyComponent} from './statement/survey/survey.component';
-import {RegistrationComponent} from './user/registration/registration.component';
 import {LoginComponent} from './user/login/login.component';
 import {ProfileComponent} from './user/profile/profile.component';
 import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
@@ -17,19 +16,22 @@ import {AppRoutingModule} from './app-routing.module';
 import {MasonryGalleryModule} from 'ngx-masonry-gallery';
 import {NgxGalleryModule} from 'ngx-gallery';
 import {UserService} from './shared/user.service';
-import {PortfolioService} from "./shared/portfolio.service";
+import {PortfolioService} from './shared/portfolio.service';
 import {LoggedInGuard} from './shared/logged-in.guard';
 import {FormsModule} from '@angular/forms';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';  
-import {AuthInterceptor} from './shared/auth-interceptor';  
+import {HttpClientModule} from '@angular/common/http';
+import {LoadingSpinnerComponent} from './core/loading-spinner/loading-spinner.component';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     StatisticsComponent,
     SurveyComponent,
-    RegistrationComponent,
     LoginComponent,
     ProfileComponent,
     ProfileEditComponent,
@@ -37,6 +39,7 @@ import {AuthInterceptor} from './shared/auth-interceptor';
     ScrollTopComponent,
     NavbarComponent,
     PortfoliocardComponent,
+    LoadingSpinnerComponent,
     ...AppRoutingModule.routableComponents
   ],
   imports: [
@@ -49,13 +52,15 @@ import {AuthInterceptor} from './shared/auth-interceptor';
     MasonryGalleryModule,
     NgxGalleryModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
   ],
   providers: [
     UserService,
     PortfolioService,
-    LoggedInGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }  
+    LoggedInGuard
   ],
   bootstrap: [AppComponent]
 })
