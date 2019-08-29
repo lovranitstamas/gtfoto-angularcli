@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PortfolioService} from '../../shared/portfolio.service';
 import {PortfolioPictureModel} from '../../shared/portfolio-picture-model';
 import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common'; 
-import {UserService} from '../../shared/user.service'; 
-import {Subject} from 'rxjs'; 
-import {takeUntil} from 'rxjs/operators'; 
+import {Location} from '@angular/common';
+import {UserService} from '../../shared/user.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-portfolio-detail',
@@ -14,13 +14,13 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class PortfolioDetailComponent implements OnInit, OnDestroy {
   portfolioPicture: PortfolioPictureModel;
-  viewForm = false; 
+  viewForm = false;
 
-  //close all subscription 
-  private _destroy$ = new Subject<void>(); 
-  //private _destroy$: Subject<void> = new Subject(); 
+  // close all subscription
+  private _destroy$ = new Subject<void>();
+  // private _destroy$: Subject<void> = new Subject();
 
-  constructor(private _route: ActivatedRoute, 
+  constructor(private _route: ActivatedRoute,
               private _portfolioService: PortfolioService,
               private _location: Location,
               public userService: UserService) {
@@ -29,24 +29,24 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const portfolioPictureId = this._route.snapshot.params['id'];
 
-    //create an empty model while we wait for data
+    // create an empty model while we wait for data
     this.portfolioPicture = new PortfolioPictureModel();
-    
-    //a method get true/false value in all case
-    //from false to true oninit and set false from click
-    //the other option is set true the default value
-    this.viewForm = !!portfolioPictureId; 
+
+    // a method get true/false value in all case
+    // from false to true oninit and set false from click
+    // the other option is set true the default value
+    this.viewForm = !!portfolioPictureId;
 
     if (portfolioPictureId) {
       this._portfolioService.getPortfolioById(portfolioPictureId).pipe(
-        takeUntil(this._destroy$))  
+        takeUntil(this._destroy$))
         .subscribe(evm => (this.portfolioPicture = evm));
     }
   }
 
   ngOnDestroy() {
-    //through the takeUntil function will be closed all stream
-    //in this case it is not absolutely necessary because all http stream close itself
+    // through the takeUntil function will be closed all stream
+    // in this case it is not absolutely necessary because all http stream close itself
     // http://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
     this._destroy$.next();
     this._destroy$.complete();
@@ -61,7 +61,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
           console.warn(`Problémánk van a form mentésnél: ${err}`);
         }
       );
-  };
+  }
 
   delete() {
     this._portfolioService.delete(this.portfolioPicture).pipe(
@@ -74,8 +74,8 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
       );
   }
 
-  navigateBack() { 
-    this._location.back(); 
-  } 
+  navigateBack() {
+    this._location.back();
+  }
 
 }

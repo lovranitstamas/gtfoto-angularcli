@@ -2,12 +2,11 @@
   <div class="col-auto text-center">
     <label>Keresés a képek között év</label>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Kérem adjon meg egy évet">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Keresés</button>
+      <input class="form-control mr-sm-2" placeholder="Esemény neve" id="search-input" type="search">
     </form>
   </div>
 
-  <div class="my-2 my-lg-0 text-center" *ngIf="userService.isLoggedIn">
+  <div class="my-2 my-lg-0 text-center" *ngIf="isLoggedIn">
     <div>
       <label>Tesztképet szeretnék feltölteni</label>
     </div>
@@ -17,31 +16,11 @@
 
 </div>
 
-<!--<div class="card-deck" *ngFor="let evg of portfolioPicturesGrouppedBy3" class="card-deck pt-5 pb-5">
+<div class="card-columns pt-5 pb-5">
   <app-portfoliocard
-    *ngFor="let picture of evg"
-    [event]="picture"
-    class="col col-md-6 col-lg-4">
-  </app-portfoliocard>
-</div>-->
-
-<!--<pre>
-  {{portfolioPictures$ | async | json}}
-</pre>-->
-
-<!--<div class="card-deck" *ngFor="let evg of portfolioPicturesGrouppedBy3" class="card-deck pt-5 pb-5">
-  <app-portfoliocard
-    *ngFor="let picture of evg"
-    [event]="picture"
-    class="col col-md-6 col-lg-4">
-  </app-portfoliocard>
-</div>-->
-
-<div class="card-deck" *ngFor="let evg of portfolioPicturesGrouppedBy3$ | async" class="card-deck pt-5 pb-5">
-  <app-portfoliocard
-    *ngFor="let picture of evg"
+    *ngFor="let picture of pictures"
     [picture]="picture"
-    class="col col-md-6 col-lg-4">
+  >
   </app-portfoliocard>
 </div>
 
