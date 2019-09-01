@@ -26,6 +26,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {HttpClientModule} from '@angular/common/http';
 import {LoadingSpinnerComponent} from './core/loading-spinner/loading-spinner.component';
 import {environment} from '../environments/environment';
+import {MomentModule} from 'angular2-moment';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {environment} from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    MomentModule
   ],
   providers: [
     UserService,
