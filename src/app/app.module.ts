@@ -27,6 +27,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoadingSpinnerComponent} from './core/loading-spinner/loading-spinner.component';
 import {environment} from '../environments/environment';
 import {MomentModule} from 'angular2-moment';
+import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {MomentModule} from 'angular2-moment';
     NavbarComponent,
     PortfoliocardComponent,
     LoadingSpinnerComponent,
-    ...AppRoutingModule.routableComponents
+    ...AppRoutingModule.routableComponents,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,
