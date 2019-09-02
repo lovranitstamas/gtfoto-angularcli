@@ -18,7 +18,7 @@ import {NgxGalleryModule} from 'ngx-gallery';
 import {UserService} from './shared/user.service';
 import {PortfolioService} from './shared/portfolio.service';
 import {LoggedInGuard} from './shared/logged-in.guard';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -59,7 +59,8 @@ import { ContactFormComponent } from './contact/contact-form/contact-form.compon
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    MomentModule
+    MomentModule,
+    ReactiveFormsModule
   ],
   providers: [
     UserService,

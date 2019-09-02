@@ -1,3 +1,47 @@
-<p>
-  contact-form works!
-</p>
+<form [formGroup]="form" (ngSubmit)="sendMessage()">
+  <div class="form-row mb-3">
+    <div class="form-group col-md-6">
+      <label for="inputName">Név *</label>
+      <input formControlName="sender"
+             type="text"
+             class="form-control"
+             id="inputName"
+             [ngClass]="{'is-invalid':submitted && form.get('sender').invalid}">
+      <div class="invalid-feedback">Kérem adja meg a nevét</div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputEmail">E-mail cím *</label>
+      <input formControlName="email"
+             type="email"
+             class="form-control"
+             id="inputEmail"
+             [ngClass]="{'is-invalid':submitted && form.get('email').invalid}">
+      <div class="invalid-feedback" *ngIf="form.get('email').hasError('required')">Kérem adja meg az e-mail címét</div>
+      <div class="invalid-feedback"
+           *ngIf="form.get('email').hasError('emailFormat') &&
+                  !form.get('email').hasError('required')">E-mail formátum nem megfelelő
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-4">
+    <label for="inputSubject">Tárgy *</label>
+    <input formControlName="subject"
+           type="text"
+           class="form-control"
+           id="inputSubject"
+           [ngClass]="{'is-invalid':submitted && form.get('subject').invalid}">
+    <div class="invalid-feedback">Kérem adja meg a levél tárgyát</div>
+  </div>
+  <div class="form-group mb-4">
+    <label for="inputContent">Üzenet *</label>
+    <textarea formControlName="message"
+              class="form-control"
+              id="inputContent"
+              rows="6"
+              [ngClass]="{'is-invalid':submitted && form.get('message').invalid}"></textarea>
+    <div class="invalid-feedback">Kérem adja meg az üzenet tartalmát</div>
+  </div>
+  <button type="submit" class="btn btn-primary">KÜLDÉS</button>
+</form>
+<!--{{form.value | json}}-->
+<!--{{form.get('message').errors | json}}-->

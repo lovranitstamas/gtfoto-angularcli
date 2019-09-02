@@ -1,6 +1,6 @@
 export class MessageModel {
   id: string;
-  name: string;
+  sender: string;
   email: string;
   subject: string;
   message: string;
