@@ -41,7 +41,14 @@
               [ngClass]="{'is-invalid':submitted && form.get('message').invalid}"></textarea>
     <div class="invalid-feedback">Kérem adja meg az üzenet tartalmát</div>
   </div>
-  <button type="submit" class="btn btn-primary mb-3" [disabled]="disabled">KÜLDÉS</button>
+  <div class="form-row">
+    <div class="col-sm-10 col-md-4">
+      <button type="submit" class="btn btn-primary mb-3" [disabled]="disabled">KÜLDÉS</button>
+    </div>
+    <div class="col-sm-2 col-md-8" *ngIf="disabled">
+      <app-loading-spinner [loaderWidth]="35" [loaderHeight]="35" [loaderMargin]="0"></app-loading-spinner>
+    </div>
+  </div>
   <alert type="success" dismissOnTimeout="5000" *ngIf="submitSuccessAlert">
     Üzenet sikeresen elküldve
   </alert>

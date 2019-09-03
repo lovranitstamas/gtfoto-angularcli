@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class LoadingSpinnerComponent {
   @Input() loaderWidth = 120;
   @Input() loaderHeight = 120;
+  @Input() loaderMargin = '0 auto';
 
 }
