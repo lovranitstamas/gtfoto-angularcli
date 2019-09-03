@@ -13,6 +13,7 @@ export class ContactFormComponent implements OnInit {
   submitted = false;
   submitSuccessAlert = false;
   submitErrorAlert = false;
+  disabled = false;
 
   constructor(
     private fb: FormBuilder,
@@ -41,12 +42,20 @@ export class ContactFormComponent implements OnInit {
     this.submitted = true;
     this.submitSuccessAlert = false;
     this.submitErrorAlert = false;
+
     // console.log('Üzenet küldése');
     // console.log(this.form);
     // console.log(this.form.value);
     // console.log(this.form.value['message']);
     // console.log(this.form.valid);
     if (this.form.valid) {
+      this.disabled = true;
+
+      this.form.get('sender').disable();
+      this.form.get('email').disable();
+      this.form.get('subject').disable();
+      this.form.get('message').disable();
+
       this._contactService.sendMessage(
         this.form.value['sender'],
         this.form.value['email'],
@@ -63,6 +72,12 @@ export class ContactFormComponent implements OnInit {
           });
           // notification user
           this.submitSuccessAlert = true;
+          this.disabled = false;
+
+          this.form.get('sender').enable();
+          this.form.get('email').enable();
+          this.form.get('subject').enable();
+          this.form.get('message').enable();
         },
         err => {
           console.error(err);
