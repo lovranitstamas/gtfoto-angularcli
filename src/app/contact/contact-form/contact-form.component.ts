@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {emailFormatValidator} from './contact.validators';
+import {ContactService} from '../../shared/contact.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -12,7 +13,8 @@ export class ContactFormComponent implements OnInit {
   submitted = false;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _contactService: ContactService
   ) {
   }
 
@@ -39,6 +41,28 @@ export class ContactFormComponent implements OnInit {
     // console.log(this.form);
     // console.log(this.form.value);
     // console.log(this.form.value['message']);
-    console.log(this.form.valid);
+    // console.log(this.form.valid);
+    if (this.form.valid) {
+      this._contactService.sendMessage(
+        this.form.value['sender'],
+        this.form.value['email'],
+        this.form.value['subject'],
+        this.form.value['message']
+      ).subscribe(
+        () => {
+          this.submitted = false;
+          this.form.reset({
+            sender: null,
+            email: null,
+            subject: null,
+            message: null
+          });
+          // TODO notification user
+        },
+        err => {
+          console.error(err);
+        }
+      );
+    }
   }
 }

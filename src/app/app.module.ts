@@ -27,7 +27,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoadingSpinnerComponent} from './core/loading-spinner/loading-spinner.component';
 import {environment} from '../environments/environment';
 import {MomentModule} from 'angular2-moment';
-import { ContactFormComponent } from './contact/contact-form/contact-form.component';
+import {ContactFormComponent} from './contact/contact-form/contact-form.component';
+import {ContactService} from './shared/contact.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ContactFormComponent } from './contact/contact-form/contact-form.compon
   providers: [
     UserService,
     PortfolioService,
-    LoggedInGuard
+    LoggedInGuard,
+    ContactService
   ],
   bootstrap: [AppComponent]
 })
