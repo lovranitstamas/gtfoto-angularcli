@@ -11,6 +11,8 @@ import {ContactService} from '../../shared/contact.service';
 export class ContactFormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
+  submitSuccessAlert = false;
+  submitErrorAlert = false;
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +39,8 @@ export class ContactFormComponent implements OnInit {
 
   sendMessage() {
     this.submitted = true;
+    this.submitSuccessAlert = false;
+    this.submitErrorAlert = false;
     // console.log('Üzenet küldése');
     // console.log(this.form);
     // console.log(this.form.value);
@@ -57,10 +61,13 @@ export class ContactFormComponent implements OnInit {
             subject: null,
             message: null
           });
-          // TODO notification user
+          // notification user
+          this.submitSuccessAlert = true;
         },
         err => {
           console.error(err);
+          // notification user
+          this.submitErrorAlert = true;
         }
       );
     }

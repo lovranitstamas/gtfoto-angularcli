@@ -41,7 +41,13 @@
               [ngClass]="{'is-invalid':submitted && form.get('message').invalid}"></textarea>
     <div class="invalid-feedback">Kérem adja meg az üzenet tartalmát</div>
   </div>
-  <button type="submit" class="btn btn-primary">KÜLDÉS</button>
+  <button type="submit" class="btn btn-primary mb-3">KÜLDÉS</button>
+  <alert type="success" dismissOnTimeout="5000" *ngIf="submitSuccessAlert">
+    Üzenet sikeresen elküldve
+  </alert>
+  <alert type="danger" *ngIf="submitErrorAlert">
+    <strong>Valami hiba történt...</strong> Próbáld meg újra vagy jelezd a supportnak.
+  </alert>
 </form>
 <!--{{form.value | json}}-->
 <!--{{form.get('message').errors | json}}-->
