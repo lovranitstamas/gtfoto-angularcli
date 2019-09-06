@@ -88,6 +88,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
 
   uploadSingle() {
     const file = this.selectedFiles.item(0);
+    // console.log(file.type);
     this.currentUpload = new FileModel(file);
     this._portfolioService.pushUpload(this.currentUpload);
   }

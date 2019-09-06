@@ -77,9 +77,14 @@ export class PortfolioService {
       },
       () => {
         // upload success
-        upload.url = uploadTask.snapshot.downloadURL;
-        upload.name = upload.file.name;
-        this.saveFileData(upload);
+        uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+          const imageUrl = downloadURL;
+          // console.log(imageUrl);
+          upload.url = imageUrl;
+          upload.name = upload.file.name;
+          this.saveFileData(upload);
+        });
+
       }
     );
   }
