@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import {Component, OnInit} from '@angular/core';
+import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from 'ngx-gallery';
 
 @Component({
   selector: 'app-photogallery-pictures',
@@ -39,9 +39,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImages = [
       {
-        small: 'assets/carousel1.jpg',
-        medium: 'assets/carousel1.jpg',
-        big: 'assets/carousel1.jpg'
+        small: 'https://firebasestorage.googleapis.com/v0/b/gt-foto-angular-89a91.appspot.com/o/uploads%2FPNG_transparency_demonstration_1.png?alt=media&token=c9d06107-f025-4cf9-bc07-27d4ec2db2b7',
+        medium: 'https://firebasestorage.googleapis.com/v0/b/gt-foto-angular-89a91.appspot.com/o/uploads%2FPNG_transparency_demonstration_1.png?alt=media&token=c9d06107-f025-4cf9-bc07-27d4ec2db2b7',
+        big: 'https://firebasestorage.googleapis.com/v0/b/gt-foto-angular-89a91.appspot.com/o/uploads%2FPNG_transparency_demonstration_1.png?alt=media&token=c9d06107-f025-4cf9-bc07-27d4ec2db2b7'
       },
       {
         small: 'assets/carousel1.jpg',
