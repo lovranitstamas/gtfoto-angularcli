@@ -16,30 +16,30 @@
         <div class="form-group">
           <label for="esemeny">Képhez tartozó esemény címe:</label>
           <input class="form-control mb-3"
-                id="esemeny"
-                placeholder="Esemény címe"
-                type="text"
-                [(ngModel)]="portfolioPicture.name"
-                required
-                name="name"
-                #name="ngModel"
-                [disabled]="viewForm"
-                >
-                <alert type="danger" *ngIf="name.touched && name.invalid">Kötelező mező!</alert>
+                 id="esemeny"
+                 placeholder="Esemény címe"
+                 type="text"
+                 [(ngModel)]="portfolioPicture.name"
+                 required
+                 name="name"
+                 #name="ngModel"
+                 [disabled]="viewForm"
+          >
+          <alert type="danger" *ngIf="name.touched && name.invalid">Kötelező mező!</alert>
         </div>
 
         <div class="form-group">
           <label for="idopont">Esemény időpontja</label>
           <input class="form-control mb-3"
-                id="idopont"
-                placeholder="Esemény időpontja"
-                type="text"
-                [(ngModel)]="portfolioPicture.date"
-                required
-                name="date"
-                #date="ngModel"
-                [disabled]="viewForm"
-          #typeup>
+                 id="idopont"
+                 placeholder="Esemény időpontja"
+                 type="text"
+                 [(ngModel)]="portfolioPicture.date"
+                 required
+                 name="date"
+                 #date="ngModel"
+                 [disabled]="viewForm"
+                 #typeup>
           <!--<div>{{typeup.classList}}</div>
           <div>{{typeup.className}}</div>
           <hr>
@@ -58,15 +58,15 @@
         <div class="form-group">
           <label for="pictureURL">Válassz képet</label>
           <input class="form-control"
-                id="pictureURL"
-                type="text"
-                placeholder="Eseményhez tartozó kép urj-je"
-                [(ngModel)]="portfolioPicture.pictureURL"
-                required
-                name="pictureURL"
-                #pictureURL="ngModel"
-                [disabled]="viewForm">
-                <alert type="danger" *ngIf="pictureURL.touched && pictureURL.invalid">Kötelező mező!</alert>
+                 id="pictureURL"
+                 type="text"
+                 placeholder="Eseményhez tartozó kép urj-je"
+                 [(ngModel)]="portfolioPicture.pictureURL"
+                 required
+                 name="pictureURL"
+                 #pictureURL="ngModel"
+                 [disabled]="viewForm">
+          <alert type="danger" *ngIf="pictureURL.touched && pictureURL.invalid">Kötelező mező!</alert>
         </div>
 
         <div class="form-group">
@@ -79,8 +79,8 @@
                     name="description"
                     #description="ngModel"
                     [disabled]="viewForm"
-                    ></textarea>
-                    <alert type="danger" *ngIf="description.touched && description.invalid">Kötelező mező!</alert>
+          ></textarea>
+          <alert type="danger" *ngIf="description.touched && description.invalid">Kötelező mező!</alert>
         </div>
 
         <div class="text-center mb-3">
@@ -109,9 +109,43 @@
           <button type="button"
                   class="btn btn-primary btn-lg"
                   (click)="navigateBack()"
-                  >Vissza</button>
+          >Vissza
+          </button>
         </div>
       </form>
+
+      <div *ngIf="currentUpload">
+        <div class="progress">
+          <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+        </div>
+        Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+      </div>
+
+      <div class="form-group">
+        <label for="singleUpload">Fájl kiválasztása</label>
+        <input type="file" (change)="detectFiles($event)" id="singleUpload">
+
+        <button
+          [disabled]="!selectedFiles"
+          (click)="uploadSingle()"
+          type="button"
+          class="btn btn-primary btn-lg">
+          Feltöltés
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label for="multiUpload">Fájlok kiválasztása</label>
+        <input type="file" (change)="detectFiles($event)" id="multiUpload" multiple>
+
+        <button
+          [disabled]="!selectedFiles"
+          (click)="uploadMulti()"
+          type="button"
+          class="btn btn-primary btn-lg">
+          Feltöltés
+        </button>
+      </div>
 
     </div>
 

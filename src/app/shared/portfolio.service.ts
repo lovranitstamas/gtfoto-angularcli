@@ -3,11 +3,14 @@ import {PortfolioPictureModel} from './portfolio-picture-model';
 import {from, Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {FileModel} from './file-model';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
+  private basePath = '/uploads';
 
   constructor(private afDb: AngularFireDatabase) {
   }
@@ -56,6 +59,35 @@ export class PortfolioService {
 
   delete(param: PortfolioPictureModel) {
     return from(this.afDb.object(`events/${param.id}`).remove());
+  }
+
+
+  pushUpload(upload: FileModel) {
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => {
+        // upload in progress
+        upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (error) => {
+        // upload failed
+        console.log(error);
+      },
+      () => {
+        // upload success
+        upload.url = uploadTask.snapshot.downloadURL;
+        upload.name = upload.file.name;
+        this.saveFileData(upload);
+      }
+    );
+  }
+
+
+  // Writes the file details to the realtime db
+  private saveFileData(upload: FileModel) {
+    this.afDb.list(`${this.basePath}/`).push(upload);
   }
 
 }
