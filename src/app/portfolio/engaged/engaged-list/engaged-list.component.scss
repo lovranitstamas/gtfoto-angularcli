@@ -5,23 +5,29 @@
   border: 1px solid $yellow;
 }
 
-/deep/ .masonry div img {
+/deep/ .masonry-extend div {
+  all: unset;
+  margin-bottom: 20px;
+}
+
+/deep/ .masonry-extend div img {
   position: static !important;
   margin: 3px;
   border-radius: 5px;
+  min-height: 0;
   // border: 1px solid $yellow;
 }
 
-/deep/ .masonry .hover-zoom-box {
+/deep/ .masonry-extend .hover-zoom-box {
   overflow: hidden;
   display: inline-block;
 }
 
-/deep/ .masonry div img {
+/deep/ .masonry-extend div img {
   transition: all 0.5s !important;
 }
 
-/deep/ .masonry div img:hover {
+/deep/ .masonry-extend div img:hover {
   transform: scale(1.4) !important;
 }
 
@@ -31,4 +37,5 @@
     margin-left: auto;
     margin-right: auto;
   }
+
 }

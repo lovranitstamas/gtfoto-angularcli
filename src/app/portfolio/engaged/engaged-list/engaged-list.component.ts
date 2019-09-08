@@ -1,19 +1,32 @@
-import {AfterViewInit, Component} from '@angular/core';
-import {IMasonryGalleryImage} from 'ngx-masonry-gallery';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as $ from 'jquery';
+import {PortfolioPictureModel} from '../../../shared/portfolio-picture-model';
+import {BehaviorSubject, fromEvent, Subscription} from 'rxjs';
+import {PortfolioService} from '../../../shared/portfolio.service';
+import {delay, distinctUntilChanged, flatMap, map} from 'rxjs/operators';
+import {IMasonryGalleryImage} from 'ngx-masonry-gallery';
 
 @Component({
   selector: 'app-engaged-list',
   templateUrl: './engaged-list.component.html',
   styleUrls: ['./engaged-list.component.scss']
 })
-export class EngagedListComponent implements AfterViewInit {
+export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
+  pictures: PortfolioPictureModel[];
+  @ViewChild('searchInput') searchInput: ElementRef;
+  private filteredText$ = new BehaviorSubject<string>(null);
+  private _picturesSubscription: Subscription;
+
   private _urls: string[] = [
-    'https://firebasestorage.googleapis.com/v0/b/gt-foto-angular-89a91.appspot.com/o/uploads%2FPNG_transparency_demonstration_1.png?alt=media&token=c9d06107-f025-4cf9-bc07-27d4ec2db2b7',
+    'assets/carousel1.jpg',
+    'assets/carousel1.jpg',
     'assets/carousel1.jpg',
     'assets/carousel1.jpg',
     'assets/carousel1.jpg'
   ];
+
+  constructor(private _portfolioService: PortfolioService) {
+  }
 
   public get images(): IMasonryGalleryImage[] {
     return this._urls.map(
@@ -24,13 +37,64 @@ export class EngagedListComponent implements AfterViewInit {
     );
   }
 
+  ngOnInit() {
+    this._picturesSubscription = this._portfolioService.getAllPortfoliosTest('engaged').pipe(
+      flatMap(
+        pictures => {
+          return this.filteredText$.pipe(
+            map(
+              filterText => {
+                if (filterText === null) {
+                  return pictures;
+                } else {
+                  return pictures.filter(
+                    picture => {
+                      return picture.name.toLowerCase().indexOf(filterText.toLowerCase()) > -1;
+                    }
+                  );
+                }
+              }
+            )
+          );
+        }
+      )
+    ).subscribe(
+      pictures => {
+        this.pictures = pictures;
+      }
+    );
+  }
+
   public ngAfterViewInit() {
     $(document).ready(() => {
       setTimeout(() => {
-        $('.masonry div img').each(function() {
+        $('.masonry-extend div img').each(function() {
           $(this).wrap('<div class="hover-zoom-box"></div>');
         });
-      }, 200);
+      }, 500);
     });
+
+    const input = document.querySelector('#search-input');
+    // this.searchInput.nativeElement
+    fromEvent(input, 'keyup').pipe(
+      delay(300),
+      map(
+        (event: Event) => {
+          return (event.srcElement as HTMLInputElement).value;
+        }
+      ),
+      distinctUntilChanged())
+      .subscribe(
+        text => {
+          if (text.length === 0) {
+            text = null;
+          }
+          this.filteredText$.next(text);
+        }
+      );
+  }
+
+  ngOnDestroy(): void {
+    this._picturesSubscription.unsubscribe();
   }
 }

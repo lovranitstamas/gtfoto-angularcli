@@ -7,6 +7,7 @@
       "app",
       "camelCase"
     ],
+    "no-angle-bracket-type-assertion": false,
     "component-selector": [
       true,
       "element",

@@ -35,6 +35,26 @@ export class PortfolioService {
       );
   }
 
+  getAllPortfoliosTest(object: string): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`gallery/${object}/`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {date: picture.payload.val()['date']},
+                  {description: picture.payload.val()['description']},
+                  {id: picture.key},
+                  {name: picture.payload.val()['name']},
+                  {pictureURL: picture.payload.val()['pictureURL']})
+                );
+              }
+            )
+        )
+      );
+  }
+
   getPortfolioById(id: string) {
     return this.afDb.object<any>(`events/${id}`).valueChanges();
   }
@@ -78,9 +98,9 @@ export class PortfolioService {
       () => {
         // upload success
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-          const imageUrl = downloadURL;
+          // const imageUrl = downloadURL;
           // console.log(imageUrl);
-          upload.url = imageUrl;
+          upload.url = downloadURL;
           upload.name = upload.file.name;
           this.saveFileData(upload);
         });
