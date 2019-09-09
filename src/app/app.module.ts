@@ -13,8 +13,8 @@ import {ScrollTopComponent} from './core/scroll-top/scroll-top.component';
 import {NavbarComponent} from './core/navbar/navbar.component';
 import {PortfoliocardComponent} from './portfolio/portfoliocard/portfoliocard.component';
 import {AppRoutingModule} from './app-routing.module';
-import {MasonryGalleryModule} from 'ngx-masonry-gallery';
-import {NgxGalleryModule} from 'ngx-gallery';
+import {MasonryGalleryModule} from 'ngx-masonry-gallery'; // replace with NgxMasonryModule
+import {NgxGalleryModule} from 'ngx-gallery'; // use to gallery
 import {UserService} from './shared/user.service';
 import {PortfolioService} from './shared/portfolio.service';
 import {LoggedInGuard} from './shared/logged-in.guard';
@@ -29,6 +29,7 @@ import {environment} from '../environments/environment';
 import {MomentModule} from 'angular2-moment';
 import {ContactFormComponent} from './contact/contact-form/contact-form.component';
 import {ContactService} from './shared/contact.service';
+import {NgxMasonryModule} from 'ngx-masonry';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {ContactService} from './shared/contact.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     MomentModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMasonryModule
   ],
   providers: [
     UserService,
