@@ -1,0 +1,13 @@
+@import '../../../sass/variables';
+
+.figure-caption {
+  color: $basic-yellow;
+  font-size: large;
+
+  a {
+    color: $basic-yellow;
+    &:hover{
+      color: $yellow;
+    }
+  }
+}

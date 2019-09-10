@@ -5,31 +5,75 @@
   border: 1px solid $yellow;
 }
 
-/deep/ .masonry-extend div {
-  all: unset;
+.masonry-elements {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+ngx-masonry {
+  margin: 0 auto;
+}
+
+.masonry-item {
   margin-bottom: 20px;
+  background-size: cover;
+  width: 340px;
 }
 
-/deep/ .masonry-extend div img {
-  position: static !important;
-  margin: 3px;
-  border-radius: 5px;
-  min-height: 0;
-  // border: 1px solid $yellow;
+.masonry-item img {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
 }
 
-/deep/ .masonry-extend .hover-zoom-box {
+/deep/ .masonry-item .hover-zoom-box {
   overflow: hidden;
   display: inline-block;
 }
 
-/deep/ .masonry-extend div img {
+/deep/ .masonry-item div img {
   transition: all 0.5s !important;
 }
 
-/deep/ .masonry-extend div img:hover {
+/deep/ .masonry-item div img:hover {
   transform: scale(1.4) !important;
 }
+
+button.btn-full-list-view {
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: $dark-blue;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-bottom: 50px;
+
+  span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  &:hover span {
+    padding-right: 25px;
+  }
+
+  &:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+}
+
 
 @media only screen and (max-width: 575px) {
   .header-row {

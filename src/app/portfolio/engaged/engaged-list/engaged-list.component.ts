@@ -1,10 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import * as $ from 'jquery';
 import {PortfolioPictureModel} from '../../../shared/portfolio-picture-model';
 import {BehaviorSubject, fromEvent, Subscription} from 'rxjs';
 import {PortfolioService} from '../../../shared/portfolio.service';
 import {delay, distinctUntilChanged, flatMap, map} from 'rxjs/operators';
-import {IMasonryGalleryImage} from 'ngx-masonry-gallery';
+import {NgxMasonryOptions} from 'ngx-masonry';
 
 @Component({
   selector: 'app-engaged-list',
@@ -13,29 +12,25 @@ import {IMasonryGalleryImage} from 'ngx-masonry-gallery';
 })
 export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
   pictures: PortfolioPictureModel[];
+  masonryImages: PortfolioPictureModel[];
   @ViewChild('searchInput') searchInput: ElementRef;
   private filteredText$ = new BehaviorSubject<string>(null);
   private _picturesSubscription: Subscription;
 
-  private _urls: string[] = [
-    'assets/carousel1.jpg',
-    'assets/carousel1.jpg',
-    'assets/carousel1.jpg',
-    'assets/carousel1.jpg',
-    'assets/carousel1.jpg'
-  ];
+  masonryOptions: NgxMasonryOptions = {
+    transitionDuration: '0.2s',
+    gutter: 20,
+    resize: true,
+    initLayout: true,
+    fitWidth: true
+  };
+
+  limit = 1;
+  fullListView = false;
 
   constructor(private _portfolioService: PortfolioService) {
   }
 
-  public get images(): IMasonryGalleryImage[] {
-    return this._urls.map(
-      m =>
-        <IMasonryGalleryImage> {
-          imageUrl: m
-        }
-    );
-  }
 
   ngOnInit() {
     this._picturesSubscription = this._portfolioService.getAllPortfoliosTest('engaged').pipe(
@@ -61,19 +56,16 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe(
       pictures => {
         this.pictures = pictures;
+        if (this.fullListView) {
+          this.masonryImages = this.pictures.slice(0, this.pictures.length);
+        } else {
+          this.masonryImages = this.pictures.slice(0, this.limit);
+        }
       }
     );
   }
 
   public ngAfterViewInit() {
-    $(document).ready(() => {
-      setTimeout(() => {
-        $('.masonry-extend div img').each(function() {
-          $(this).wrap('<div class="hover-zoom-box"></div>');
-        });
-      }, 500);
-    });
-
     const input = document.querySelector('#search-input');
     // this.searchInput.nativeElement
     fromEvent(input, 'keyup').pipe(
@@ -96,5 +88,10 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._picturesSubscription.unsubscribe();
+  }
+
+  showMoreImages() {
+    this.masonryImages = this.pictures.slice(0, this.pictures.length);
+    this.fullListView = true;
   }
 }

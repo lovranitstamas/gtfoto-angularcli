@@ -13,7 +13,7 @@ import {ScrollTopComponent} from './core/scroll-top/scroll-top.component';
 import {NavbarComponent} from './core/navbar/navbar.component';
 import {PortfoliocardComponent} from './portfolio/portfoliocard/portfoliocard.component';
 import {AppRoutingModule} from './app-routing.module';
-import {MasonryGalleryModule} from 'ngx-masonry-gallery'; // replace with NgxMasonryModule
+// import {MasonryGalleryModule} from 'ngx-masonry-gallery'; // replace with NgxMasonryModule
 import {NgxGalleryModule} from 'ngx-gallery'; // use to gallery
 import {UserService} from './shared/user.service';
 import {PortfolioService} from './shared/portfolio.service';
@@ -54,7 +54,7 @@ import {NgxMasonryModule} from 'ngx-masonry';
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AppRoutingModule,
-    MasonryGalleryModule,
+    // MasonryGalleryModule,
     NgxGalleryModule,
     FormsModule,
     HttpClientModule,

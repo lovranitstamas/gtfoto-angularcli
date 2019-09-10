@@ -8,4 +8,5 @@ import {PortfolioPictureModel} from '../../shared/portfolio-picture-model';
 })
 export class PortfoliocardComponent {
   @Input() picture: PortfolioPictureModel;
+  @Input() nextLabel = 'Tovább';
 }

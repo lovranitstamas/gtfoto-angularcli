@@ -15,11 +15,26 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <ngx-masonry-gallery
-      class="masonry-extend d-block text-center"
-      [width]="360"
-      [images]="images"
-    ></ngx-masonry-gallery>
+    <div class="masonry-elements" *ngIf="masonryImages; else loading">
+      <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
+        <ngxMasonryItem *ngFor="let picture of masonryImages" class="masonry-item">
+          <app-portfoliocard
+            [picture]="picture"
+            nextLabel="Szerkesztés"
+          >
+          </app-portfoliocard>
+        </ngxMasonryItem>
+      </ngx-masonry>
+      <button class="btn btn-full-list-view bg-warning"
+              type="button"
+              *ngIf="limit < pictures.length && masonryImages.length!=pictures.length"
+              (click)="showMoreImages()"><span>Mutasd a többi képet</span>
+      </button>
+      <h2 *ngIf="fullListView">Nincs több kép</h2>
+    </div>
+    <ng-template #loading>
+      <app-loading-spinner [loaderWidth]="100" [loaderHeight]="100"></app-loading-spinner>
+    </ng-template>
   </div>
 </div>
 

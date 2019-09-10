@@ -1,12 +1,8 @@
-<div class="card">
-  <img alt="Card image cap" class="card-img-top" [src]="picture.pictureURL">
-  <div class="card-body">
-    <h4 class="card-title">{{ picture.name }}</h4>
-    <p class="card_text card-text">{{picture.description}}</p>
-    <p class="card-text">
-      <small class="text-muted">{{picture.date}}</small>
-    </p>
-    <a [routerLink]="['../../',picture.id]" class="row justify-content-end pr-4">Tovább</a>
+<figure class="figure">
+  <div class="hover-zoom-box">
+    <img alt="Card image cap" class="card-img-top" [src]="picture.pictureURL">
   </div>
-</div>
-
+  <figcaption class="figure-caption text-right">
+    {{picture.date}} - <a [routerLink]="['../../',picture.id]">{{nextLabel}}</a>
+  </figcaption>
+</figure>
