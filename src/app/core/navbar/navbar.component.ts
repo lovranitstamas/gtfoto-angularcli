@@ -23,12 +23,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
       name: 'Jegyesfotók',
       mainMenu: 'portfolio',
       subMenu: 'engaged'
-    },
+    }/*,
     {
       name: 'Teszt',
       mainMenu: 'portfolio',
       subMenu: 'test'
-    }
+    }*/
     // 'Portré',
     // 'Család',
     // 'Rendezvény',
@@ -86,7 +86,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   isOpenChange(): void {
-    console.log('Dropdown state is changed');
+    // console.log('Dropdown state is changed');
   }
 
   logout() {

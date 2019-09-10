@@ -10,13 +10,14 @@ import * as firebase from 'firebase';
   providedIn: 'root'
 })
 export class PortfolioService {
-  private basePath = '/uploads';
+  private basePath = '/gallery';
 
   constructor(private afDb: AngularFireDatabase) {
   }
 
   getAllPortfolios(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list('events/').snapshotChanges()
+    const node = 'engaged';
+    return this.afDb.list(`${this.basePath}/${node}`).snapshotChanges()
       .pipe(
         map(
           (pictures) =>
@@ -27,27 +28,8 @@ export class PortfolioService {
                   {description: picture.payload.val()['description']},
                   {id: picture.key},
                   {name: picture.payload.val()['name']},
-                  {pictureURL: picture.payload.val()['pictureURL']})
-                );
-              }
-            )
-        )
-      );
-  }
-
-  getAllPortfoliosTest(object: string): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`gallery/${object}/`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {date: picture.payload.val()['date']},
-                  {description: picture.payload.val()['description']},
-                  {id: picture.key},
-                  {name: picture.payload.val()['name']},
-                  {pictureURL: picture.payload.val()['pictureURL']})
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {progress: picture.payload.val()['progress']})
                 );
               }
             )
@@ -56,35 +38,39 @@ export class PortfolioService {
   }
 
   getPortfolioById(id: string) {
-    return this.afDb.object<any>(`events/${id}`).valueChanges();
+    const node = 'engaged';
+    return this.afDb.object<any>(`${this.basePath}/${node}/${id}`).valueChanges();
   }
 
   save(param: PortfolioPictureModel) {
+    const node = 'engaged';
     if (param.id) {
-      return from(this.afDb.object(`events/${param.id}`).update(param));
+      return from(this.afDb.object(`${this.basePath}/${node}/${param.id}`).update(param));
     } else {
       return from(
-        this.afDb.list(`events`).push(param)
+        this.afDb.list(`${this.basePath}/${node}`).push(param)
       ).pipe(
-        map((eventPostReturn: { key: string }) => {
-          return eventPostReturn.key;
+        map((picturePostReturn: { key: string }) => {
+          return picturePostReturn.key;
         }),
 
-        switchMap(eventId => this.afDb.object(
-          `events/${eventId}`).set({...param, id: eventId})
+        switchMap(pictureId => this.afDb.object(
+          `${this.basePath}/${node}/${pictureId}`).set({...param, id: pictureId})
         )
       );
     }
   }
 
   delete(param: PortfolioPictureModel) {
-    return from(this.afDb.object(`events/${param.id}`).remove());
+    const node = 'engaged';
+    return from(this.afDb.object(`${this.basePath}/${node}/${param.id}`).remove());
   }
 
 
   pushUpload(upload: FileModel) {
+    const node = 'engaged';
     const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    const uploadTask = storageRef.child(`${this.basePath}/${node}/${upload.file.name}`).put(upload.file);
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
@@ -99,9 +85,11 @@ export class PortfolioService {
         // upload success
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           // const imageUrl = downloadURL;
-          // console.log(imageUrl);
-          upload.url = downloadURL;
+          upload.id = 'tesztid';
           upload.name = upload.file.name;
+          upload.date = '2011-11-11';
+          upload.pictureURL = downloadURL;
+          upload.description = 'description';
           this.saveFileData(upload);
         });
 
@@ -112,7 +100,8 @@ export class PortfolioService {
 
   // Writes the file details to the realtime db
   private saveFileData(upload: FileModel) {
-    this.afDb.list(`${this.basePath}/`).push(upload);
+    const node = 'engaged';
+    this.afDb.list(`${this.basePath}/${node}`).push(upload);
   }
 
 }

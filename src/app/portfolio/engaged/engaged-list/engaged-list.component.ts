@@ -4,6 +4,7 @@ import {BehaviorSubject, fromEvent, Subscription} from 'rxjs';
 import {PortfolioService} from '../../../shared/portfolio.service';
 import {delay, distinctUntilChanged, flatMap, map} from 'rxjs/operators';
 import {NgxMasonryOptions} from 'ngx-masonry';
+import {UserService} from '../../../shared/user.service';
 
 @Component({
   selector: 'app-engaged-list',
@@ -11,11 +12,7 @@ import {NgxMasonryOptions} from 'ngx-masonry';
   styleUrls: ['./engaged-list.component.scss']
 })
 export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
-  pictures: PortfolioPictureModel[];
-  masonryImages: PortfolioPictureModel[];
   @ViewChild('searchInput') searchInput: ElementRef;
-  private filteredText$ = new BehaviorSubject<string>(null);
-  private _picturesSubscription: Subscription;
 
   masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0.2s',
@@ -25,17 +22,40 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
     fitWidth: true
   };
 
+  pictures: PortfolioPictureModel[];
+  masonryImages: PortfolioPictureModel[];
+  isLoggedIn: boolean;
+  fullListLength: number;
   limit = 1;
   fullListView = false;
+  emptyEngagedList = false;
+  loading = true;
 
-  constructor(private _portfolioService: PortfolioService) {
+  private filteredText$ = new BehaviorSubject<string>(null);
+  private _picturesSubscription: Subscription;
+  private _isLoggedInSubscription: Subscription;
+
+  constructor(
+    private _portfolioService: PortfolioService,
+    userService: UserService) {
+    this._isLoggedInSubscription = userService.isLoggedIn$.subscribe(
+      isLoggedIn => this.isLoggedIn = isLoggedIn
+    );
   }
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllPortfoliosTest('engaged').pipe(
+    this._picturesSubscription = this._portfolioService.getAllPortfolios().pipe(
       flatMap(
         pictures => {
+
+          if (pictures.length === 0) {
+            this.emptyEngagedList = true;
+          } else {
+            this.emptyEngagedList = false;
+          }
+          this.fullListLength = pictures.length;
+
           return this.filteredText$.pipe(
             map(
               filterText => {
@@ -56,11 +76,14 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe(
       pictures => {
         this.pictures = pictures;
+        this.loading = false;
+
         if (this.fullListView) {
           this.masonryImages = this.pictures.slice(0, this.pictures.length);
         } else {
           this.masonryImages = this.pictures.slice(0, this.limit);
         }
+
       }
     );
   }
@@ -88,6 +111,7 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._picturesSubscription.unsubscribe();
+    this._isLoggedInSubscription.unsubscribe();
   }
 
   showMoreImages() {

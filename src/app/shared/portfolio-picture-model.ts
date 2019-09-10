@@ -4,6 +4,7 @@ export class PortfolioPictureModel {
   date: string;
   pictureURL: string;
   description: string;
+  progress: number;
 
   constructor(param?: PortfolioPictureModel) {
 

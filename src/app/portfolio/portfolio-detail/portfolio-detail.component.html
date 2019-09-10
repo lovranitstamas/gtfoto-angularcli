@@ -83,6 +83,20 @@
           <alert type="danger" *ngIf="description.touched && description.invalid">Kötelező mező!</alert>
         </div>
 
+        <div class="form-group">
+          <label for="progress">Progress</label>
+          <textarea class="form-control"
+                    id="progress"
+                    placeholder="Progress"
+                    [(ngModel)]="portfolioPicture.progress"
+                    required
+                    name="progress"
+                    #progress="ngModel"
+                    [disabled]="viewForm"
+          ></textarea>
+          <alert type="danger" *ngIf="progress.touched && progress.invalid">Kötelező mező!</alert>
+        </div>
+
         <div class="text-center mb-3">
           <ng-container *ngIf="userService.isLoggedIn$ | async">
             <ng-container *ngIf="viewForm; else editButtons">
