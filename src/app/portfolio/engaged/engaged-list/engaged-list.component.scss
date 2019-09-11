@@ -82,4 +82,12 @@ button.btn-full-list-view {
     margin-right: auto;
   }
 
+  ngx-masonry {
+    margin-left: -5px !important;
+
+    .masonry-item {
+      margin:0 auto;
+    }
+  }
+
 }
