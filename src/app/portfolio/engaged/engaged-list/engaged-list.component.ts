@@ -26,7 +26,7 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
   masonryImages: PortfolioPictureModel[];
   isLoggedIn: boolean;
   fullListLength: number;
-  limit = 1;
+  limit = 5;
   fullListView = false;
   emptyEngagedList = false;
   loading = true;
@@ -64,7 +64,7 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
                 } else {
                   return pictures.filter(
                     picture => {
-                      return picture.name.toLowerCase().indexOf(filterText.toLowerCase()) > -1;
+                      return picture.date.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
                     }
                   );
                 }
