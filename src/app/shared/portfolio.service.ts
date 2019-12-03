@@ -1,18 +1,20 @@
 import {Injectable} from '@angular/core';
 import {PortfolioPictureModel} from './portfolio-picture-model';
 import {from, Observable} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {finalize, map, switchMap} from 'rxjs/operators';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {FileModel} from './file-model';
-import * as firebase from 'firebase';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
+
   private basePath = '/gallery';
 
-  constructor(private afDb: AngularFireDatabase) {
+  constructor(private afDb: AngularFireDatabase,
+              private storage: AngularFireStorage) {
   }
 
   getAllPortfolios(): Observable<PortfolioPictureModel[]> {
@@ -28,8 +30,7 @@ export class PortfolioService {
                   {description: picture.payload.val()['description']},
                   {id: picture.key},
                   {name: picture.payload.val()['name']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {progress: picture.payload.val()['progress']})
+                  {pictureURL: picture.payload.val()['pictureURL']})
                 );
               }
             )
@@ -66,42 +67,55 @@ export class PortfolioService {
     return from(this.afDb.object(`${this.basePath}/${node}/${param.id}`).remove());
   }
 
-
-  pushUpload(upload: FileModel) {
+  pushFileToStorage(model, fileUpload) {
     const node = 'engaged';
-    const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${node}/${upload.file.name}`).put(upload.file);
+    const date: Date = new Date();
+    // fileUpload.name
+    const randomId = Math.random()
+      .toString(36)
+      .substring(2) + '.jpg';
 
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot) => {
-        // upload in progress
-        upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      },
-      (error) => {
-        // upload failed
-        console.log(error);
-      },
-      () => {
-        // upload success
-        uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-          // const imageUrl = downloadURL;
-          upload.id = 'tesztid';
-          upload.name = upload.file.name;
-          upload.date = '2011-11-11';
-          upload.pictureURL = downloadURL;
-          upload.description = 'description';
-          this.saveFileData(upload);
+    const filePath = `${this.basePath}/${node}/${randomId}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, fileUpload);
+
+    uploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        storageRef.getDownloadURL().subscribe(downloadURL => {
+
+          let finalDate: string = '' + date.getFullYear();
+          date.getMonth() < 10 ? finalDate = finalDate + '-0' + (date.getMonth() + 1) : finalDate = finalDate + '-' + (date.getMonth() + 1);
+          date.getDate() < 10 ? finalDate = finalDate + '-0' + date.getDate() : finalDate = finalDate + '-' + date.getDate();
+
+          model.name = 'test';
+          model.date = finalDate;
+          model.pictureURL = downloadURL;
+          model.description = 'description';
+          this.saveFileData(model);
         });
+      })
+    ).subscribe();
 
-      }
-    );
+    return uploadTask.percentageChanges();
   }
-
 
   // Writes the file details to the realtime db
   private saveFileData(upload: FileModel) {
     const node = 'engaged';
-    this.afDb.list(`${this.basePath}/${node}`).push(upload);
+    const newRef = this.afDb.list(`${this.basePath}/${node}`).push(upload);
+    const newKey = newRef.key;
+    this.afDb.object(`${this.basePath}/${node}/${newKey}`).set({...upload, id: newKey});
+    /*return from(
+      this.afDb.list(`${this.basePath}/${node}`).push(upload)
+    ).pipe(
+      map((picturePostReturn: { key: string }) => {
+        console.log(picturePostReturn.key);
+        return picturePostReturn.key;
+      }),
+      switchMap(pictureId => this.afDb.object(
+        `${this.basePath}/${node}/${pictureId}`).set({...upload, id: pictureId})
+      )
+    );*/
   }
 
 }

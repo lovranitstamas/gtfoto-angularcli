@@ -7,7 +7,6 @@ import {UserService} from '../../shared/user.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {FileModel} from '../../shared/file-model';
-import { _ } from 'underscore';
 
 @Component({
   selector: 'app-portfolio-detail',
@@ -18,7 +17,8 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   portfolioPicture: PortfolioPictureModel;
   viewForm = false;
   selectedFiles: FileList;
-  currentUpload: FileModel;
+  currentFileUpload: FileModel;
+  percentage: number;
 
   // close all subscription
   private _destroy$ = new Subject<void>();
@@ -87,18 +87,18 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   }
 
   uploadSingle() {
-    const file = this.selectedFiles.item(0);
-    // console.log(file.type);
-    this.currentUpload = new FileModel(file);
-    this._portfolioService.pushUpload(this.currentUpload);
-  }
+    console.log(this.selectedFiles.item(0));
+    const file: File = this.selectedFiles.item(0);
+    this.selectedFiles = undefined;
 
-  uploadMulti() {
-    const files = this.selectedFiles;
-    const filesIndex = _.range(files.length);
-    _.each(filesIndex, (idx) => {
-        this.currentUpload = new FileModel(files[idx]);
-        this._portfolioService.pushUpload(this.currentUpload);
+    this.currentFileUpload = new FileModel();
+    this._portfolioService.pushFileToStorage(this.currentFileUpload, file).subscribe(
+      percentage => {
+        this.percentage = Math.round(percentage);
+        console.log(this.percentage);
+      },
+      error => {
+        console.log(error);
       }
     );
   }
