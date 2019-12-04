@@ -5,8 +5,6 @@ import {PhotogalleryComponent} from './portfolio/photogallery/photogallery.compo
 import {PhotogalleryPicturesComponent} from './portfolio/photogallery/photogallery-pictures/photogallery-pictures.component';
 import {EngagedComponent} from './portfolio/engaged/engaged.component';
 import {EngagedListComponent} from './portfolio/engaged/engaged-list/engaged-list.component';
-import {TestComponent} from './portfolio/test/test.component';
-import {TestListComponent} from './portfolio/test/test-list/test-list.component';
 import {PortfolioDetailComponent} from './portfolio/portfolio-detail/portfolio-detail.component';
 import {MyserviceComponent} from './myservice/myservice.component';
 import {AboutComponent} from './about/about.component';
@@ -30,12 +28,8 @@ const routes: Routes = [
         path: 'engaged', component: EngagedComponent, children: [
           {path: '', component: EngagedListComponent}]
       },
-      {
-        path: 'test', component: TestComponent, children: [
-          {path: '', component: TestListComponent}]
-      },
       {path: 'new', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]},
-      {path: ':id', component: PortfolioDetailComponent}
+      {path: ':node/:id', component: PortfolioDetailComponent}
     ]
   },
   {path: 'myservice', component: MyserviceComponent},
@@ -65,8 +59,6 @@ export class AppRoutingModule {
     PhotogalleryPicturesComponent,
     EngagedComponent,
     EngagedListComponent,
-    TestComponent,
-    TestListComponent,
     PortfolioDetailComponent,
     MyserviceComponent,
     AboutComponent,

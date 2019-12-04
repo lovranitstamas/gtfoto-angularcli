@@ -45,15 +45,10 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllPortfolios().pipe(
+    this._picturesSubscription = this._portfolioService.getAllPortfolios('engaged').pipe(
       flatMap(
         pictures => {
-
-          if (pictures.length === 0) {
-            this.emptyEngagedList = true;
-          } else {
-            this.emptyEngagedList = false;
-          }
+          pictures.length === 0 ? this.emptyEngagedList = true : this.emptyEngagedList = false;
           this.fullListLength = pictures.length;
 
           return this.filteredText$.pipe(

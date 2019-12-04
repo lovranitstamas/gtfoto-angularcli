@@ -1,10 +1,10 @@
 export class PortfolioPictureModel {
-  id: string;
   name: string;
+  id: string;
   date: string;
   pictureURL: string;
-  description: string;
-  progress: number;
+  node: string;
+  storageRef: string;
 
   constructor(param?: PortfolioPictureModel) {
 

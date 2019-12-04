@@ -6,7 +6,6 @@ import {Location} from '@angular/common';
 import {UserService} from '../../shared/user.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {FileModel} from '../../shared/file-model';
 
 @Component({
   selector: 'app-portfolio-detail',
@@ -17,11 +16,13 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   portfolioPicture: PortfolioPictureModel;
   viewForm = false;
   selectedFiles: FileList;
-  currentFileUpload: FileModel;
+  currentFileUpload: PortfolioPictureModel;
   percentage: number;
+  file: boolean | File;
 
   // close all subscription
   private _destroy$ = new Subject<void>();
+
   // private _destroy$: Subject<void> = new Subject();
 
   constructor(private _route: ActivatedRoute,
@@ -32,6 +33,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const portfolioPictureId = this._route.snapshot.params['id'];
+    const node = this._route.snapshot.params['node'];
 
     // create an empty model while we wait for data
     this.portfolioPicture = new PortfolioPictureModel();
@@ -42,7 +44,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
     this.viewForm = !!portfolioPictureId;
 
     if (portfolioPictureId) {
-      this._portfolioService.getPortfolioById(portfolioPictureId).pipe(
+      this._portfolioService.getPortfolioById(node, portfolioPictureId).pipe(
         takeUntil(this._destroy$))
         .subscribe(evm => (this.portfolioPicture = evm));
     }
@@ -61,14 +63,34 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this._portfolioService.save(this.portfolioPicture).pipe(
-      takeUntil(this._destroy$))
-      .subscribe(
-        () => this.navigateBack(),
-        (err) => {
-          console.warn(`Problémánk van a form mentésnél: ${err}`);
-        }
-      );
+
+    !this.selectedFiles ? this.file = false : this.file = this.selectedFiles.item(0);
+    if (this.selectedFiles) {
+      this.currentFileUpload = this.portfolioPicture;
+    }
+
+    if (this.file === false) {
+      this._portfolioService.modify(this.portfolioPicture).pipe(
+        takeUntil(this._destroy$))
+        .subscribe(
+          () => this.navigateBack(),
+          (err) => {
+            console.warn(`Problémánk van a form mentésnél: ${err}`);
+          }
+        );
+    } else {
+      // this.selectedFiles = undefined;
+      this._portfolioService.save(this.portfolioPicture, this.file).pipe(
+        takeUntil(this._destroy$))
+        .subscribe(
+          percentage => {
+            this.percentage = Math.round(percentage);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
   }
 
   delete() {
@@ -84,23 +106,6 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
 
   navigateBack() {
     this._location.back();
-  }
-
-  uploadSingle() {
-    console.log(this.selectedFiles.item(0));
-    const file: File = this.selectedFiles.item(0);
-    this.selectedFiles = undefined;
-
-    this.currentFileUpload = new FileModel();
-    this._portfolioService.pushFileToStorage(this.currentFileUpload, file).subscribe(
-      percentage => {
-        this.percentage = Math.round(percentage);
-        console.log(this.percentage);
-      },
-      error => {
-        console.log(error);
-      }
-    );
   }
 
 }

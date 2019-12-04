@@ -14,9 +14,9 @@
       <!-- portfolioPictureForm.value-->
       <form #portfolioPictureForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="esemeny">Képhez tartozó esemény címe:</label>
+          <label for="name">Képhez tartozó esemény címe:</label>
           <input class="form-control mb-3"
-                 id="esemeny"
+                 id="name"
                  placeholder="Esemény címe"
                  type="text"
                  [(ngModel)]="portfolioPicture.name"
@@ -25,13 +25,13 @@
                  #name="ngModel"
                  [disabled]="viewForm"
           >
-          <alert type="danger" *ngIf="name.touched && name.invalid">Kötelező mező!</alert>
+          <alert class="mt-1" type="danger" *ngIf="name.touched && name.invalid">Kötelező mező!</alert>
         </div>
 
         <div class="form-group">
-          <label for="idopont">Esemény időpontja</label>
+          <label for="date">Esemény időpontja</label>
           <input class="form-control mb-3"
-                 id="idopont"
+                 id="date"
                  placeholder="Esemény időpontja"
                  type="text"
                  [(ngModel)]="portfolioPicture.date"
@@ -44,72 +44,66 @@
           <div>{{typeup.className}}</div>
           <hr>
           form summa: <div>{{ portfolioPictureForm.touched }}</div>-->
-          <alert type="danger" *ngIf="date.touched && date.invalid">Kötelező mező!</alert>
+          <alert class="mt-1" type="danger" *ngIf="date.touched && date.invalid">Kötelező mező!</alert>
         </div>
 
-        <!--<div class="form-group row">
-          <img alt="" class="img-fluid mx-auto" src="assets/newportfolioPicture.png">
-          <div class="form-group mx-auto mt-3">
-            <label for="kep">Válassz képet az eseményhez</label>
-            <input class="form-control-file" id="kep" type="file">
-          </div>
-        </div>-->
-
         <div class="form-group">
-          <label for="pictureURL">Válassz képet</label>
-          <input class="form-control"
-                 id="pictureURL"
+          <label for="node">Csomópont megadása</label>
+          <input class="form-control mb-3"
+                 id="node"
+                 placeholder="Csomópont megadása"
                  type="text"
-                 placeholder="Eseményhez tartozó kép urj-je"
-                 [(ngModel)]="portfolioPicture.pictureURL"
+                 [(ngModel)]="portfolioPicture.node"
                  required
-                 name="pictureURL"
-                 #pictureURL="ngModel"
-                 [disabled]="viewForm">
-          <alert type="danger" *ngIf="pictureURL.touched && pictureURL.invalid">Kötelező mező!</alert>
+                 name="node"
+                 #node="ngModel"
+                 [disabled] = "portfolioPicture.id"
+                 >
+          <alert class="mt-1" type="danger" *ngIf="node.touched && node.invalid">Kötelező mező!</alert>
         </div>
 
         <div class="form-group">
-          <label for="leiras">Képhez tarozó esemény leírása</label>
-          <textarea class="form-control"
-                    id="leiras"
-                    placeholder="Esemény leírása"
-                    [(ngModel)]="portfolioPicture.description"
-                    required
-                    name="description"
-                    #description="ngModel"
-                    [disabled]="viewForm"
-          ></textarea>
-          <alert type="danger" *ngIf="description.touched && description.invalid">Kötelező mező!</alert>
-        </div>
-
-        <div class="form-group">
-          <label for="progress">Progress</label>
-          <textarea class="form-control"
-                    id="progress"
-                    placeholder="Progress"
-                    [(ngModel)]="portfolioPicture.progress"
-                    required
-                    name="progress"
-                    #progress="ngModel"
-                    [disabled]="viewForm"
-          ></textarea>
-          <alert type="danger" *ngIf="progress.touched && progress.invalid">Kötelező mező!</alert>
+          <!--|| (portfolioPicture.id && !viewForm))-->
+          <ng-container
+            *ngIf="!portfolioPicture.id; else imgThumbnail">
+            <label for="pictureURL">Fájl kiválasztása</label>
+            <input
+              class="form-control"
+              id="pictureURL"
+              type="file"
+              name="pictureURL"
+              #pictureURL
+              (change)="detectFiles($event)"
+              [disabled]="viewForm"
+            >
+            <img *ngIf="portfolioPicture.id && !viewForm"
+                 class="img-fluid img-thumbnail mt-3"
+                 width="400"
+                 alt="thumbnail"
+                 [src]="portfolioPicture.pictureURL">
+            <div *ngIf="currentFileUpload" class="progress mt-3">
+              <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': percentage + '%' }"></div>
+            </div>
+          </ng-container>
+          <ng-template #imgThumbnail>
+            <h5 *ngIf="portfolioPicture.id && !viewForm">KÉP NEM MÓDOSÍTHATÓ</h5>
+            <img class="img-fluid img-thumbnail" width="400" [src]="portfolioPicture.pictureURL" alt="thumbnail">
+          </ng-template>
         </div>
 
         <div class="text-center mb-3">
           <ng-container *ngIf="userService.isLoggedIn$ | async">
             <ng-container *ngIf="viewForm; else editButtons">
               <button type="button"
-                      class="btn btn-primary btn-lg"
+                      class="btn btn-primary btn-lg mr-1"
                       (click)="viewForm = false"
               >Szerkesztés
               </button>
             </ng-container>
             <ng-template #editButtons>
               <button type="submit"
-                      class="btn btn-primary btn-lg"
-                      [disabled]="portfolioPictureForm.invalid"
+                      class="btn btn-primary btn-lg mr-1"
+                      [disabled]="portfolioPictureForm.invalid || (!portfolioPicture.id && !selectedFiles)"
               >Mentés
               </button>
               <button type="button"
@@ -121,31 +115,12 @@
             </ng-template>
           </ng-container>
           <button type="button"
-                  class="btn btn-primary btn-lg"
+                  class="btn btn-primary btn-lg ml-1"
                   (click)="navigateBack()"
           >Vissza
           </button>
         </div>
       </form>
-
-      <div *ngIf="currentFileUpload">
-        <div class="progress">
-          <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': percentage + '%' }"></div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="singleUpload">Fájl kiválasztása</label>
-        <input type="file" (change)="detectFiles($event)" id="singleUpload">
-
-        <button
-          [disabled]="!selectedFiles"
-          (click)="uploadSingle()"
-          type="button"
-          class="btn btn-primary btn-lg">
-          Feltöltés
-        </button>
-      </div>
 
     </div>
 
