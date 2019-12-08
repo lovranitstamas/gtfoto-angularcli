@@ -83,4 +83,24 @@ export class PortfolioService {
     const newKey = newRef.key;
     this.afDb.object(`${this.basePath}/${upload.node}/${newKey}`).set({...upload, id: newKey});
   }
+
+  getAllEngagedPictures(): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`${this.basePath}/engaged`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {name: picture.payload.val()['name']},
+                  {id: picture.key},
+                  {date: picture.payload.val()['date']},
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {node: picture.payload.val()['node']})
+                );
+              }
+            )
+        )
+      );
+  }
 }

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from 'ngx-gallery';
+import {PortfolioService} from '../../../shared/portfolio.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-photogallery-pictures',
@@ -10,6 +12,13 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  private _engagedListArray = [];
+  private _picturesSubscription: Subscription;
+
+  constructor(
+    private _portfolioService: PortfolioService
+  ) {
+  }
 
   ngOnInit(): void {
 
@@ -37,27 +46,21 @@ export class PhotogalleryPicturesComponent implements OnInit {
       }
     ];
 
-    this.galleryImages = [
-      {
-        small: 'https://firebasestorage.googleapis.com/v0/b/gt-foto-angular-89a91.appspot.com/o/uploads%2FPNG_transparency_demonstration_1.png?alt=media&token=c9d06107-f025-4cf9-bc07-27d4ec2db2b7',
-        medium: 'https://firebasestorage.googleapis.com/v0/b/gt-foto-angular-89a91.appspot.com/o/uploads%2FPNG_transparency_demonstration_1.png?alt=media&token=c9d06107-f025-4cf9-bc07-27d4ec2db2b7',
-        big: 'https://firebasestorage.googleapis.com/v0/b/gt-foto-angular-89a91.appspot.com/o/uploads%2FPNG_transparency_demonstration_1.png?alt=media&token=c9d06107-f025-4cf9-bc07-27d4ec2db2b7'
-      },
-      {
-        small: 'assets/carousel1.jpg',
-        medium: 'assets/carousel1.jpg',
-        big: 'assets/carousel1.jpg'
-      },
-      {
-        small: 'assets/carousel1.jpg',
-        medium: 'assets/carousel1.jpg',
-        big: 'assets/carousel1.jpg'
-      },
-      {
-        small: 'assets/carousel1.jpg',
-        medium: 'assets/carousel1.jpg',
-        big: 'assets/carousel1.jpg'
-      }
-    ];
+    this._picturesSubscription = this._portfolioService.getAllEngagedPictures()
+      .subscribe(
+        pictures => {
+          pictures.map(
+            picture => {
+              const item = {
+                small: picture.pictureURL,
+                medium: picture.pictureURL,
+                big: picture.pictureURL
+              };
+              this._engagedListArray.push(item);
+            }
+          );
+        }
+      );
+    this.galleryImages = this._engagedListArray;
   }
 }
