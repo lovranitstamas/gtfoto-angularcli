@@ -48,8 +48,8 @@
         </div>
 
         <div class="form-group">
-          <label for="node">Csomópont megadása</label>
-          <input class="form-control mb-3"
+          <label for="node">Almenü hozzárendelés</label>
+          <!--<input class="form-control mb-3"
                  id="node"
                  placeholder="Csomópont megadása"
                  type="text"
@@ -58,7 +58,18 @@
                  name="node"
                  #node="ngModel"
                  [disabled] = "portfolioPicture.id"
-                 >
+                 >-->
+          <select class="form-control mb-3"
+                  id="node"
+                  required
+                  [(ngModel)]="portfolioPicture.node"
+                  name="node"
+                  #node="ngModel"
+                  [disabled] = "portfolioPicture.id"
+          >
+            <option value="" selected>Kérem válasszon</option>
+            <option value="engaged">Jegyesfotók</option>
+          </select>
           <alert class="mt-1" type="danger" *ngIf="node.touched && node.invalid">Kötelező mező!</alert>
         </div>
 

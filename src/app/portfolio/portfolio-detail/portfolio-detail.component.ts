@@ -47,6 +47,8 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
       this._portfolioService.getPortfolioById(node, portfolioPictureId).pipe(
         takeUntil(this._destroy$))
         .subscribe(evm => (this.portfolioPicture = evm));
+    } else {
+      this.portfolioPicture.node = '';
     }
   }
 
