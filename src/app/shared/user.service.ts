@@ -11,6 +11,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
 })
 export class UserService {
   isLoggedIn$ = new ReplaySubject<boolean>(1);
+  adminStatus$ = new ReplaySubject<boolean>(1);
   private _user = new ReplaySubject<UserModel>(1);
 
   constructor(private _router: Router,
@@ -21,12 +22,16 @@ export class UserService {
       user => {
         if (user != null) {
           this.getUserById(user.uid).subscribe(
-            (remoteUser: UserModel) => this._user.next(remoteUser)
+            (remoteUser: UserModel) => {
+              this._user.next(remoteUser);
+              this.adminStatus$.next(remoteUser.admin);
+            }
           );
           this.isLoggedIn$.next(true);
         } else {
           this._user.next(null);
           this.isLoggedIn$.next(false);
+          this.adminStatus$.next(false);
         }
       }
     );
@@ -46,7 +51,7 @@ export class UserService {
     ).pipe(
       tap(
         (response) => {
-          this.save({...param, id: response.user.uid});
+          this.save({...param, id: response.user.uid, admin: false});
         }
       )
     );

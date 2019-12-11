@@ -25,6 +25,7 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
   pictures: PortfolioPictureModel[];
   masonryImages: PortfolioPictureModel[];
   isLoggedIn: boolean;
+  isAdmin;
   fullListLength: number;
   limit = 5;
   fullListView = false;
@@ -34,12 +35,20 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
   private filteredText$ = new BehaviorSubject<string>(null);
   private _picturesSubscription: Subscription;
   private _isLoggedInSubscription: Subscription;
+  private _adminStatusSubscription: Subscription;
 
   constructor(
     private _portfolioService: PortfolioService,
     userService: UserService) {
     this._isLoggedInSubscription = userService.isLoggedIn$.subscribe(
-      isLoggedIn => this.isLoggedIn = isLoggedIn
+      isLoggedIn => {
+        this.isLoggedIn = isLoggedIn;
+      }
+    );
+    this._adminStatusSubscription = userService.adminStatus$.subscribe(
+      adminStatus => {
+        this.isAdmin = adminStatus;
+      }
     );
   }
 
@@ -59,7 +68,7 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
                 } else {
                   return pictures.filter(
                     picture => {
-                      return picture.date.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
+                      return picture.dateOfEvent.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
                     }
                   );
                 }

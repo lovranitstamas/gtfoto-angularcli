@@ -23,6 +23,7 @@
             <app-portfoliocard
               [picture]="picture"
               nextLabel="Szerkesztés"
+              [isAdmin] = this.isAdmin
             >
             </app-portfoliocard>
           </ngxMasonryItem>
@@ -41,7 +42,8 @@
   </div>
   <div class="row">
     <div class="col-12 mb-5">
-      <a routerLink="/portfolio/new" class="btn btn-primary" role="button" *ngIf="isLoggedIn">Új kép feltöltése</a>
+      <a routerLink="/portfolio/new" class="btn btn-primary" role="button" *ngIf="isLoggedIn && isAdmin">Új kép
+        feltöltése</a>
     </div>
   </div>
 </div>

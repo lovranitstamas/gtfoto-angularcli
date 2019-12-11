@@ -3,6 +3,6 @@
     <img alt="Card image cap" class="card-img-top img-fluid" [src]="picture.pictureURL">
   </div>
   <figcaption class="figure-caption text-right">
-    {{picture.date}} - <a [routerLink]="['../../',picture.node,picture.id]">{{nextLabel}}</a>
+    {{picture.dateOfEvent}} <span *ngIf="isAdmin">-</span> <a [routerLink]="['../../',picture.node,picture.id]" *ngIf="isAdmin">{{nextLabel}}</a>
   </figcaption>
 </figure>
