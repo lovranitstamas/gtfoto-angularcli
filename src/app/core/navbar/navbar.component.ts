@@ -23,16 +23,42 @@ export class NavbarComponent implements OnInit, OnDestroy {
       name: 'Jegyesfotók',
       mainMenu: 'portfolio',
       subMenu: 'engaged'
-    }/*,
+    },
     {
-      name: 'Teszt',
+      name: 'Kreatív fotók',
       mainMenu: 'portfolio',
-      subMenu: 'test'
-    }*/
-    // 'Portré',
-    // 'Család',
-    // 'Rendezvény',
-    // 'Tájak, városok'
+      subMenu: 'creative'
+    },
+    {
+      name: 'Portrék',
+      mainMenu: 'portfolio',
+      subMenu: 'portrait'
+    },
+    {
+      name: 'Gyerek-és családi fotók',
+      mainMenu: 'portfolio',
+      subMenu: 'childandfamily'
+    },
+    {
+      name: 'Kismama fotók',
+      mainMenu: 'portfolio',
+      subMenu: 'pregnant'
+    },
+    {
+      name: 'Keresztelő fotók',
+      mainMenu: 'portfolio',
+      subMenu: 'christening'
+    },
+    {
+      name: 'Óvodai gyerekfotók',
+      mainMenu: 'portfolio',
+      subMenu: 'kindergarten'
+    },
+    {
+      name: 'Esküvői fotók',
+      mainMenu: 'portfolio',
+      subMenu: 'wedding'
+    }
   ];
   private _routerSub = Subscription.EMPTY;
   private _routerSubEnd = Subscription.EMPTY;
