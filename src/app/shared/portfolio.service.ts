@@ -105,4 +105,151 @@ export class PortfolioService {
         )
       );
   }
+
+  getAllCreativePictures(): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`${this.basePath}/creative`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {name: picture.payload.val()['name']},
+                  {id: picture.key},
+                  {_date: picture.payload.val()['date']},
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {node: picture.payload.val()['node']},
+                  {storageRef: picture.payload.val()['storageRef']})
+                );
+              }
+            )
+        )
+      );
+  }
+
+  getAllPortraitPictures(): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`${this.basePath}/portrait`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {name: picture.payload.val()['name']},
+                  {id: picture.key},
+                  {_date: picture.payload.val()['date']},
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {node: picture.payload.val()['node']},
+                  {storageRef: picture.payload.val()['storageRef']})
+                );
+              }
+            )
+        )
+      );
+  }
+
+  getAllChildAndFamilyPictures(): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`${this.basePath}/childandfamily`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {name: picture.payload.val()['name']},
+                  {id: picture.key},
+                  {_date: picture.payload.val()['date']},
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {node: picture.payload.val()['node']},
+                  {storageRef: picture.payload.val()['storageRef']})
+                );
+              }
+            )
+        )
+      );
+  }
+
+  getAllPregnantPictures(): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`${this.basePath}/pregnant`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {name: picture.payload.val()['name']},
+                  {id: picture.key},
+                  {_date: picture.payload.val()['date']},
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {node: picture.payload.val()['node']},
+                  {storageRef: picture.payload.val()['storageRef']})
+                );
+              }
+            )
+        )
+      );
+  }
+
+  getAllChristeningPictures(): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`${this.basePath}/christening`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {name: picture.payload.val()['name']},
+                  {id: picture.key},
+                  {_date: picture.payload.val()['date']},
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {node: picture.payload.val()['node']},
+                  {storageRef: picture.payload.val()['storageRef']})
+                );
+              }
+            )
+        )
+      );
+  }
+
+  getAllKindergartenPictures(): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`${this.basePath}/kindergarten`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {name: picture.payload.val()['name']},
+                  {id: picture.key},
+                  {_date: picture.payload.val()['date']},
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {node: picture.payload.val()['node']},
+                  {storageRef: picture.payload.val()['storageRef']})
+                );
+              }
+            )
+        )
+      );
+  }
+
+  getAllWeddingPictures(): Observable<PortfolioPictureModel[]> {
+    return this.afDb.list(`${this.basePath}/wedding`).snapshotChanges()
+      .pipe(
+        map(
+          (pictures) =>
+            pictures.map(
+              picture => {
+                return new PortfolioPictureModel(Object.assign({},
+                  {name: picture.payload.val()['name']},
+                  {id: picture.key},
+                  {_date: picture.payload.val()['date']},
+                  {pictureURL: picture.payload.val()['pictureURL']},
+                  {node: picture.payload.val()['node']},
+                  {storageRef: picture.payload.val()['storageRef']})
+                );
+              }
+            )
+        )
+      );
+  }
 }
