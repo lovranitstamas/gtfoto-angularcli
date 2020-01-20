@@ -30,20 +30,7 @@ import {ContactFormComponent} from './contact/contact-form/contact-form.componen
 import {ContactService} from './shared/contact.service';
 import {NgxMasonryModule} from 'ngx-masonry';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { CreativeComponent } from './portfolio/creative/creative.component';
-import { CreativeListComponent } from './portfolio/creative/creative-list/creative-list.component';
-import { PortraitComponent } from './portfolio/portrait/portrait.component';
-import { PortraitListComponent } from './portfolio/portrait/portrait-list/portrait-list.component';
-import { ChildAndFamilyListComponent } from './portfolio/child-and-family/child-and-family-list/child-and-family-list.component';
-import { ChildAndFamilyComponent } from './portfolio/child-and-family/child-and-family.component';
-import { PregnantComponent } from './portfolio/pregnant/pregnant.component';
-import { PregnantListComponent } from './portfolio/pregnant/pregnant-list/pregnant-list.component';
-import { ChristeningComponent } from './portfolio/christening/christening.component';
-import { ChristeningListComponent } from './portfolio/christening/christening-list/christening-list.component';
-import { KindergartenComponent } from './portfolio/kindergarten/kindergarten.component';
-import { KindergartenListComponent } from './portfolio/kindergarten/kindergarten-list/kindergarten-list.component';
-import { WeddingComponent } from './portfolio/wedding/wedding.component';
-import { WeddingListComponent } from './portfolio/wedding/wedding-list/wedding-list.component';
+
 
 @NgModule({
   declarations: [
@@ -59,21 +46,7 @@ import { WeddingListComponent } from './portfolio/wedding/wedding-list/wedding-l
     PortfoliocardComponent,
     LoadingSpinnerComponent,
     ...AppRoutingModule.routableComponents,
-    ContactFormComponent,
-    CreativeComponent,
-    CreativeListComponent,
-    PortraitComponent,
-    PortraitListComponent,
-    ChildAndFamilyComponent,
-    ChildAndFamilyListComponent,
-    PregnantComponent,
-    PregnantListComponent,
-    ChristeningComponent,
-    ChristeningListComponent,
-    KindergartenComponent,
-    KindergartenListComponent,
-    WeddingComponent,
-    WeddingListComponent
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,
