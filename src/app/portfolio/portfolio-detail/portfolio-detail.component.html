@@ -34,7 +34,7 @@
                  id="date"
                  placeholder="Esemény időpontja"
                  type="text"
-                 [(ngModel)]="portfolioPicture.date"
+                 [(ngModel)]="portfolioPicture.dateOfEvent"
                  required
                  name="date"
                  #date="ngModel"
@@ -69,6 +69,13 @@
           >
             <option value="" selected>Kérem válasszon</option>
             <option value="engaged">Jegyesfotók</option>
+            <option value="creative">Kreatívfotók</option>
+            <option value="portrait">Portrék</option>
+            <option value="childandfamily">Gyerek-és családi fotók</option>
+            <option value="pregnant">Kismamafotók</option>
+            <option value="christening">Keresztelőfotók</option>
+            <option value="kindergarten">Óvodaifotók</option>
+            <option value="wedding">Esküvőifotók</option>
           </select>
           <alert class="mt-1" type="danger" *ngIf="node.touched && node.invalid">Kötelező mező!</alert>
         </div>
