@@ -4,7 +4,7 @@ export class PortfolioPictureModel {
   pictureURL: string;
   node: string;
   storageRef: string;
-  private _date: string; //
+  private _date: string;
 
   constructor(param?: PortfolioPictureModel) {
     if (param) {
