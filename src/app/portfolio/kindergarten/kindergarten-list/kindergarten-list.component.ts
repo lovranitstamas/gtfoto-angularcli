@@ -69,7 +69,7 @@ export class KindergartenListComponent implements OnInit, AfterViewInit, OnDestr
                 } else {
                   return pictures.filter(
                     picture => {
-                      return picture.dateOfEvent.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
+                      return picture.getDateOfEvent().split('-', 3).indexOf(filterText.toLowerCase()) > -1;
                     }
                   );
                 }

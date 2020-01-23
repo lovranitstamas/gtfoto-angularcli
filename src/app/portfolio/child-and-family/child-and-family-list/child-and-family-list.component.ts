@@ -68,7 +68,7 @@ export class ChildAndFamilyListComponent implements OnInit, AfterViewInit, OnDes
                 } else {
                   return pictures.filter(
                     picture => {
-                      return picture.dateOfEvent.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
+                      return picture.getDateOfEvent().split('-', 3).indexOf(filterText.toLowerCase()) > -1;
                     }
                   );
                 }

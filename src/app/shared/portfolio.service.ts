@@ -27,7 +27,7 @@ export class PortfolioService {
                   // {description: picture.payload.val()['description']},
                   {name: picture.payload.val()['name']},
                   {id: picture.key},
-                  {_date: picture.payload.val()['date']},
+                  {_date: picture.payload.val()['_date']},
                   {pictureURL: picture.payload.val()['pictureURL']},
                   {node: picture.payload.val()['node']},
                   {storageRef: picture.payload.val()['storageRef']})

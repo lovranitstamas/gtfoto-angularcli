@@ -4,7 +4,7 @@ export class PortfolioPictureModel {
   pictureURL: string;
   node: string;
   storageRef: string;
-  private _date: string;
+  _date: string;
 
   constructor(param?: PortfolioPictureModel) {
     if (param) {
@@ -14,15 +14,15 @@ export class PortfolioPictureModel {
       this.node = param.node;
       this.storageRef = param.storageRef;
       // Object.assign(this, param);
-      this.dateOfEvent = param._date;
+      this._date = param._date;
     }
   }
 
-  get dateOfEvent(): string {
+  getDateOfEvent(): string {
     return this._date;
   }
 
-  set dateOfEvent(date: string) {
+  setDateOfEvent(date: string) {
     this._date = date;
   }
 
