@@ -1,255 +1,72 @@
 import {Injectable} from '@angular/core';
 import {PortfolioPictureModel} from './portfolio-picture-model';
-import {from, Observable} from 'rxjs';
-import {finalize, map} from 'rxjs/operators';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireStorage} from '@angular/fire/storage';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
-
-  private basePath = '/gallery';
+  PHP_API_SERVER = './';
 
   constructor(private afDb: AngularFireDatabase,
-              private storage: AngularFireStorage) {
-  }
-
-  getAllPortfolios(node): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/${node}`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  // {description: picture.payload.val()['description']},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['_date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
-  }
-
-  getPortfolioById(node: string, id: string) {
-    return this.afDb.object<any>(`${this.basePath}/${node}/${id}`).valueChanges();
-  }
-
-  modify(param: PortfolioPictureModel) {
-    return from(this.afDb.object(`${this.basePath}/${param.node}/${param.id}`).update(param));
-  }
-
-  save(param: PortfolioPictureModel, file) {
-    // fileUpload.name
-
-    const randomId = Math.random()
-      .toString(36)
-      .substring(2) + '.jpg';
-
-    const filePath = `${this.basePath}/${param.node}/${randomId}`;
-    const storageRef = this.storage.ref(filePath);
-    const uploadTask = this.storage.upload(filePath, file);
-
-    uploadTask.snapshotChanges().pipe(
-      finalize(() => {
-        storageRef.getDownloadURL().subscribe(downloadURL => {
-          param.pictureURL = downloadURL;
-          param.storageRef = randomId;
-          this.saveFileData(param);
-        });
-      })
-    ).subscribe();
-
-    return uploadTask.percentageChanges();
-
-  }
-
-  delete(param: PortfolioPictureModel) {
-    const filePath = `${this.basePath}/${param.node}/${param.storageRef}`;
-
-    this.storage.ref(filePath).delete();
-    return from(this.afDb.object(`${this.basePath}/${param.node}/${param.id}`).remove());
-  }
-
-  // Writes the file details to the realtime db
-  private saveFileData(upload: PortfolioPictureModel) {
-    const newRef = this.afDb.list(`${this.basePath}/${upload.node}`).push(upload);
-    const newKey = newRef.key;
-    this.afDb.object(`${this.basePath}/${upload.node}/${newKey}`).set({...upload, id: newKey});
+              private storage: AngularFireStorage,
+              private _httpClient: HttpClient) {
   }
 
   getAllEngagedPictures(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/engaged`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getEngagedPhotos.php`);
   }
 
   getAllCreativePictures(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/creative`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getCreativePhotos.php`);
   }
 
   getAllPortraitPictures(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/portrait`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPortraitPhotos.php`);
   }
 
   getAllChildAndFamilyPictures(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/childandfamily`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getChildAndFamilyPhotos.php`);
   }
 
   getAllPregnantPictures(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/pregnant`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPregnantPhotos.php`);
   }
 
   getAllChristeningPictures(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/christening`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getChristeningPhotos.php`);
   }
 
   getAllKindergartenPictures(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/kindergarten`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getKindergartenPhotos.php`);
   }
 
   getAllWeddingPictures(): Observable<PortfolioPictureModel[]> {
-    return this.afDb.list(`${this.basePath}/wedding`).snapshotChanges()
-      .pipe(
-        map(
-          (pictures) =>
-            pictures.map(
-              picture => {
-                return new PortfolioPictureModel(Object.assign({},
-                  {name: picture.payload.val()['name']},
-                  {id: picture.key},
-                  {_date: picture.payload.val()['date']},
-                  {pictureURL: picture.payload.val()['pictureURL']},
-                  {node: picture.payload.val()['node']},
-                  {storageRef: picture.payload.val()['storageRef']})
-                );
-              }
-            )
-        )
-      );
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getWeddingPhotos.php`);
+  }
+
+  getPortfolioById(pictureId) {
+    return this._httpClient.get<PortfolioPictureModel>(`${this.PHP_API_SERVER}api/getPictureDatas.php?id=${pictureId}`);
+  }
+
+  delete(param: PortfolioPictureModel) {
+    return this._httpClient.delete<PortfolioPictureModel>(`${this.PHP_API_SERVER}api/delete.php/?id=${param.id}`);
+  }
+
+  update(param: PortfolioPictureModel) {
+    return this._httpClient.put<PortfolioPictureModel>(`${this.PHP_API_SERVER}api/update.php`, param);
+  }
+
+  create(param: PortfolioPictureModel, data: File) {
+    const formData: FormData = new FormData();
+    formData.append('title', param.title);
+    formData.append('createDate', param.createDate);
+    formData.append('node', param.node);
+    formData.append('pictureURL', data, data.name);
+    const uploadURL = `${this.PHP_API_SERVER}api/upload.php`;
+    return this._httpClient.post<any>(uploadURL, formData);
   }
 }

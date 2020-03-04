@@ -1,8 +1,8 @@
 <figure class="figure">
   <div class="hover-zoom-box">
-    <img alt="Card image cap" class="card-img-top img-fluid" [src]="picture.pictureURL">
+    <img alt="Card image cap" class="card-img-top img-fluid" [src]="picture.filename">
   </div>
   <figcaption class="figure-caption text-right">
-    {{picture.getDateOfEvent()}} <span *ngIf="isAdmin">-</span> <a [routerLink]="['../../',picture.node,picture.id]" *ngIf="isAdmin">{{nextLabel}}</a>
+    {{picture.createDate}} <span *ngIf="isAdmin">-</span> <a [routerLink]="['../../',picture.node,picture.id]" *ngIf="isAdmin">{{nextLabel}}</a>
   </figcaption>
 </figure>

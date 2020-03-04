@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {emailFormatValidator} from './contact.validators';
 import {ContactService} from '../../shared/contact.service';
+import {MessageModel} from '../../shared/message-model';
 
 @Component({
   selector: 'app-contact-form',
@@ -14,6 +15,12 @@ export class ContactFormComponent implements OnInit {
   submitSuccessAlert = false;
   submitErrorAlert = false;
   disabled = false;
+  messageO = {
+    sender: null,
+    email: null,
+    subject: null,
+    message: null
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -56,13 +63,21 @@ export class ContactFormComponent implements OnInit {
       this.form.get('subject').disable();
       this.form.get('message').disable();
 
+      this.messageO.sender = this.form.value['sender'];
+      this.messageO.email = this.form.value['email'];
+      this.messageO.subject = this.form.value['subject'];
+      this.messageO.message = this.form.value['message'];
+
       this._contactService.sendMessage(
-        this.form.value['sender'],
+        /*this.form.value['sender'],
         this.form.value['email'],
         this.form.value['subject'],
-        this.form.value['message']
+        this.form.value['message'] */
+        this.messageO
       ).subscribe(
-        () => {
+        (message: MessageModel) => {
+          // console.log(message);
+
           this.submitted = false;
           this.form.reset({
             sender: null,

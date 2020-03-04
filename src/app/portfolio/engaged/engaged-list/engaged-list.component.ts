@@ -23,15 +23,16 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   pictures: PortfolioPictureModel[];
-  masonryImages: PortfolioPictureModel[];
   isLoggedIn: boolean;
-  isAdmin;
+  isAdmin: boolean;
   fullListLength: number;
-  limit = 5;
+  limit = 30;
   fullListView = false;
   emptyEngagedList = false;
   loading = true;
 
+  masonryImages; // remove type
+  resultObjects: { node: string; filename: string; id: string; title: string; createDate: string }[]; // insert step
   private filteredText$ = new BehaviorSubject<string>(null);
   private _picturesSubscription: Subscription;
   private _isLoggedInSubscription: Subscription;
@@ -52,9 +53,8 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllPortfolios('engaged').pipe(
+    this._picturesSubscription = this._portfolioService.getAllEngagedPictures().pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyEngagedList = true : this.emptyEngagedList = false;
@@ -68,7 +68,7 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
                 } else {
                   return pictures.filter(
                     picture => {
-                      return picture.getDateOfEvent().split('-', 3).indexOf(filterText.toLowerCase()) > -1;
+                      return picture.createDate.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
                     }
                   );
                 }
@@ -82,10 +82,20 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.pictures = pictures;
         this.loading = false;
 
+        this.resultObjects = this.pictures.map((ev) => {
+          return {
+            id: ev.id,
+            title: ev.title,
+            node: ev.node,
+            filename: '/gtfoto-angular-php/uploads/gallery/' + ev.node + '/' + ev.filename,
+            createDate: ev.createDate
+          };
+        });
+
         if (this.fullListView) {
-          this.masonryImages = this.pictures.slice(0, this.pictures.length);
+          this.masonryImages = this.resultObjects.slice(0, this.pictures.length);
         } else {
-          this.masonryImages = this.pictures.slice(0, this.limit);
+          this.masonryImages = this.resultObjects.slice(0, this.limit);
         }
 
       }

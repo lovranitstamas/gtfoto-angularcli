@@ -23,15 +23,16 @@ export class ChildAndFamilyListComponent implements OnInit, AfterViewInit, OnDes
   };
 
   pictures: PortfolioPictureModel[];
-  masonryImages: PortfolioPictureModel[];
   isLoggedIn: boolean;
-  isAdmin;
+  isAdmin: boolean;
   fullListLength: number;
-  limit = 5;
+  limit = 30;
   fullListView = false;
   emptyChildAndFamilyList = false;
   loading = true;
 
+  masonryImages; // remove type
+  resultObjects: { node: string; filename: string; id: string; title: string; createDate: string }[]; // insert step
   private filteredText$ = new BehaviorSubject<string>(null);
   private _picturesSubscription: Subscription;
   private _isLoggedInSubscription: Subscription;
@@ -54,7 +55,7 @@ export class ChildAndFamilyListComponent implements OnInit, AfterViewInit, OnDes
   }
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllPortfolios('childandfamily').pipe(
+    this._picturesSubscription = this._portfolioService.getAllChildAndFamilyPictures().pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyChildAndFamilyList = true : this.emptyChildAndFamilyList = false;
@@ -68,7 +69,7 @@ export class ChildAndFamilyListComponent implements OnInit, AfterViewInit, OnDes
                 } else {
                   return pictures.filter(
                     picture => {
-                      return picture.getDateOfEvent().split('-', 3).indexOf(filterText.toLowerCase()) > -1;
+                      return picture.createDate.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
                     }
                   );
                 }
@@ -82,10 +83,21 @@ export class ChildAndFamilyListComponent implements OnInit, AfterViewInit, OnDes
         this.pictures = pictures;
         this.loading = false;
 
+        // insert step
+        this.resultObjects = this.pictures.map((ev) => {
+          return {
+            id: ev.id,
+            title: ev.title,
+            node: ev.node,
+            filename: './uploads/gallery/' + ev.node + '/' + ev.filename,
+            createDate: ev.createDate
+          };
+        });
+
         if (this.fullListView) {
-          this.masonryImages = this.pictures.slice(0, this.pictures.length);
+          this.masonryImages = this.resultObjects.slice(0, this.pictures.length);
         } else {
-          this.masonryImages = this.pictures.slice(0, this.limit);
+          this.masonryImages = this.resultObjects.slice(0, this.limit);
         }
 
       }

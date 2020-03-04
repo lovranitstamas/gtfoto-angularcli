@@ -1,29 +1,57 @@
 export class PortfolioPictureModel {
-  name: string;
   id: string;
-  pictureURL: string;
+  title: string;
   node: string;
-  storageRef: string;
-  _date: string;
+  filename: string;
+  createDate: string;
 
-  constructor(param?: PortfolioPictureModel) {
-    if (param) {
-      this.name = param.name;
-      this.id = param.id;
-      this.pictureURL = param.pictureURL;
-      this.node = param.node;
-      this.storageRef = param.storageRef;
-      // Object.assign(this, param);
-      this._date = param._date;
-    }
+  /*constructor(id: string, title: string, node: string, filename: string, createDate: string) {
+    this.id = id;
+    this.title = title;
+    this.node = node;
+    this.filename = filename;
+    this.createDate = createDate;
+  }*/
+
+  get idF(): string {
+    return this.id;
   }
 
-  getDateOfEvent(): string {
-    return this._date;
+  set idF(id: string) {
+    this.id = id;
   }
 
-  setDateOfEvent(date: string) {
-    this._date = date;
+  get titleF(): string {
+    return this.title;
+  }
+
+  set titleF(title: string) {
+    this.title = title;
+  }
+
+  get nodeF(): string {
+    return this.node;
+  }
+
+  set nodeF(node: string) {
+    this.node = node;
+  }
+
+  get filenameF(): string {
+    return this.filename;
+  }
+
+  set filenameF(filename: string) {
+    this.filename = filename;
+  }
+
+  get dateOfEventF(): string {
+    return this.createDate;
+  }
+
+  set dateOfEventF(createDate: string) {
+    this.createDate = createDate;
   }
 
 }
+

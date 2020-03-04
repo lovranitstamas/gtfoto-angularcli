@@ -3,7 +3,7 @@
 
     <div class="card-header portfolio-detail-card-header">
       <div class="text-center">
-        <h3 *ngIf="!portfolioPicture.id; else modify">Új kép feltöltése</h3>
+        <h3 *ngIf="!portfolioPicture.idF; else modify">Új kép feltöltése</h3>
         <ng-template #modify><h3>Kép szerkesztése</h3></ng-template>
       </div>
     </div>
@@ -14,18 +14,18 @@
       <!-- portfolioPictureForm.value-->
       <form #portfolioPictureForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="name">Képhez tartozó esemény címe:</label>
+          <label for="title">Képhez tartozó esemény címe:</label>
           <input class="form-control mb-3"
-                 id="name"
+                 id="title"
                  placeholder="Esemény címe"
                  type="text"
-                 [(ngModel)]="portfolioPicture.name"
+                 [(ngModel)]="portfolioPicture.titleF"
                  required
-                 name="name"
-                 #name="ngModel"
+                 name="title"
+                 #title="ngModel"
                  [disabled]="viewForm"
           >
-          <alert class="mt-1" type="danger" *ngIf="name.touched && name.invalid">Kötelező mező!</alert>
+          <alert class="mt-1" type="danger" *ngIf="title.touched && title.invalid">Kötelező mező!</alert>
         </div>
 
         <div class="form-group">
@@ -34,38 +34,30 @@
                  id="date"
                  placeholder="Esemény időpontja"
                  type="text"
-                 [(ngModel)]="portfolioPicture._date"
+                 [(ngModel)]="portfolioPicture.dateOfEventF"
                  required
                  name="date"
                  #date="ngModel"
                  [disabled]="viewForm"
                  #typeup>
+
           <!--<div>{{typeup.classList}}</div>
           <div>{{typeup.className}}</div>
           <hr>
           form summa: <div>{{ portfolioPictureForm.touched }}</div>-->
+
           <alert class="mt-1" type="danger" *ngIf="date.touched && date.invalid">Kötelező mező!</alert>
         </div>
 
         <div class="form-group">
           <label for="node">Almenü hozzárendelés</label>
-          <!--<input class="form-control mb-3"
-                 id="node"
-                 placeholder="Csomópont megadása"
-                 type="text"
-                 [(ngModel)]="portfolioPicture.node"
-                 required
-                 name="node"
-                 #node="ngModel"
-                 [disabled] = "portfolioPicture.id"
-                 >-->
           <select class="form-control mb-3"
                   id="node"
                   required
-                  [(ngModel)]="portfolioPicture.node"
+                  [(ngModel)]="portfolioPicture.nodeF"
                   name="node"
                   #node="ngModel"
-                  [disabled] = "portfolioPicture.id"
+                  [disabled]="setNode"
           >
             <option value="" selected>Kérem válasszon</option>
             <option value="engaged">Jegyesfotók</option>
@@ -81,9 +73,8 @@
         </div>
 
         <div class="form-group">
-          <!--|| (portfolioPicture.id && !viewForm))-->
           <ng-container
-            *ngIf="!portfolioPicture.id; else imgThumbnail">
+            *ngIf="!portfolioPicture.idF; else imgThumbnail">
             <label for="pictureURL">Fájl kiválasztása</label>
             <input
               class="form-control"
@@ -98,14 +89,11 @@
                  class="img-fluid img-thumbnail mt-3"
                  width="400"
                  alt="thumbnail"
-                 [src]="portfolioPicture.pictureURL">
-            <div *ngIf="currentFileUpload" class="progress mt-3">
-              <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': percentage + '%' }"></div>
-            </div>
+                 [src]="portfolioPicture.filenameF">
           </ng-container>
           <ng-template #imgThumbnail>
-            <h5 *ngIf="portfolioPicture.id && !viewForm">KÉP NEM MÓDOSÍTHATÓ</h5>
-            <img class="img-fluid img-thumbnail" width="400" [src]="portfolioPicture.pictureURL" alt="thumbnail">
+            <h5 *ngIf="portfolioPicture.idF && !viewForm">KÉP NEM MÓDOSÍTHATÓ</h5>
+            <img class="img-fluid img-thumbnail" width="400" [src]="portfolioPicture.filenameF" alt="thumbnail">
           </ng-template>
         </div>
 
@@ -121,13 +109,13 @@
             <ng-template #editButtons>
               <button type="submit"
                       class="btn btn-primary btn-lg mr-1"
-                      [disabled]="portfolioPictureForm.invalid || (!portfolioPicture.id && !selectedFiles)"
+                      [disabled]="portfolioPictureForm.invalid || (!portfolioPicture.idF && !selectedFiles)"
               >Mentés
               </button>
               <button type="button"
                       class="btn btn-danger btn-lg"
                       (click)="delete()"
-                      *ngIf="portfolioPicture.id"
+                      *ngIf="portfolioPicture.idF"
               >Törlés
               </button>
             </ng-template>

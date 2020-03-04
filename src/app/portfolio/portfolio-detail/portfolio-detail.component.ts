@@ -15,9 +15,9 @@ import {takeUntil} from 'rxjs/operators';
 export class PortfolioDetailComponent implements OnInit, OnDestroy {
   portfolioPicture: PortfolioPictureModel;
   viewForm = false;
+  setNode = false;
   selectedFiles: FileList;
   currentFileUpload: PortfolioPictureModel;
-  percentage: number;
   file: boolean | File;
 
   // close all subscription
@@ -37,6 +37,11 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
 
     // create an empty model while we wait for data
     this.portfolioPicture = new PortfolioPictureModel();
+    this.portfolioPicture.idF = '';
+    this.portfolioPicture.titleF = '';
+    this.portfolioPicture.nodeF = '';
+    this.portfolioPicture.filenameF = '';
+    this.portfolioPicture.dateOfEventF = '';
 
     // a method get true/false value in all case
     // from false to true oninit and set false from click
@@ -44,11 +49,16 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
     this.viewForm = !!portfolioPictureId;
 
     if (portfolioPictureId) {
-      this._portfolioService.getPortfolioById(node, portfolioPictureId).pipe(
+      this._portfolioService.getPortfolioById(portfolioPictureId).pipe(
         takeUntil(this._destroy$))
-        .subscribe(evm => (this.portfolioPicture = evm));
-    } else {
-      this.portfolioPicture.node = '';
+        .subscribe(evm => {
+          this.portfolioPicture.idF = evm.id;
+          this.portfolioPicture.titleF = evm.title;
+          this.portfolioPicture.nodeF = evm.node;
+          this.portfolioPicture.filenameF = './uploads/gallery/' + node + '/' + evm.filename;
+          this.portfolioPicture.dateOfEventF = evm.createDate;
+          this.setNode = true;
+        });
     }
   }
 
@@ -72,24 +82,22 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
     }
 
     if (this.file === false) {
-      this._portfolioService.modify(this.portfolioPicture).pipe(
+      this._portfolioService.update(this.portfolioPicture).pipe(
         takeUntil(this._destroy$))
         .subscribe(
           () => this.navigateBack(),
           (err) => {
-            console.warn(`Problémánk van a form mentésnél: ${err}`);
+            console.warn(`Problémánk van a form módosításban: ${err}`);
           }
         );
     } else {
-      // this.selectedFiles = undefined;
-      this._portfolioService.save(this.portfolioPicture, this.file).pipe(
+      this.selectedFiles = undefined;
+      this._portfolioService.create(this.portfolioPicture, this.file).pipe(
         takeUntil(this._destroy$))
         .subscribe(
-          percentage => {
-            this.percentage = Math.round(percentage);
-          },
-          error => {
-            console.log(error);
+          () => this.navigateBack(),
+          (err) => {
+            console.warn(`Problémánk van a form feltöltésénél: ${err}`);
           }
         );
     }
@@ -101,7 +109,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
       .subscribe(
         () => this.navigateBack(),
         (err) => {
-          console.warn(`Problémánk van a form mentésnél: ${err}`);
+          console.warn(`Problémánk van a törlésnél: ${err}`);
         }
       );
   }
@@ -109,5 +117,4 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   navigateBack() {
     this._location.back();
   }
-
 }
