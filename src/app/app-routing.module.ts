@@ -3,22 +3,17 @@ import {NgModule} from '@angular/core';
 import {HomeComponent} from './home/home.component';
 import {PhotogalleryComponent} from './portfolio/photogallery/photogallery.component';
 import {PhotogalleryPicturesComponent} from './portfolio/photogallery/photogallery-pictures/photogallery-pictures.component';
-import {EngagedComponent} from './portfolio/engaged/engaged.component';
-import {EngagedListComponent} from './portfolio/engaged/engaged-list/engaged-list.component';
-import { CreativeComponent } from './portfolio/creative/creative.component';
-import { CreativeListComponent } from './portfolio/creative/creative-list/creative-list.component';
-import { PortraitComponent } from './portfolio/portrait/portrait.component';
-import { PortraitListComponent } from './portfolio/portrait/portrait-list/portrait-list.component';
-import { ChildAndFamilyListComponent } from './portfolio/child-and-family/child-and-family-list/child-and-family-list.component';
-import { ChildAndFamilyComponent } from './portfolio/child-and-family/child-and-family.component';
-import { PregnantComponent } from './portfolio/pregnant/pregnant.component';
-import { PregnantListComponent } from './portfolio/pregnant/pregnant-list/pregnant-list.component';
-import { ChristeningComponent } from './portfolio/christening/christening.component';
-import { ChristeningListComponent } from './portfolio/christening/christening-list/christening-list.component';
-import { KindergartenComponent } from './portfolio/kindergarten/kindergarten.component';
-import { KindergartenListComponent } from './portfolio/kindergarten/kindergarten-list/kindergarten-list.component';
-import { WeddingComponent } from './portfolio/wedding/wedding.component';
-import { WeddingListComponent } from './portfolio/wedding/wedding-list/wedding-list.component';
+import {PortraitComponent} from './portfolio/portrait/portrait.component';
+import {PortraitListComponent} from './portfolio/portrait/portrait-list/portrait-list.component';
+import {ChildAndFamilyListComponent} from './portfolio/child-and-family/child-and-family-list/child-and-family-list.component';
+import {ChildAndFamilyComponent} from './portfolio/child-and-family/child-and-family.component';
+import {PregnantComponent} from './portfolio/pregnant/pregnant.component';
+import {PregnantListComponent} from './portfolio/pregnant/pregnant-list/pregnant-list.component';
+import {ChristeningComponent} from './portfolio/christening/christening.component';
+import {ChristeningListComponent} from './portfolio/christening/christening-list/christening-list.component';
+import {KindergartenComponent} from './portfolio/kindergarten/kindergarten.component';
+import {KindergartenListComponent} from './portfolio/kindergarten/kindergarten-list/kindergarten-list.component';
+import {WeddingComponent} from './portfolio/wedding/wedding.component';
 import {PortfolioDetailComponent} from './portfolio/portfolio-detail/portfolio-detail.component';
 import {MyserviceComponent} from './myservice/myservice.component';
 import {AboutComponent} from './about/about.component';
@@ -28,6 +23,14 @@ import {ProfileComponent} from './user/profile/profile.component';
 import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
 import {LoginComponent} from './user/login/login.component';
 import {LoggedInGuard} from './shared/logged-in.guard';
+import {WeddingSubmenuComponent} from './portfolio/wedding/wedding-submenu/wedding-submenu.component';
+import {CreativeListComponent} from './portfolio/wedding/creative-list/creative-list.component';
+import {EngagedListComponent} from './portfolio/wedding/engaged-list/engaged-list.component';
+import {LiturgyListComponent} from './portfolio/wedding/liturgy-list/liturgy-list.component';
+import {PreparationListComponent} from './portfolio/wedding/preparation-list/preparation-list.component';
+import {PermissionListComponent} from './portfolio/wedding/permission-list/permission-list.component';
+import {CivilCerenomyListComponent} from './portfolio/wedding/civil-cerenomy-list/civil-cerenomy-list.component';
+import {DinnerPartyListComponent} from './portfolio/wedding/dinner-party-list/dinner-party-list.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -37,14 +40,6 @@ const routes: Routes = [
       {
         path: 'photogallery', component: PhotogalleryComponent, children: [
           {path: '', component: PhotogalleryPicturesComponent}]
-      },
-      {
-        path: 'engaged', component: EngagedComponent, children: [
-          {path: '', component: EngagedListComponent}]
-      },
-      {
-        path: 'creative', component: CreativeComponent, children: [
-          {path: '', component: CreativeListComponent}]
       },
       {
         path: 'portrait', component: PortraitComponent, children: [
@@ -67,8 +62,41 @@ const routes: Routes = [
           {path: '', component: KindergartenListComponent}]
       },
       {
-        path: 'wedding', component: WeddingComponent, children: [
-          {path: '', component: WeddingListComponent}]
+        path: 'wedding', component: WeddingComponent,
+        children: [
+          {
+            path: 'categories',
+            component: WeddingSubmenuComponent
+          },
+          {
+            path: 'creative',
+            component: CreativeListComponent
+          },
+          {
+            path: 'engaged',
+            component: EngagedListComponent,
+          },
+          {
+            path: 'preparation',
+            component: PreparationListComponent
+          },
+          {
+            path: 'permission',
+            component: PermissionListComponent
+          },
+          {
+            path: 'civil-ceremony',
+            component: CivilCerenomyListComponent
+          },
+          {
+            path: 'liturgy',
+            component: LiturgyListComponent
+          },
+          {
+            path: 'dinner-party',
+            component: DinnerPartyListComponent
+          }
+        ]
       },
       {path: 'new', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]},
       {path: ':node/:id', component: PortfolioDetailComponent}
@@ -99,10 +127,6 @@ export class AppRoutingModule {
     HomeComponent,
     PhotogalleryComponent,
     PhotogalleryPicturesComponent,
-    EngagedComponent,
-    EngagedListComponent,
-    CreativeComponent,
-    CreativeListComponent,
     PortraitComponent,
     PortraitListComponent,
     ChildAndFamilyComponent,
@@ -114,7 +138,14 @@ export class AppRoutingModule {
     KindergartenComponent,
     KindergartenListComponent,
     WeddingComponent,
-    WeddingListComponent,
+    WeddingSubmenuComponent,
+    CreativeListComponent,
+    EngagedListComponent,
+    PreparationListComponent,
+    PermissionListComponent,
+    CivilCerenomyListComponent,
+    LiturgyListComponent,
+    DinnerPartyListComponent,
     PortfolioDetailComponent,
     MyserviceComponent,
     AboutComponent,

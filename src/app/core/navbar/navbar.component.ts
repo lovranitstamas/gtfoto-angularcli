@@ -20,17 +20,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       subMenu: 'photogallery'
     },
     {
-      name: 'Jegyesfotók',
-      mainMenu: 'portfolio',
-      subMenu: 'engaged'
-    },
-    {
-      name: 'Kreatív fotók',
-      mainMenu: 'portfolio',
-      subMenu: 'creative'
-    },
-    {
-      name: 'Portrék',
+      name: 'Portré fotók',
       mainMenu: 'portfolio',
       subMenu: 'portrait'
     },
@@ -57,7 +47,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     {
       name: 'Esküvői fotók',
       mainMenu: 'portfolio',
-      subMenu: 'wedding'
+      subMenu: 'wedding/categories'
     }
   ];
   private _routerSub = Subscription.EMPTY;

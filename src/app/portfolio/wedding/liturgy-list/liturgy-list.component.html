@@ -1,12 +1,22 @@
 <div class="row header-row py-4">
   <div class="col-12 title text-center rounded p-3">
-    <h1>KISMAMA FOTÓK</h1>
+    <h1>TEMPLOMI SZERTARTÁS</h1>
     <p>
       Megörökítem életetek egyik legfontosabb napjának legszebb pillanatait.
     </p>
   </div>
 </div>
-<div class="row py-4" *ngIf="!emptyPregnantList">
+<div class="row">
+  <div class="col-12">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/portfolio/wedding/categories">Esküvő</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Templomi szertartás</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<div class="row py-4" *ngIf="!emptyLiturgyList">
   <div class="col-8 col-md-4 text-center mx-auto">
     <form class="my-2 my-lg-0">
       <input class="form-control" placeholder="Keresés évszám alapján" id="search-input" type="search">
@@ -17,7 +27,7 @@
 <div class="masonry-elements" *ngIf="!loading; else loadingWarning">
   <div class="row">
     <div class="col-12">
-      <ng-container *ngIf="!emptyPregnantList; else warningMessage">
+      <ng-container *ngIf="!emptyLiturgyList; else warningMessage">
         <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
           <ngxMasonryItem *ngFor="let picture of masonryImages" class="masonry-item">
             <app-portfoliocard
@@ -50,7 +60,4 @@
 <ng-template #loadingWarning>
   <app-loading-spinner [loaderWidth]="100" [loaderHeight]="100" class="mb-5"></app-loading-spinner>
 </ng-template>
-
-
-
 

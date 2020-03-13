@@ -60,14 +60,18 @@
                   [disabled]="setNode"
           >
             <option value="" selected>Kérem válasszon</option>
-            <option value="engaged">Jegyesfotók</option>
-            <option value="creative">Kreatívfotók</option>
             <option value="portrait">Portrék</option>
-            <option value="childandfamily">Gyerek-és családi fotók</option>
+            <option value="child-and-family">Gyerek-és családi fotók</option>
             <option value="pregnant">Kismamafotók</option>
             <option value="christening">Keresztelőfotók</option>
             <option value="kindergarten">Óvodaifotók</option>
-            <option value="wedding">Esküvőifotók</option>
+            <option value="creative">Kreatívfotók</option>
+            <option value="engaged">Jegyesfotók</option>
+            <option value="preparation">Készülődés</option>
+            <option value="permission">Ki kérő</option>
+            <option value="civil-cerenomy">Polgári szertartás</option>
+            <option value="liturgy">Templomi szertartás</option>
+            <option value="dinner-party">Vacsora-buli</option>
           </select>
           <alert class="mt-1" type="danger" *ngIf="node.touched && node.invalid">Kötelező mező!</alert>
         </div>

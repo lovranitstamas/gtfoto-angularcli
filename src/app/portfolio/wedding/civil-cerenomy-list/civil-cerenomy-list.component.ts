@@ -1,17 +1,18 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {NgxMasonryOptions} from 'ngx-masonry';
 import {PortfolioPictureModel} from '../../../shared/portfolio-picture-model';
 import {BehaviorSubject, fromEvent, Subscription} from 'rxjs';
 import {PortfolioService} from '../../../shared/portfolio.service';
-import {delay, distinctUntilChanged, flatMap, map} from 'rxjs/operators';
-import {NgxMasonryOptions} from 'ngx-masonry';
 import {UserService} from '../../../shared/user.service';
+import {delay, distinctUntilChanged, flatMap, map} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-engaged-list',
-  templateUrl: './engaged-list.component.html',
-  styleUrls: ['./engaged-list.component.scss']
+  selector: 'app-civil-cerenomy-list',
+  templateUrl: './civil-cerenomy-list.component.html',
+  styleUrls: ['./civil-cerenomy-list.component.scss']
 })
-export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CivilCerenomyListComponent implements OnInit, AfterViewInit, OnDestroy {
+
   @ViewChild('searchInput') searchInput: ElementRef;
 
   masonryOptions: NgxMasonryOptions = {
@@ -28,7 +29,7 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
   fullListLength: number;
   limit = 30;
   fullListView = false;
-  emptyEngagedList = false;
+  emptyCivilCerenomyList = false;
   loading = true;
 
   masonryImages; // remove type
@@ -53,11 +54,12 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllEngagedPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getAllCivilCerenomyPictures().pipe(
       flatMap(
         pictures => {
-          pictures.length === 0 ? this.emptyEngagedList = true : this.emptyEngagedList = false;
+          pictures.length === 0 ? this.emptyCivilCerenomyList = true : this.emptyCivilCerenomyList = false;
           this.fullListLength = pictures.length;
 
           return this.filteredText$.pipe(
@@ -82,12 +84,13 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.pictures = pictures;
         this.loading = false;
 
+        // insert step
         this.resultObjects = this.pictures.map((ev) => {
           return {
             id: ev.id,
             title: ev.title,
             node: ev.node,
-            filename: '/gtfoto-angular-php/uploads/gallery/' + ev.node + '/' + ev.filename,
+            filename: './uploads/gallery/' + ev.node + '/' + ev.filename,
             createDate: ev.createDate
           };
         });
@@ -132,4 +135,5 @@ export class EngagedListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.masonryImages = this.pictures.slice(0, this.pictures.length);
     this.fullListView = true;
   }
+
 }

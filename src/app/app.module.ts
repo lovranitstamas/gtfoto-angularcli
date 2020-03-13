@@ -3,11 +3,6 @@ import {NgModule} from '@angular/core';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {AlertModule, BsDropdownModule, CollapseModule} from 'ngx-bootstrap';
 import {AppComponent} from './app.component';
-import {StatisticsComponent} from './statement/statistics/statistics.component';
-import {SurveyComponent} from './statement/survey/survey.component';
-import {LoginComponent} from './user/login/login.component';
-import {ProfileComponent} from './user/profile/profile.component';
-import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
 import {FooterComponent} from './core/footer/footer.component';
 import {ScrollTopComponent} from './core/scroll-top/scroll-top.component';
 import {NavbarComponent} from './core/navbar/navbar.component';
@@ -26,27 +21,21 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoadingSpinnerComponent} from './core/loading-spinner/loading-spinner.component';
 import {environment} from '../environments/environment';
 import {MomentModule} from 'angular2-moment';
-import {ContactFormComponent} from './contact/contact-form/contact-form.component';
 import {ContactService} from './shared/contact.service';
 import {NgxMasonryModule} from 'ngx-masonry';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-
+import {ContactFormComponent} from './contact/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StatisticsComponent,
-    SurveyComponent,
-    LoginComponent,
-    ProfileComponent,
-    ProfileEditComponent,
     FooterComponent,
     ScrollTopComponent,
     NavbarComponent,
+    ContactFormComponent,
     PortfoliocardComponent,
     LoadingSpinnerComponent,
     ...AppRoutingModule.routableComponents,
-    ContactFormComponent
   ],
   imports: [
     BrowserModule,

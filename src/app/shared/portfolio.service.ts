@@ -16,14 +16,6 @@ export class PortfolioService {
               private _httpClient: HttpClient) {
   }
 
-  getAllEngagedPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getEngagedPhotos.php`);
-  }
-
-  getAllCreativePictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getCreativePhotos.php`);
-  }
-
   getAllPortraitPictures(): Observable<PortfolioPictureModel[]> {
     return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPortraitPhotos.php`);
   }
@@ -44,8 +36,39 @@ export class PortfolioService {
     return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getKindergartenPhotos.php`);
   }
 
+  getAllCreativePictures(): Observable<PortfolioPictureModel[]> {
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getCreativePhotos.php`);
+  }
+
+  getAllEngagedPictures(): Observable<PortfolioPictureModel[]> {
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getEngagedPhotos.php`);
+  }
+
+  getAllPreparationPictures(): Observable<PortfolioPictureModel[]> {
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPreparationPhotos.php`);
+  }
+
+  getAllPermissionPictures(): Observable<PortfolioPictureModel[]> {
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPermissionPhotos.php`);
+  }
+
+  getAllCivilCerenomyPictures(): Observable<PortfolioPictureModel[]> {
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getCivilCerenomyPhotos.php`);
+  }
+
+  getAllLiturgyPictures(): Observable<PortfolioPictureModel[]> {
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getLiturgyPhotos.php`);
+  }
+
+  getAllDinnerPartyPictures(): Observable<PortfolioPictureModel[]> {
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getDinnerPartyPhotos.php`);
+  }
+
+
+
+
   getAllWeddingPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getWeddingPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getLiturgyPhotos.php`);
   }
 
   getPortfolioById(pictureId) {

@@ -8,10 +8,10 @@ import {delay, distinctUntilChanged, flatMap, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-wedding-list',
-  templateUrl: './wedding-list.component.html',
-  styleUrls: ['./wedding-list.component.scss']
+  templateUrl: './liturgy-list.component.html',
+  styleUrls: ['./liturgy-list.component.scss']
 })
-export class WeddingListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class LiturgyListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('searchInput') searchInput: ElementRef;
 
@@ -29,7 +29,7 @@ export class WeddingListComponent implements OnInit, AfterViewInit, OnDestroy {
   fullListLength: number;
   limit = 30;
   fullListView = false;
-  emptyWeddingList = false;
+  emptyLiturgyList = false;
   loading = true;
 
   masonryImages; // remove type
@@ -56,10 +56,10 @@ export class WeddingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllWeddingPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getAllLiturgyPictures().pipe(
       flatMap(
         pictures => {
-          pictures.length === 0 ? this.emptyWeddingList = true : this.emptyWeddingList = false;
+          pictures.length === 0 ? this.emptyLiturgyList = true : this.emptyLiturgyList = false;
           this.fullListLength = pictures.length;
 
           return this.filteredText$.pipe(
