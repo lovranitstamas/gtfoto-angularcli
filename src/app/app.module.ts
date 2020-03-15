@@ -14,16 +14,11 @@ import {UserService} from './shared/user.service';
 import {PortfolioService} from './shared/portfolio.service';
 import {LoggedInGuard} from './shared/logged-in.guard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
-import {AngularFireAuthModule} from '@angular/fire/auth';
 import {HttpClientModule} from '@angular/common/http';
 import {LoadingSpinnerComponent} from './core/loading-spinner/loading-spinner.component';
-import {environment} from '../environments/environment';
 import {MomentModule} from 'angular2-moment';
 import {ContactService} from './shared/contact.service';
 import {NgxMasonryModule} from 'ngx-masonry';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import {ContactFormComponent} from './contact/contact-form/contact-form.component';
 
 @NgModule({
@@ -48,10 +43,6 @@ import {ContactFormComponent} from './contact/contact-form/contact-form.componen
     NgxGalleryModule,
     FormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFireStorageModule,
     MomentModule,
     ReactiveFormsModule,
     NgxMasonryModule

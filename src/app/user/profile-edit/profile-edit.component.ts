@@ -44,20 +44,20 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
 
-  createUser(pass: string) {
+  /*createUser(pass: string) {
     this._userService.register(this.user, pass)
       .subscribe(
         () => this._goToProfile(),
         err => console.warn('registracio kozben problemank adodott: ', err)
       );
-  }
+  }*/
 
-  updateUser() {
+  /*updateUser() {
     this._userService.save(this.user);
     this._goToProfile();
-  }
+  }*/
 
-  private _goToProfile() {
+  /*private _goToProfile() {
     this._router.navigate(['/user']);
-  }
+  }*/
 }

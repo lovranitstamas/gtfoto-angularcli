@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {PortfolioPictureModel} from './portfolio-picture-model';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {AngularFireStorage} from '@angular/fire/storage';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -11,9 +9,7 @@ import {Observable} from 'rxjs';
 export class PortfolioService {
   PHP_API_SERVER = './';
 
-  constructor(private afDb: AngularFireDatabase,
-              private storage: AngularFireStorage,
-              private _httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient) {
   }
 
   getAllPortraitPictures(): Observable<PortfolioPictureModel[]> {
@@ -62,13 +58,6 @@ export class PortfolioService {
 
   getAllDinnerPartyPictures(): Observable<PortfolioPictureModel[]> {
     return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getDinnerPartyPhotos.php`);
-  }
-
-
-
-
-  getAllWeddingPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getLiturgyPhotos.php`);
   }
 
   getPortfolioById(pictureId) {

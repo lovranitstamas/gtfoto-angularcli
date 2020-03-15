@@ -3,18 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  firebase: {
-    baseUrl: 'https://gtfotoangular.firebaseio.com',
-    registrationUrl: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser',
-    loginUrl: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword',
-    apiKey: 'AIzaSyD3RYHLuefd0mn6mCkKwPNc4xxen2xcHjM',
-    authDomain: 'https://gtfotoangular.firebaseio.com',
-    databaseURL: 'https://gtfotoangular.firebaseio.com',
-    projectId: 'gtfotoangular',
-    storageBucket: 'gtfotoangular.appspot.com',
-    messagingSenderId: '1073579308136'
-  }
+  production: false
 };
 
 /*

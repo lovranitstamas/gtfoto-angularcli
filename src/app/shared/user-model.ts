@@ -6,7 +6,7 @@ export class UserModel {
   dateOfBirth: string;
   gender: string;
   profilePictureUrl: string;
-  admin: boolean;
+  admin: number;
 
   constructor(param?: UserModel) {
     if (param) {
