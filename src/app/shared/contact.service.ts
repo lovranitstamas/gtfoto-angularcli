@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MessageModel} from './message-model';
 import {Observable} from 'rxjs';
@@ -7,9 +7,8 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ContactService {
-  PHP_API_SERVER = './';
 
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient, @Inject('API_URL') private apiUrl: string) {
   }
 
   sendMessage(message): Observable<MessageModel> {
@@ -23,7 +22,7 @@ export class ContactService {
         {id: fbId}
       )));*/
 
-    return this._httpClient.post<MessageModel>(`${this.PHP_API_SERVER}api/saveMessage.php`, message);
+    return this._httpClient.post<MessageModel>(`${this.apiUrl}api/saveMessage.php`, message);
 
   }
 }

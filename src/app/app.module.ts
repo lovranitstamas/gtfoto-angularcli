@@ -51,7 +51,8 @@ import {ContactFormComponent} from './contact/contact-form/contact-form.componen
     UserService,
     PortfolioService,
     LoggedInGuard,
-    ContactService
+    ContactService,
+    { provide: 'API_URL', useValue: './' },
   ],
   bootstrap: [AppComponent]
 })

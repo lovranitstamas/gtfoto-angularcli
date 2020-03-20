@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {PortfolioPictureModel} from './portfolio-picture-model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -7,69 +7,68 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class PortfolioService {
-  PHP_API_SERVER = './';
 
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient,  @Inject('API_URL') private apiUrl: string) {
   }
 
   getAllPortraitPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPortraitPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPortraitPhotos.php`);
   }
 
   getAllChildAndFamilyPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getChildAndFamilyPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getChildAndFamilyPhotos.php`);
   }
 
   getAllPregnantPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPregnantPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPregnantPhotos.php`);
   }
 
   getAllChristeningPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getChristeningPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getChristeningPhotos.php`);
   }
 
   getAllKindergartenPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getKindergartenPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getKindergartenPhotos.php`);
   }
 
   getAllCreativePictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getCreativePhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getCreativePhotos.php`);
   }
 
   getAllEngagedPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getEngagedPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getEngagedPhotos.php`);
   }
 
   getAllPreparationPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPreparationPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPreparationPhotos.php`);
   }
 
   getAllPermissionPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getPermissionPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPermissionPhotos.php`);
   }
 
   getAllCivilCerenomyPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getCivilCerenomyPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getCivilCerenomyPhotos.php`);
   }
 
   getAllLiturgyPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getLiturgyPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getLiturgyPhotos.php`);
   }
 
   getAllDinnerPartyPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.PHP_API_SERVER}api/getDinnerPartyPhotos.php`);
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getDinnerPartyPhotos.php`);
   }
 
   getPortfolioById(pictureId) {
-    return this._httpClient.get<PortfolioPictureModel>(`${this.PHP_API_SERVER}api/getPictureDatas.php?id=${pictureId}`);
+    return this._httpClient.get<PortfolioPictureModel>(`${this.apiUrl}api/getPictureDatas.php?id=${pictureId}`);
   }
 
   delete(param: PortfolioPictureModel) {
-    return this._httpClient.delete<PortfolioPictureModel>(`${this.PHP_API_SERVER}api/delete.php/?id=${param.id}`);
+    return this._httpClient.delete<PortfolioPictureModel>(`${this.apiUrl}api/delete.php/?id=${param.id}`);
   }
 
   update(param: PortfolioPictureModel) {
-    return this._httpClient.put<PortfolioPictureModel>(`${this.PHP_API_SERVER}api/update.php`, param);
+    return this._httpClient.put<PortfolioPictureModel>(`${this.apiUrl}api/update.php`, param);
   }
 
   create(param: PortfolioPictureModel, data: File) {
@@ -78,7 +77,7 @@ export class PortfolioService {
     formData.append('createDate', param.createDate);
     formData.append('node', param.node);
     formData.append('pictureURL', data, data.name);
-    const uploadURL = `${this.PHP_API_SERVER}api/upload.php`;
+    const uploadURL = `${this.apiUrl}api/upload.php`;
     return this._httpClient.post<any>(uploadURL, formData);
   }
 }

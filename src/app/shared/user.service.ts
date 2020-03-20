@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserModel} from './user-model';
 import {Observable, ReplaySubject} from 'rxjs';
@@ -14,12 +14,13 @@ export class UserService {
   private _user = new ReplaySubject<UserModel>(1);
 
   constructor(private _router: Router,
-              private _httpClient: HttpClient
+              private _httpClient: HttpClient,
+              @Inject('API_URL') private apiUrl: string
   ) {
   }
 
   login(loginObj): Observable<UserModel | number> {
-    return this._httpClient.post<UserModel | number>(`${this.PHP_API_SERVER}api/loginUser.php`, loginObj);
+    return this._httpClient.post<UserModel | number>(`${this.apiUrl}api/loginUser.php`, loginObj);
   }
 
   setUserToActive(remoteUser) {
