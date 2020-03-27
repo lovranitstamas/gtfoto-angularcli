@@ -1,0 +1,29 @@
+@import '../../../../../sass/variables';
+// @import url('https://fonts.googleapis.com/css?family=Acherus Militant');
+
+.title {
+  background-color: $dark-grey-transparent;
+  border: 1px solid $yellow;
+}
+
+.portfolio {
+
+  h4 {
+    color: $dark-blue;
+    // font-family: 'Acherus Militant';
+  }
+
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.active {
+  display: block;
+}
+
+.inactive {
+  display: none;
+}
+
+button {
+  margin-top: 5px;
+}

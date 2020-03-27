@@ -10,4 +10,5 @@ export class PortfoliocardComponent {
   @Input() picture: PortfolioPictureModel;
   @Input() nextLabel = 'Tovább';
   @Input() isAdmin = false;
+  @Input() isLoggedIn = false;
 }

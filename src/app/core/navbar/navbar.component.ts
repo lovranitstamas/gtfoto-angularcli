@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     {
       name: 'Esküvői fotók',
       mainMenu: 'portfolio',
-      subMenu: 'wedding/categories'
+      subMenu: 'wedding'
     }
   ];
   private _routerSub = Subscription.EMPTY;
