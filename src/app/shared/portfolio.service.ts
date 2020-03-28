@@ -64,19 +64,22 @@ export class PortfolioService {
   }
 
   delete(param: PortfolioPictureModel) {
+    console.log(param);
     return this._httpClient.delete<PortfolioPictureModel>(`${this.apiUrl}api/delete.php/?id=${param.id}`);
   }
 
   update(param: PortfolioPictureModel) {
+    console.log(param);
     return this._httpClient.put<PortfolioPictureModel>(`${this.apiUrl}api/update.php`, param);
   }
 
-  create(param: PortfolioPictureModel, data: File) {
-    const formData: FormData = new FormData();
+  create(param, data: File) {
+    const formData = new FormData();
     formData.append('title', param.title);
-    formData.append('createDate', param.createDate);
-    formData.append('node', param.node);
+    formData.append('nodeId', param.nodeId);
     formData.append('pictureURL', data, data.name);
+    formData.append('createDate', param.createDate);
+    console.log(formData);
     const uploadURL = `${this.apiUrl}api/upload.php`;
     return this._httpClient.post<any>(uploadURL, formData);
   }

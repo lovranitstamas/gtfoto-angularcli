@@ -19,6 +19,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   selectedFiles: FileList;
   currentFileUpload: PortfolioPictureModel;
   file: boolean | File;
+  nodes: Array<{ id: number, category: string }> = [];
 
   // close all subscription
   private _destroy$ = new Subject<void>();
@@ -38,8 +39,10 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
     // create an empty model while we wait for data
     this.portfolioPicture = new PortfolioPictureModel();
     this.portfolioPicture.idF = '';
+    this.portfolioPicture.nodeIdF = '';
+    this.portfolioPicture.subfolderF = '';
+    this.portfolioPicture.categoryF = '';
     this.portfolioPicture.titleF = '';
-    this.portfolioPicture.nodeF = '';
     this.portfolioPicture.filenameF = '';
     this.portfolioPicture.dateOfEventF = '';
 
@@ -53,13 +56,30 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
         takeUntil(this._destroy$))
         .subscribe(evm => {
           this.portfolioPicture.idF = evm.id;
+          this.portfolioPicture.nodeIdF = evm.nodeId;
+          this.portfolioPicture.subfolderF = evm.subfolder;
+          this.portfolioPicture.categoryF = evm.category;
           this.portfolioPicture.titleF = evm.title;
-          this.portfolioPicture.nodeF = evm.node;
           this.portfolioPicture.filenameF = './uploads/gallery/' + node + '/' + evm.filename;
           this.portfolioPicture.dateOfEventF = evm.createDate;
           this.setNode = true;
         });
     }
+
+    this.nodes = [
+      {id: 1, category: 'Portré'},
+      {id: 2, category: 'Gyerek-és családi fotók'},
+      {id: 3, category: 'Kismamafotók'},
+      {id: 4, category: 'Keresztelőfotók'},
+      {id: 5, category: 'Óvodaifotók'},
+      {id: 6, category: 'Kreatívfotók'},
+      {id: 7, category: 'Jegyesfotók'},
+      {id: 8, category: 'Készülődés'},
+      {id: 9, category: 'Ki kérő'},
+      {id: 10, category: 'Polgári szertartás'},
+      {id: 11, category: 'Templomi szertartás'},
+      {id: 12, category: 'Vacsora-buli'}
+    ];
   }
 
   ngOnDestroy() {

@@ -41,7 +41,7 @@ export const portfolioRoutes: Routes = [
           {path: '', component: PortraitListComponent}]
       },
       {
-        path: 'childandfamily', component: ChildAndFamilyComponent, children: [
+        path: 'child-and-family', component: ChildAndFamilyComponent, children: [
           {path: '', component: ChildAndFamilyListComponent}]
       },
       {

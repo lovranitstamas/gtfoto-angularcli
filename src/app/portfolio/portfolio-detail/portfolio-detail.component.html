@@ -50,28 +50,19 @@
         </div>
 
         <div class="form-group">
-          <label for="node">Almenü hozzárendelés</label>
+          <label for="nodeId">Almenü hozzárendelés</label>
           <select class="form-control mb-3"
-                  id="node"
+                  id="nodeId"
                   required
-                  [(ngModel)]="portfolioPicture.nodeF"
-                  name="node"
+                  [(ngModel)]="portfolioPicture.nodeIdF"
+                  name="nodeId"
                   #node="ngModel"
                   [disabled]="setNode"
           >
             <option value="" selected>Kérem válasszon</option>
-            <option value="portrait">Portrék</option>
-            <option value="child-and-family">Gyerek-és családi fotók</option>
-            <option value="pregnant">Kismamafotók</option>
-            <option value="christening">Keresztelőfotók</option>
-            <option value="kindergarten">Óvodaifotók</option>
-            <option value="creative">Kreatívfotók</option>
-            <option value="engaged">Jegyesfotók</option>
-            <option value="preparation">Készülődés</option>
-            <option value="permission">Ki kérő</option>
-            <option value="civil-cerenomy">Polgári szertartás</option>
-            <option value="liturgy">Templomi szertartás</option>
-            <option value="dinner-party">Vacsora-buli</option>
+            <option *ngFor="let node of nodes"
+                    [value]="node.id">{{node.category}}
+            </option>
           </select>
           <alert class="mt-1" type="danger" *ngIf="node.touched && node.invalid">Kötelező mező!</alert>
         </div>

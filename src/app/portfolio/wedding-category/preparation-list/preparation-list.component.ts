@@ -33,7 +33,7 @@ export class PreparationListComponent implements OnInit, AfterViewInit, OnDestro
   loading = true;
 
   masonryImages; // remove type
-  resultObjects: { node: string; filename: string; id: string; title: string; createDate: string }[]; // insert step
+  resultObjects: { id: string; nodeId: string; subfolder: string; category: string; title: string; filename: string; createDate: string }[];
   private filteredText$ = new BehaviorSubject<string>(null);
   private _picturesSubscription: Subscription;
   private _isLoggedInSubscription: Subscription;
@@ -86,9 +86,11 @@ export class PreparationListComponent implements OnInit, AfterViewInit, OnDestro
         this.resultObjects = this.pictures.map((ev) => {
           return {
             id: ev.id,
+            nodeId: ev.nodeId,
+            subfolder: ev.subfolder,
+            category: ev.category,
             title: ev.title,
-            node: ev.node,
-            filename: './uploads/gallery/' + ev.node + '/' + ev.filename,
+            filename: './uploads/gallery/' + ev.subfolder + '/' + ev.filename,
             createDate: ev.createDate
           };
         });

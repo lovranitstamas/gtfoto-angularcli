@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     {
       name: 'Gyerek-és családi fotók',
       mainMenu: 'portfolio',
-      subMenu: 'childandfamily'
+      subMenu: 'child-and-family'
     },
     {
       name: 'Kismama fotók',

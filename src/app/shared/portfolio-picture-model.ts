@@ -1,7 +1,9 @@
 export class PortfolioPictureModel {
   id: string;
+  nodeId: string;
+  subfolder: string;
+  category: string;
   title: string;
-  node: string;
   filename: string;
   createDate: string;
 
@@ -21,20 +23,36 @@ export class PortfolioPictureModel {
     this.id = id;
   }
 
+  get nodeIdF(): string {
+    return this.nodeId;
+  }
+
+  set nodeIdF(nodeId: string) {
+    this.nodeId = nodeId;
+  }
+
+  get subfolderF(): string {
+    return this.subfolder;
+  }
+
+  set subfolderF(subfolder: string) {
+    this.subfolder = subfolder;
+  }
+
+  get categoryF(): string {
+    return this.category;
+  }
+
+  set categoryF(category: string) {
+    this.category = category;
+  }
+
   get titleF(): string {
     return this.title;
   }
 
   set titleF(title: string) {
     this.title = title;
-  }
-
-  get nodeF(): string {
-    return this.node;
-  }
-
-  set nodeF(node: string) {
-    this.node = node;
   }
 
   get filenameF(): string {

@@ -4,6 +4,6 @@
   </div>
   <figcaption class="figure-caption text-right">
     {{picture.createDate}} <span *ngIf="isAdmin && isLoggedIn">-</span>&nbsp;
-    <a [routerLink]="['../../',picture.node,picture.id]" *ngIf="isAdmin && isLoggedIn">{{nextLabel}}</a>
+    <a [routerLink]="['../../',picture.subfolder,picture.id]" *ngIf="isAdmin && isLoggedIn">{{nextLabel}}</a>
   </figcaption>
 </figure>

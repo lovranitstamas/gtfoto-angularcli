@@ -99,9 +99,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._portraitListArray.push(item);
             }
@@ -117,9 +117,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._childandfamilyListArray.push(item);
             }
@@ -135,9 +135,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._pregnantListArray.push(item);
             }
@@ -153,9 +153,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._christeningListArray.push(item);
             }
@@ -171,9 +171,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._kindergartenListArray.push(item);
             }
@@ -189,9 +189,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._creativeListArray.push(item);
             }
@@ -208,9 +208,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._engagedListArray.push(item);
             }
@@ -226,9 +226,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._preparationListArray.push(item);
             }
@@ -244,9 +244,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._permissionListArray.push(item);
             }
@@ -262,9 +262,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._civilCerenomyListArray.push(item);
             }
@@ -280,9 +280,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._liturgyListArray.push(item);
             }
@@ -298,9 +298,9 @@ export class PhotogalleryPicturesComponent implements OnInit {
           pictures.map(
             picture => {
               const item = {
-                small: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                medium: './uploads/gallery/' + picture.node + '/' + picture.filename,
-                big: './uploads/gallery/' + picture.node + '/' + picture.filename
+                small: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                medium: './uploads/gallery/' + picture.subfolder + '/' + picture.filename,
+                big: './uploads/gallery/' + picture.subfolder + '/' + picture.filename
               };
               this._dinnerPartyListArray.push(item);
             }
