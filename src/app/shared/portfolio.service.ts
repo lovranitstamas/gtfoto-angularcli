@@ -11,52 +11,8 @@ export class PortfolioService {
   constructor(private _httpClient: HttpClient,  @Inject('API_URL') private apiUrl: string) {
   }
 
-  getAllPortraitPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPortraitPhotos.php`);
-  }
-
-  getAllChildAndFamilyPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getChildAndFamilyPhotos.php`);
-  }
-
-  getAllPregnantPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPregnantPhotos.php`);
-  }
-
-  getAllChristeningPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getChristeningPhotos.php`);
-  }
-
-  getAllKindergartenPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getKindergartenPhotos.php`);
-  }
-
-  getAllCreativePictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getCreativePhotos.php`);
-  }
-
-  getAllEngagedPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getEngagedPhotos.php`);
-  }
-
-  getAllPreparationPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPreparationPhotos.php`);
-  }
-
-  getAllPermissionPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPermissionPhotos.php`);
-  }
-
-  getAllCivilCerenomyPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getCivilCerenomyPhotos.php`);
-  }
-
-  getAllLiturgyPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getLiturgyPhotos.php`);
-  }
-
-  getAllDinnerPartyPictures(): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getDinnerPartyPhotos.php`);
+  getPictureList(subfolder): Observable<PortfolioPictureModel[]> {
+    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPictureList.php?subfolder=${subfolder}`);
   }
 
   getPortfolioById(pictureId) {

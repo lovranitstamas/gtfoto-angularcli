@@ -56,7 +56,7 @@ export class PermissionListComponent implements OnInit, AfterViewInit, OnDestroy
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllPermissionPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('permission').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyPermissionList = true : this.emptyPermissionList = false;

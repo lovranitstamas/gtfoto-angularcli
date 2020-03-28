@@ -56,7 +56,7 @@ export class KindergartenListComponent implements OnInit, AfterViewInit, OnDestr
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllKindergartenPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('kindergarten').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyKindergartenList = true : this.emptyKindergartenList = false;

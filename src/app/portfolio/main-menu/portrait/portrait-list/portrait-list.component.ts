@@ -56,7 +56,7 @@ export class PortraitListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllPortraitPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('portrait').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyPortraitList = true : this.emptyPortraitList = false;

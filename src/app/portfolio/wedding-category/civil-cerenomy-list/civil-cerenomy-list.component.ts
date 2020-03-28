@@ -56,7 +56,7 @@ export class CivilCerenomyListComponent implements OnInit, AfterViewInit, OnDest
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllCivilCerenomyPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('civil-cerenomy').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyCivilCerenomyList = true : this.emptyCivilCerenomyList = false;

@@ -56,7 +56,7 @@ export class LiturgyListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllLiturgyPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('liturgy').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyLiturgyList = true : this.emptyLiturgyList = false;

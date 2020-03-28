@@ -56,7 +56,7 @@ export class ChristeningListComponent implements OnInit, AfterViewInit, OnDestro
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllChristeningPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('christening').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyChristeningList = true : this.emptyChristeningList = false;

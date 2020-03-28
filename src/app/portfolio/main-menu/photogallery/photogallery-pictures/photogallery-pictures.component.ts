@@ -93,7 +93,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
       }
     ];
 
-    this._picturesSubscriptionPortrait = this._portfolioService.getAllPortraitPictures()
+    this._picturesSubscriptionPortrait = this._portfolioService.getPictureList('portrait')
       .subscribe(
         pictures => {
           pictures.map(
@@ -111,7 +111,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesPortrait = this._portraitListArray;
 
-    this._picturesSubscriptionChildAndFamily = this._portfolioService.getAllChildAndFamilyPictures()
+    this._picturesSubscriptionChildAndFamily = this._portfolioService.getPictureList('child-and-family')
       .subscribe(
         pictures => {
           pictures.map(
@@ -129,7 +129,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesChildAndFamily = this._childandfamilyListArray;
 
-    this._picturesSubscriptionPregnant = this._portfolioService.getAllPregnantPictures()
+    this._picturesSubscriptionPregnant = this._portfolioService.getPictureList('pregnant')
       .subscribe(
         pictures => {
           pictures.map(
@@ -147,7 +147,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesPregnant = this._pregnantListArray;
 
-    this._picturesSubscriptionChristening = this._portfolioService.getAllChristeningPictures()
+    this._picturesSubscriptionChristening = this._portfolioService.getPictureList('christening')
       .subscribe(
         pictures => {
           pictures.map(
@@ -165,7 +165,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesChristening = this._christeningListArray;
 
-    this._picturesSubscriptionKindergarten = this._portfolioService.getAllKindergartenPictures()
+    this._picturesSubscriptionKindergarten = this._portfolioService.getPictureList('kindergarten')
       .subscribe(
         pictures => {
           pictures.map(
@@ -183,7 +183,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesKindergarten = this._kindergartenListArray;
 
-    this._picturesSubscriptionCreative = this._portfolioService.getAllCreativePictures()
+    this._picturesSubscriptionCreative = this._portfolioService.getPictureList('creative')
       .subscribe(
         pictures => {
           pictures.map(
@@ -202,7 +202,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this.galleryImagesCreative = this._creativeListArray;
     this.showCreativePhotos = true;
 
-    this._picturesSubscriptionEngaged = this._portfolioService.getAllEngagedPictures()
+    this._picturesSubscriptionEngaged = this._portfolioService.getPictureList('engaged')
       .subscribe(
         pictures => {
           pictures.map(
@@ -220,7 +220,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this.galleryImagesEngaged = this._engagedListArray;
 
 
-    this._picturesSubscriptionPreparation = this._portfolioService.getAllPreparationPictures()
+    this._picturesSubscriptionPreparation = this._portfolioService.getPictureList('preparation')
       .subscribe(
         pictures => {
           pictures.map(
@@ -238,7 +238,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesPreparation = this._preparationListArray;
 
-    this._picturesSubscriptionPermission = this._portfolioService.getAllPermissionPictures()
+    this._picturesSubscriptionPermission = this._portfolioService.getPictureList('permission')
       .subscribe(
         pictures => {
           pictures.map(
@@ -256,7 +256,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesPermission = this._permissionListArray;
 
-    this._picturesSubscriptionCivilCerenomy = this._portfolioService.getAllCivilCerenomyPictures()
+    this._picturesSubscriptionCivilCerenomy = this._portfolioService.getPictureList('civil-cerenomy')
       .subscribe(
         pictures => {
           pictures.map(
@@ -274,7 +274,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesCivilCerenomy = this._civilCerenomyListArray;
 
-    this._picturesSubscriptionLiturgy = this._portfolioService.getAllLiturgyPictures()
+    this._picturesSubscriptionLiturgy = this._portfolioService.getPictureList('liturgy')
       .subscribe(
         pictures => {
           pictures.map(
@@ -292,7 +292,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
 
     this.galleryImagesLiturgy = this._liturgyListArray;
 
-    this._picturesSubscriptionDinnerParty = this._portfolioService.getAllDinnerPartyPictures()
+    this._picturesSubscriptionDinnerParty = this._portfolioService.getPictureList('dinner-party')
       .subscribe(
         pictures => {
           pictures.map(

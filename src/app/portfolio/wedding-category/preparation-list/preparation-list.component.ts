@@ -55,7 +55,7 @@ export class PreparationListComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllPreparationPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('preparation').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyPreparationList = true : this.emptyPreparationList = false;

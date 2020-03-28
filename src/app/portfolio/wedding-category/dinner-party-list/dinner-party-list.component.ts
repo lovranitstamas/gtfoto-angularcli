@@ -56,7 +56,7 @@ export class DinnerPartyListComponent implements OnInit, AfterViewInit, OnDestro
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllDinnerPartyPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('dinner-party').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyDinnerPartyList = true : this.emptyDinnerPartyList = false;

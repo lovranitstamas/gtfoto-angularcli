@@ -56,7 +56,7 @@ export class PregnantListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllPregnantPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('pregnant').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyPregnantList = true : this.emptyPregnantList = false;

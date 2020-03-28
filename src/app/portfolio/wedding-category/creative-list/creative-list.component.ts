@@ -56,7 +56,7 @@ export class CreativeListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllCreativePictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('creative').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyCreativeList = true : this.emptyCreativeList = false;

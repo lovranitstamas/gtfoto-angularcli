@@ -55,7 +55,7 @@ export class ChildAndFamilyListComponent implements OnInit, AfterViewInit, OnDes
   }
 
   ngOnInit() {
-    this._picturesSubscription = this._portfolioService.getAllChildAndFamilyPictures().pipe(
+    this._picturesSubscription = this._portfolioService.getPictureList('child-and-family').pipe(
       flatMap(
         pictures => {
           pictures.length === 0 ? this.emptyChildAndFamilyList = true : this.emptyChildAndFamilyList = false;
