@@ -9,6 +9,9 @@ import {PortfoliocardComponent} from './portfoliocard/portfoliocard.component';
 import {PortfolioUploadLinkComponent} from './portfolio-upload-link/portfolio-upload-link.component';
 import {PortfolioDetailComponent} from './portfolio-detail/portfolio-detail.component';
 
+import {PortfolioHeaderComponent} from './portfolio-header/portfolio-header.component';
+import {PortfolioListComponent} from './portfolio-list/portfolio-list.component';
+
 import {PhotogalleryComponent} from './main-menu/photogallery/photogallery.component';
 import {PhotogalleryPicturesComponent} from './main-menu/photogallery/photogallery-pictures/photogallery-pictures.component';
 import {PortraitComponent} from './main-menu/portrait/portrait.component';
@@ -21,8 +24,8 @@ import {ChristeningComponent} from './main-menu/christening/christening.componen
 import {ChristeningListComponent} from './main-menu/christening/christening-list/christening-list.component';
 import {KindergartenComponent} from './main-menu/kindergarten/kindergarten.component';
 import {KindergartenListComponent} from './main-menu/kindergarten/kindergarten-list/kindergarten-list.component';
-import {WeddingCategoryComponent} from './wedding-category/wedding-category.component';
-import {weddingRoutes as weddingChildRoutes} from './wedding-category/wedding-category.module';
+import {WeddingComponent} from './wedding/wedding.component';
+import {weddingRoutes as weddingChildRoutes} from './wedding/wedding.module';
 
 import {LoggedInGuard} from '../shared/logged-in.guard';
 import {FormsModule} from '@angular/forms';
@@ -57,7 +60,7 @@ export const portfolioRoutes: Routes = [
           {path: '', component: KindergartenListComponent}]
       },
       {
-        path: 'wedding', component: WeddingCategoryComponent, children: weddingChildRoutes
+        path: 'wedding', component: WeddingComponent, children: weddingChildRoutes
       },
       {path: 'new', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]},
       {path: ':node/:id', component: PortfolioDetailComponent}
@@ -71,6 +74,9 @@ export const portfolioRoutes: Routes = [
     PortfolioUploadLinkComponent,
     PortfolioDetailComponent,
 
+    PortfolioHeaderComponent,
+    PortfolioListComponent,
+
     PhotogalleryComponent,
     PhotogalleryPicturesComponent,
     PortraitComponent,
@@ -83,7 +89,7 @@ export const portfolioRoutes: Routes = [
     ChristeningListComponent,
     KindergartenComponent,
     KindergartenListComponent,
-    WeddingCategoryComponent
+    WeddingComponent
   ],
   imports: [
     CommonModule,
@@ -92,12 +98,15 @@ export const portfolioRoutes: Routes = [
     NgxMasonryModule,
     RouterModule,
     FormsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
   ],
   exports: [
     PortfoliocardComponent,
     PortfolioUploadLinkComponent,
-    PortfolioDetailComponent
+    PortfolioDetailComponent,
+
+    PortfolioHeaderComponent,
+    PortfolioListComponent
   ]
 })
 export class PortfolioModule {
