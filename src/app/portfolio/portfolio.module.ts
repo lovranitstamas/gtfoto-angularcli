@@ -5,12 +5,7 @@ import {CoreModule} from '../core/core.module';
 import {NgxGalleryModule} from 'ngx-gallery'; // use to gallery
 import {NgxMasonryModule} from 'ngx-masonry';
 
-import {PortfoliocardComponent} from './portfoliocard/portfoliocard.component';
-import {PortfolioUploadLinkComponent} from './portfolio-upload-link/portfolio-upload-link.component';
 import {PortfolioDetailComponent} from './portfolio-detail/portfolio-detail.component';
-
-import {PortfolioHeaderComponent} from './portfolio-header/portfolio-header.component';
-import {PortfolioListComponent} from './portfolio-list/portfolio-list.component';
 
 import {PhotogalleryComponent} from './main-menu/photogallery/photogallery.component';
 import {PhotogalleryPicturesComponent} from './main-menu/photogallery/photogallery-pictures/photogallery-pictures.component';
@@ -25,7 +20,7 @@ import {ChristeningListComponent} from './main-menu/christening/christening-list
 import {KindergartenComponent} from './main-menu/kindergarten/kindergarten.component';
 import {KindergartenListComponent} from './main-menu/kindergarten/kindergarten-list/kindergarten-list.component';
 import {WeddingComponent} from './wedding/wedding.component';
-import {weddingRoutes as weddingChildRoutes} from './wedding/wedding.module';
+import {WeddingModule, weddingRoutes as weddingChildRoutes} from './wedding/wedding.module';
 
 import {LoggedInGuard} from '../shared/logged-in.guard';
 import {FormsModule} from '@angular/forms';
@@ -70,12 +65,7 @@ export const portfolioRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    PortfoliocardComponent,
-    PortfolioUploadLinkComponent,
     PortfolioDetailComponent,
-
-    PortfolioHeaderComponent,
-    PortfolioListComponent,
 
     PhotogalleryComponent,
     PhotogalleryPicturesComponent,
@@ -99,14 +89,9 @@ export const portfolioRoutes: Routes = [
     RouterModule,
     FormsModule,
     AlertModule.forRoot(),
+    WeddingModule
   ],
   exports: [
-    PortfoliocardComponent,
-    PortfolioUploadLinkComponent,
-    PortfolioDetailComponent,
-
-    PortfolioHeaderComponent,
-    PortfolioListComponent
   ]
 })
 export class PortfolioModule {

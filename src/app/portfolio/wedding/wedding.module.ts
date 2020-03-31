@@ -4,7 +4,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {CoreModule} from '../../core/core.module';
 import {NgxMasonryModule} from 'ngx-masonry';
 
-import {PortfolioModule} from '../portfolio.module';
 import {TopicsComponent} from './topics/topics.component';
 import {CreativeListComponent} from './creative-list/creative-list.component';
 import {EngagedListComponent} from './engaged-list/engaged-list.component';
@@ -14,6 +13,11 @@ import {PermissionListComponent} from './permission-list/permission-list.compone
 import {CivilCerenomyListComponent} from './civil-cerenomy-list/civil-cerenomy-list.component';
 import {DinnerPartyListComponent} from './dinner-party-list/dinner-party-list.component';
 import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
+
+import {PortfoliocardComponent} from '../portfoliocard/portfoliocard.component';
+import {PortfolioUploadLinkComponent} from '../portfolio-upload-link/portfolio-upload-link.component';
+import {PortfolioHeaderComponent} from '../portfolio-header/portfolio-header.component';
+import {PortfolioListComponent} from '../portfolio-list/portfolio-list.component';
 
 export const weddingRoutes: Routes = [
   {path: '', component: TopicsComponent, pathMatch: 'full'},
@@ -28,6 +32,11 @@ export const weddingRoutes: Routes = [
 
 @NgModule({
   declarations: [
+    PortfoliocardComponent,
+    PortfolioHeaderComponent,
+    PortfolioListComponent,
+    PortfolioUploadLinkComponent,
+
     TopicsComponent,
     BreadcrumbComponent,
     CreativeListComponent,
@@ -38,13 +47,17 @@ export const weddingRoutes: Routes = [
     LiturgyListComponent,
     DinnerPartyListComponent
   ],
-  exports: [],
+  exports: [
+    PortfoliocardComponent,
+    PortfolioHeaderComponent,
+    PortfolioListComponent,
+    PortfolioUploadLinkComponent
+  ],
   imports: [
     CommonModule,
     CoreModule,
     NgxMasonryModule,
-    RouterModule,
-    PortfolioModule,
+    RouterModule
   ]
 })
 export class WeddingModule {

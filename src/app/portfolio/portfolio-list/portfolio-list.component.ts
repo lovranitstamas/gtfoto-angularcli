@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import {PortfolioPictureModel} from '../../shared/portfolio-picture-model';
 import {BehaviorSubject, fromEvent, Subscription} from 'rxjs';
@@ -42,7 +42,9 @@ export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy 
 
   constructor(
     private _portfolioService: PortfolioService,
-    userService: UserService) {
+    userService: UserService,
+    @Inject('API_URL') private apiUrl: string
+  ) {
     this._isLoggedInSubscription = userService.isLoggedIn$.subscribe(
       isLoggedIn => {
         this.isLoggedIn = isLoggedIn;
@@ -92,7 +94,8 @@ export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy 
             subfolder: ev.subfolder,
             category: ev.category,
             title: ev.title,
-            filename: './uploads/gallery/' + ev.subfolder + '/' + ev.filename,
+            filename: `${this.apiUrl}uploads/gallery/${ev.subfolder}/${ev.filename}`,
+            // filename: ${this.apiUrl}'api./uploads/gallery/' + ev.subfolder + '/' + ev.filename,
             createDate: ev.createDate
           };
         });

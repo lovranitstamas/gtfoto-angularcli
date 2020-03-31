@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {PortfolioService} from '../../shared/portfolio.service';
 import {PortfolioPictureModel} from '../../shared/portfolio-picture-model';
 import {ActivatedRoute} from '@angular/router';
@@ -29,7 +29,8 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   constructor(private _route: ActivatedRoute,
               private _portfolioService: PortfolioService,
               private _location: Location,
-              public userService: UserService) {
+              public userService: UserService,
+              @Inject('API_URL') private apiUrl: string) {
   }
 
   ngOnInit() {
@@ -60,7 +61,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
           this.portfolioPicture.subfolderF = evm.subfolder;
           this.portfolioPicture.categoryF = evm.category;
           this.portfolioPicture.titleF = evm.title;
-          this.portfolioPicture.filenameF = './uploads/gallery/' + node + '/' + evm.filename;
+          this.portfolioPicture.filenameF = `${this.apiUrl}uploads/gallery/${node}/${evm.filename}`;
           this.portfolioPicture.dateOfEventF = evm.createDate;
           this.setNode = true;
         });

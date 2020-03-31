@@ -13,7 +13,8 @@ import {LoggedInGuard} from './shared/logged-in.guard';
 import {HttpClientModule} from '@angular/common/http';
 import {MomentModule} from 'angular2-moment';
 import {ContactFormComponent} from './contact/contact-form/contact-form.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'; // use in user and contact menu
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {PortfolioModule} from './portfolio/portfolio.module'; // use in user and contact menu
 
 
 @NgModule({
@@ -31,14 +32,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'; // use in user 
     MomentModule,
     CoreModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PortfolioModule
   ],
   providers: [
     UserService,
     PortfolioService,
     LoggedInGuard,
     ContactService,
-    {provide: 'API_URL', useValue: './'},
+    {provide: 'API_URL', useValue: 'http://localhost:1234/'}
+    // {provide: 'API_URL', useValue: './'},
   ],
   bootstrap: [AppComponent]
 })
