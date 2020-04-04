@@ -4,3 +4,19 @@
   background-color: $dark-grey-transparent;
   border: 1px solid $yellow;
 }
+
+@media only screen and (max-width: 575px) {
+  .header-row {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1{
+    font-size: 22px;
+  }
+
+  .subtitle {
+    display: none;
+  }
+}
