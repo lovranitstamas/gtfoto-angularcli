@@ -30,6 +30,7 @@ export class LoginComponent {
   onProcess = false;
   loginForm: FormGroup;
   loginPassword: any;
+  user: UserModel;
 
   @HostListener('input')
   oninput() {
@@ -55,7 +56,18 @@ export class LoginComponent {
       this._userService.login(form.value).subscribe(
         (response) => {
           if (response.statusCode === 200) {
-            this._userService.setUserToActive((response.user as UserModel));
+            this.user = new UserModel();
+
+            this.user.idFunction = response.user.id;
+            this.user.nameFunction = response.user.name;
+            this.user.emailFunction = response.user.email;
+            this.user.addressFunction = response.user.address;
+            this.user.dateOfBirthFunction = response.user.dateOfBirth;
+            this.user.genderFunction = response.user.gender;
+            this.user.profilePictureUrlFunction = response.user.profilePictureUrl;
+            this.user.adminFunction = response.user.admin;
+
+            this._userService.setUserToActive(this.user);
             this._router.navigate(['/user']);
           }
           if (response.statusCode === 204) {

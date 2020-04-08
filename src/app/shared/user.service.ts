@@ -28,7 +28,8 @@ export class UserService {
 
   setUserToActive(remoteUser) {
     this._user.next(remoteUser);
-    if (Number(remoteUser.admin) === 1) {
+
+    if (Number(remoteUser.adminFunction) === 1) {
       this.adminStatus$.next(true);
     } else {
       this.adminStatus$.next(false);
