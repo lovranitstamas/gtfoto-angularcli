@@ -30,7 +30,7 @@ export class LoginComponent {
   onProcess = false;
   loginForm: FormGroup;
   loginPassword: any;
-  user: UserModel;
+  private remoteUser: UserModel;
 
   @HostListener('input')
   oninput() {
@@ -56,18 +56,18 @@ export class LoginComponent {
       this._userService.login(form.value).subscribe(
         (response) => {
           if (response.statusCode === 200) {
-            this.user = new UserModel();
+            this.remoteUser = new UserModel();
 
-            this.user.idFunction = response.user.id;
-            this.user.nameFunction = response.user.name;
-            this.user.emailFunction = response.user.email;
-            this.user.addressFunction = response.user.address;
-            this.user.dateOfBirthFunction = response.user.dateOfBirth;
-            this.user.genderFunction = response.user.gender;
-            this.user.profilePictureUrlFunction = response.user.profilePictureUrl;
-            this.user.adminFunction = response.user.admin;
+            this.remoteUser.idFunction = response.user.id;
+            this.remoteUser.nameFunction = response.user.name;
+            this.remoteUser.emailFunction = response.user.email;
+            this.remoteUser.addressFunction = response.user.address;
+            this.remoteUser.dateOfBirthFunction = response.user.dateOfBirth;
+            this.remoteUser.genderFunction = response.user.gender;
+            this.remoteUser.profilePictureUrlFunction = response.user.profilePictureUrl;
+            this.remoteUser.adminFunction = response.user.admin;
 
-            this._userService.setUserToActive(this.user);
+            this._userService.setUserToActive(this.remoteUser);
             this._router.navigate(['/user']);
           }
           if (response.statusCode === 204) {
