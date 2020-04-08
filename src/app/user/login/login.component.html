@@ -2,50 +2,50 @@
   <div class="row py-4 justify-content-center">
     <div class="col-10 col-sm-8 col-md-6 col-lg-4">
 
-      <!-- Alert message. -->
-
-      <alert dismissible="true"
-             type="danger"
-             (onClose)="clearError()"
-             *ngIf="error"
-        ><strong>{{error}}</strong>
-      </alert>
-      <!--<div class="alert alert-primary alert-dismissible fade show mt-2" role="alert">
-        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        Hello, itt tudsz belépni.
-      </div>-->
-
       <div class="card login-card border-secondary mt-3 mb-4">
         <div class="card-header login-card-header text-uppercase">Bejelentkezés</div>
         <div class="card-body">
 
-          <form #f = "ngForm">
+          <form [formGroup]="loginForm"
+                (ngSubmit)="login(loginForm)">
+
+            <div class="form-group font-weight-bold text-center">
+              <alert dismissible="true"
+                     type="danger" *ngIf="(loginForm.get('loginEmail').hasError('required') ||
+                      loginPassword.hasError('required')) && onProcess"
+                     (onClose)="closeAlert()">Hiányos adatbevitel</alert>
+              <alert dismissible="true"
+                     type="danger" *ngIf="loginForm.get('loginEmail').hasError('invalidEmail') &&
+                      !loginForm.get('loginEmail').hasError('required') && onProcess"
+                     (onClose)="closeAlert()">E-mail cím formátum nem megfelelő</alert>
+            </div>
+
             <div class="form-group">
               <label for="loginEmail">E-mail cím</label>
-              <input #email="ngModel"
-                     class="form-control"
+              <input class="form-control"
                      id="loginEmail"
-                     name="loginEmail"
-                     type="email"
-                     ngModel>
+                     type="text"
+                     placeholder="E-mail cím"
+                     formControlName="loginEmail"
+              >
             </div>
             <div class="form-group">
               <label for="loginPassword">Jelszó</label>
-              <input #password="ngModel"
-                     class="form-control"
+              <input class="form-control"
                      id="loginPassword"
-                     name="loginPassword"
                      type="password"
-                     ngModel>
+                     placeholder="Jelszó"
+                     [formControl]="loginPassword">
             </div>
-            <!--<div class="form-check custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-              <label class="custom-control-label" for="customCheck">Emlékezz rám</label>
-            </div>-->
+
+            <div class="form-group font-weight-bold text-center">
+              <alert dismissible="true"
+                     type="danger" *ngIf="loginAuthInfo"
+                     (onClose)="closeAlert()">E-mail cím és/vagy jelszó nem megfelelő</alert>
+            </div>
+
             <button class="btn btn-login btn-lg btn-block bg-warning mt-3"
-                    (click)="login(f)"><span>Belépés</span></button>
+                    type="submit"><span>Belépés</span></button>
           </form>
 
         </div>
