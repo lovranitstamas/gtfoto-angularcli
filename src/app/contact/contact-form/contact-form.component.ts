@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {emailFormatValidator} from './contact.validators';
 import {ContactService} from '../../shared/contact.service';
-import {MessageModel} from '../../shared/message-model';
 
 @Component({
   selector: 'app-contact-form',
@@ -14,13 +13,7 @@ export class ContactFormComponent implements OnInit {
   submitted = false;
   submitSuccessAlert = false;
   submitErrorAlert = false;
-  disabled = false;
-  messageO = {
-    sender: null,
-    email: null,
-    subject: null,
-    message: null
-  };
+  inactiveStateOfSendButton = false;
 
   constructor(
     private fb: FormBuilder,
@@ -45,61 +38,82 @@ export class ContactFormComponent implements OnInit {
     );
   }
 
-  sendMessage() {
+  sendMessage(form) {
     this.submitted = true;
     this.submitSuccessAlert = false;
     this.submitErrorAlert = false;
 
-    // console.log('Üzenet küldése');
-    // console.log(this.form);
-    // console.log(this.form.value);
-    // console.log(this.form.value['message']);
-    // console.log(this.form.valid);
+
     if (this.form.valid) {
-      this.disabled = true;
+      this.inactiveStateOfSendButton = true;
 
       this.form.get('sender').disable();
       this.form.get('email').disable();
       this.form.get('subject').disable();
       this.form.get('message').disable();
 
-      this.messageO.sender = this.form.value['sender'];
-      this.messageO.email = this.form.value['email'];
-      this.messageO.subject = this.form.value['subject'];
-      this.messageO.message = this.form.value['message'];
-
       this._contactService.sendMessage(
-        /*this.form.value['sender'],
-        this.form.value['email'],
-        this.form.value['subject'],
-        this.form.value['message'] */
-        this.messageO
+        form.value
       ).subscribe(
-        (message: MessageModel) => {
-          // console.log(message);
+        (response) => {
+          switch (response.status_code_header) {
+            case 404:
+              // HTTP/1.1 404 Not Found
+              console.log(response.status_code_header);
+              this.submitErrorAlert = true;
+              this.enableMessageForm();
+              break;
 
-          this.submitted = false;
-          this.form.reset({
-            sender: null,
-            email: null,
-            subject: null,
-            message: null
-          });
-          // notification user
-          this.submitSuccessAlert = true;
-          this.disabled = false;
+            case 422:
+              // HTTP/1.1 422 Unprocessable Entity
+              console.log(response.status_code_header);
+              this.submitErrorAlert = true;
+              this.enableMessageForm();
+              break;
 
-          this.form.get('sender').enable();
-          this.form.get('email').enable();
-          this.form.get('subject').enable();
-          this.form.get('message').enable();
+            case 200:
+
+              // console.log(response.body['message']);
+              console.log(response.status_code_header);
+              this.submitted = false;
+              this.submitSuccessAlert = true;
+              this.enableMessageForm();
+              break;
+
+          }
         },
         err => {
           console.error(err);
           // notification user
           this.submitErrorAlert = true;
+
+
         }
       );
     }
+  }
+
+  enableMessageForm() {
+
+    setTimeout(() => {
+      this.submitted = false;
+      this.form.reset({
+        sender: null,
+        email: null,
+        subject: null,
+        message: null
+      });
+
+      // notification user
+      this.submitSuccessAlert = false;
+      this.submitErrorAlert = false;
+
+      this.inactiveStateOfSendButton = false;
+
+      this.form.get('sender').enable();
+      this.form.get('email').enable();
+      this.form.get('subject').enable();
+      this.form.get('message').enable();
+    }, 5000);
   }
 }

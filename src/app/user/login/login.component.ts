@@ -55,24 +55,24 @@ export class LoginComponent {
     if (form.valid) {
       this._userService.login(form.value).subscribe(
         (response) => {
-          if (response.statusCode === 200) {
+          if (response.status_code_header === 200) {
+            console.log(response.status_code_header);
             this.remoteUser = new UserModel();
 
-            this.remoteUser.idFunction = response.user.id;
-            this.remoteUser.nameFunction = response.user.name;
-            this.remoteUser.emailFunction = response.user.email;
-            this.remoteUser.addressFunction = response.user.address;
-            this.remoteUser.dateOfBirthFunction = response.user.dateOfBirth;
-            this.remoteUser.genderFunction = response.user.gender;
-            this.remoteUser.profilePictureUrlFunction = response.user.profilePictureUrl;
-            this.remoteUser.adminFunction = response.user.admin;
+            this.remoteUser.idFunction = response.body['user'].id;
+            this.remoteUser.nameFunction = response.body['user'].name;
+            this.remoteUser.emailFunction = response.body['user'].email;
+            this.remoteUser.addressFunction = response.body['user'].address;
+            this.remoteUser.dateOfBirthFunction = response.body['user'].dateOfBirth;
+            this.remoteUser.genderFunction = response.body['user'].gender;
+            this.remoteUser.profilePictureUrlFunction = response.body['user'].profilePictureUrl;
+            this.remoteUser.adminFunction = response.body['user'].admin;
 
             this._userService.setUserToActive(this.remoteUser);
             this._router.navigate(['/user']);
-          }
-          if (response.statusCode === 204) {
+          } else {
             this.loginAuthInfo = true;
-            console.log(response.statusCode);
+            console.log(response.status_code_header);
           }
         });
     }
