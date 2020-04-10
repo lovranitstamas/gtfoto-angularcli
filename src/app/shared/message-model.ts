@@ -1,12 +1,8 @@
 export class MessageModel {
-  id: string;
-  sender: string;
-  email: string;
-  subject: string;
-  message: string;
-  date: string;
-
-  constructor(param?: MessageModel) {
-    Object.assign(this, param);
-  }
+  private _id: string;
+  private _sender: string;
+  private _email: string;
+  private _subject: string;
+  private _message: string;
+  private _date: string;
 }
