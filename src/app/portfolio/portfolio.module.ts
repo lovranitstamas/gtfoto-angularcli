@@ -58,7 +58,7 @@ export const portfolioRoutes: Routes = [
         path: 'wedding', component: WeddingComponent, children: weddingChildRoutes
       },
       {path: 'new', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]},
-      {path: ':node/:id', component: PortfolioDetailComponent}
+      {path: ':node/:id', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]}
     ]
   }
 ];

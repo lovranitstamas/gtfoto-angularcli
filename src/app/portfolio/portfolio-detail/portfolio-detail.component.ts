@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {PortfolioService} from '../../shared/portfolio.service';
 import {PortfolioPictureModel} from '../../shared/portfolio-picture-model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {UserService} from '../../shared/user.service';
 import {Subject} from 'rxjs';
@@ -16,8 +16,8 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   portfolioPicture: PortfolioPictureModel;
   viewForm = false;
   setNode = false;
+  messageToWebmaster: boolean;
   selectedFiles: FileList;
-  currentFileUpload: PortfolioPictureModel;
   file: boolean | File;
   nodes: Array<{ id: number, category: string }> = [];
 
@@ -30,6 +30,7 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
               private _portfolioService: PortfolioService,
               private _location: Location,
               public userService: UserService,
+              private _router: Router,
               @Inject('API_URL') private apiUrl: string) {
   }
 
@@ -39,13 +40,13 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
 
     // create an empty model while we wait for data
     this.portfolioPicture = new PortfolioPictureModel();
-    this.portfolioPicture.idF = '';
-    this.portfolioPicture.nodeIdF = '';
-    this.portfolioPicture.subfolderF = '';
-    this.portfolioPicture.categoryF = '';
-    this.portfolioPicture.titleF = '';
-    this.portfolioPicture.filenameF = '';
-    this.portfolioPicture.dateOfEventF = '';
+    this.portfolioPicture.idFunction = '';
+    this.portfolioPicture.nodeIdFunction = '';
+    this.portfolioPicture.subfolderFunction = '';
+    this.portfolioPicture.categoryFunction = '';
+    this.portfolioPicture.titleFunction = '';
+    this.portfolioPicture.fileURLFunction = '';
+    this.portfolioPicture.dateOfEventFunction = '';
 
     // a method get true/false value in all case
     // from false to true oninit and set false from click
@@ -56,25 +57,30 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
       this._portfolioService.getPortfolioById(portfolioPictureId).pipe(
         takeUntil(this._destroy$))
         .subscribe(evm => {
-          this.portfolioPicture.idF = evm.id;
-          this.portfolioPicture.nodeIdF = evm.nodeId;
-          this.portfolioPicture.subfolderF = evm.subfolder;
-          this.portfolioPicture.categoryF = evm.category;
-          this.portfolioPicture.titleF = evm.title;
-          this.portfolioPicture.filenameF = `${this.apiUrl}uploads/gallery/${node}/${evm.filename}`;
-          this.portfolioPicture.dateOfEventF = evm.createDate;
-          this.setNode = true;
+          if (evm.status_code_header === 200) {
+            this.portfolioPicture.idFunction = evm.body['picture'].id;
+            this.portfolioPicture.nodeIdFunction = evm.body['picture'].nodeId;
+            this.portfolioPicture.subfolderFunction = evm.body['picture'].subfolder;
+            this.portfolioPicture.categoryFunction = evm.body['picture'].category;
+            this.portfolioPicture.titleFunction = evm.body['picture'].title;
+            this.portfolioPicture.fileURLFunction = `${this.apiUrl}uploads/gallery/${node}/${evm.body['picture'].filename}`;
+            this.portfolioPicture.dateOfEventFunction = evm.body['picture'].createDate;
+            this.setNode = true;
+          } else {
+            console.log(evm.status_code_header);
+            this._router.navigate(['/home']);
+          }
         });
     }
 
     this.nodes = [
       {id: 1, category: 'Portré'},
       {id: 2, category: 'Gyerek-és családi fotók'},
-      {id: 3, category: 'Kismamafotók'},
-      {id: 4, category: 'Keresztelőfotók'},
-      {id: 5, category: 'Óvodaifotók'},
-      {id: 6, category: 'Kreatívfotók'},
-      {id: 7, category: 'Jegyesfotók'},
+      {id: 3, category: 'Kismama fotók'},
+      {id: 4, category: 'Keresztelő fotók'},
+      {id: 5, category: 'Óvodai fotók'},
+      {id: 6, category: 'Kreatív fotók'},
+      {id: 7, category: 'Jegyes fotók'},
       {id: 8, category: 'Készülődés'},
       {id: 9, category: 'Ki kérő'},
       {id: 10, category: 'Polgári szertartás'},
@@ -98,17 +104,16 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
   onSubmit() {
 
     !this.selectedFiles ? this.file = false : this.file = this.selectedFiles.item(0);
-    if (this.selectedFiles) {
-      this.currentFileUpload = this.portfolioPicture;
-    }
 
     if (this.file === false) {
       this._portfolioService.update(this.portfolioPicture).pipe(
         takeUntil(this._destroy$))
         .subscribe(
-          () => this.navigateBack(),
+          () => {
+            this.navigateBack();
+          },
           (err) => {
-            console.warn(`Problémánk van a form módosításban: ${err}`);
+            this.handleError(err);
           }
         );
     } else {
@@ -118,24 +123,43 @@ export class PortfolioDetailComponent implements OnInit, OnDestroy {
         .subscribe(
           () => this.navigateBack(),
           (err) => {
-            console.warn(`Problémánk van a form feltöltésénél: ${err}`);
+            this.handleError(err);
           }
         );
     }
   }
 
   delete() {
+    this.messageToWebmaster = false;
     this._portfolioService.delete(this.portfolioPicture).pipe(
       takeUntil(this._destroy$))
       .subscribe(
-        () => this.navigateBack(),
+        () => {
+          this.navigateBack();
+        },
         (err) => {
-          console.warn(`Problémánk van a törlésnél: ${err}`);
+          this.handleError(err);
         }
       );
   }
 
   navigateBack() {
     this._location.back();
+  }
+
+  handleError(err) {
+    switch (err.status) {
+      case 422:
+        console.log(err.status);
+        this.messageToWebmaster = true;
+        break;
+      case 400:
+        console.log(err.status);
+        this.messageToWebmaster = true;
+        break;
+      default:
+        this.messageToWebmaster = true;
+        console.log(err);
+    }
   }
 }

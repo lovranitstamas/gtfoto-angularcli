@@ -1,73 +1,65 @@
 export class PortfolioPictureModel {
-  id: string;
-  nodeId: string;
-  subfolder: string;
-  category: string;
-  title: string;
-  filename: string;
-  createDate: string;
+  private id: string;
+  private nodeId: string;
+  private subfolder: string;
+  private category: string;
+  private title: string;
+  private fileURL: string;
+  private createDate: string;
 
-  /*constructor(id: string, title: string, node: string, filename: string, createDate: string) {
-    this.id = id;
-    this.title = title;
-    this.node = node;
-    this.filename = filename;
-    this.createDate = createDate;
-  }*/
-
-  get idF(): string {
+  get idFunction(): string {
     return this.id;
   }
 
-  set idF(id: string) {
+  set idFunction(id: string) {
     this.id = id;
   }
 
-  get nodeIdF(): string {
+  get nodeIdFunction(): string {
     return this.nodeId;
   }
 
-  set nodeIdF(nodeId: string) {
+  set nodeIdFunction(nodeId: string) {
     this.nodeId = nodeId;
   }
 
-  get subfolderF(): string {
+  get subfolderFunction(): string {
     return this.subfolder;
   }
 
-  set subfolderF(subfolder: string) {
+  set subfolderFunction(subfolder: string) {
     this.subfolder = subfolder;
   }
 
-  get categoryF(): string {
+  get categoryFunction(): string {
     return this.category;
   }
 
-  set categoryF(category: string) {
+  set categoryFunction(category: string) {
     this.category = category;
   }
 
-  get titleF(): string {
+  get titleFunction(): string {
     return this.title;
   }
 
-  set titleF(title: string) {
+  set titleFunction(title: string) {
     this.title = title;
   }
 
-  get filenameF(): string {
-    return this.filename;
+  get fileURLFunction(): string {
+    return this.fileURL;
   }
 
-  set filenameF(filename: string) {
-    this.filename = filename;
+  set fileURLFunction(filename: string) {
+    this.fileURL = filename;
   }
 
-  get dateOfEventF(): string {
+  get dateOfEventFunction(): string {
     return this.createDate;
   }
 
-  set dateOfEventF(createDate: string) {
+  set dateOfEventFunction(createDate: string) {
     this.createDate = createDate;
   }
 

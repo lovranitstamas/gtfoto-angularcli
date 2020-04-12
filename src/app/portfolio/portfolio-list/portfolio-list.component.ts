@@ -24,7 +24,6 @@ export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy 
     fitWidth: true
   };
 
-  pictures: PortfolioPictureModel[];
   isLoggedIn: boolean;
   isAdmin: boolean;
   fullListLength: number;
@@ -32,9 +31,13 @@ export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy 
   fullListView = false;
   emptyList = false;
   loading = true;
+  serverError = false;
+  serverErrorCode: number;
 
-  masonryImages; // remove type
-  resultObjects: { id: string; nodeId: string; subfolder: string; category: string; title: string; filename: string; createDate: string }[];
+  picture: PortfolioPictureModel;
+  masonryImages: PortfolioPictureModel[];
+  aModifiedResultObjects: Array<PortfolioPictureModel> = [];
+
   private filteredText$ = new BehaviorSubject<string>(null);
   private _picturesSubscription: Subscription;
   private _isLoggedInSubscription: Subscription;
@@ -61,49 +64,61 @@ export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnInit() {
     this._picturesSubscription = this._portfolioService.getPictureList(this.node).pipe(
       flatMap(
-        pictures => {
-          pictures.length === 0 ? this.emptyList = true : this.emptyList = false;
-          this.fullListLength = pictures.length;
+        response => {
+          if (response.status_code_header !== 200) {
+            console.log(response.status_code_header);
+            this.serverError = true;
+            this.serverErrorCode = response.status_code_header;
+            this._picturesSubscription.unsubscribe();
+            return null;
+          } else {
+            this.serverError = false;
+            const pictures = response.body['pictures'];
+            pictures.length === 0 ? this.emptyList = true : this.emptyList = false;
+            this.fullListLength = pictures.length;
 
-          return this.filteredText$.pipe(
-            map(
-              filterText => {
-                if (filterText === null) {
-                  return pictures;
-                } else {
-                  return pictures.filter(
-                    picture => {
-                      return picture.createDate.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
-                    }
-                  );
+            return this.filteredText$.pipe(
+              map(
+                filterText => {
+                  if (filterText === null) {
+                    return pictures;
+                  } else {
+                    return pictures.filter(
+                      picture => {
+                        return picture.createDate.split('-', 3).indexOf(filterText.toLowerCase()) > -1;
+                      });
+                  }
                 }
-              }
-            )
-          );
+              )
+            );
+          }
         }
       )
     ).subscribe(
-      pictures => {
-        this.pictures = pictures;
-        this.loading = false;
+      response => {
+        this.aModifiedResultObjects = [];
 
-        this.resultObjects = this.pictures.map((ev) => {
-          return {
-            id: ev.id,
-            nodeId: ev.nodeId,
-            subfolder: ev.subfolder,
-            category: ev.category,
-            title: ev.title,
-            filename: `${this.apiUrl}uploads/gallery/${ev.subfolder}/${ev.filename}`,
-            // filename: ${this.apiUrl}'api./uploads/gallery/' + ev.subfolder + '/' + ev.filename,
-            createDate: ev.createDate
-          };
+        response.map((ev) => {
+
+          this.picture = new PortfolioPictureModel();
+
+          this.picture.idFunction = ev.id;
+          this.picture.nodeIdFunction = ev.nodeId;
+          this.picture.subfolderFunction = ev.subfolder;
+          this.picture.categoryFunction = ev.category;
+          this.picture.titleFunction = ev.title;
+          this.picture.fileURLFunction = `${this.apiUrl}uploads/gallery/${ev.subfolder}/${ev.filename}`;
+          this.picture.dateOfEventFunction = ev.createDate;
+
+          this.aModifiedResultObjects.push(this.picture);
         });
 
+        this.loading = false;
+
         if (this.fullListView) {
-          this.masonryImages = this.resultObjects.slice(0, this.pictures.length);
+          this.masonryImages = this.aModifiedResultObjects.slice(0, this.fullListLength);
         } else {
-          this.masonryImages = this.resultObjects.slice(0, this.limit);
+          this.masonryImages = this.aModifiedResultObjects.slice(0, this.limit);
         }
 
       }
@@ -137,7 +152,7 @@ export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   showMoreImages() {
-    this.masonryImages = this.pictures.slice(0, this.pictures.length);
+    this.masonryImages = this.aModifiedResultObjects.slice(0, this.fullListLength);
     this.fullListView = true;
   }
 

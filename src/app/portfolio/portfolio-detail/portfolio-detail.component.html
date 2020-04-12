@@ -3,15 +3,14 @@
 
     <div class="card-header portfolio-detail-card-header">
       <div class="text-center">
-        <h3 *ngIf="!portfolioPicture.idF; else modify">Új kép feltöltése</h3>
+        <h3 *ngIf="!portfolioPicture.idFunction; else modify">Új kép feltöltése</h3>
         <ng-template #modify><h3>Kép szerkesztése</h3></ng-template>
       </div>
     </div>
 
-    <!--card-body-->
+
     <div class="card-body">
 
-      <!-- portfolioPictureForm.value-->
       <form #portfolioPictureForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="title">Képhez tartozó esemény címe:</label>
@@ -19,7 +18,7 @@
                  id="title"
                  placeholder="Esemény címe"
                  type="text"
-                 [(ngModel)]="portfolioPicture.titleF"
+                 [(ngModel)]="portfolioPicture.titleFunction"
                  required
                  name="title"
                  #title="ngModel"
@@ -34,17 +33,13 @@
                  id="date"
                  placeholder="Esemény időpontja"
                  type="text"
-                 [(ngModel)]="portfolioPicture.dateOfEventF"
+                 [(ngModel)]="portfolioPicture.dateOfEventFunction"
                  required
                  name="date"
                  #date="ngModel"
                  [disabled]="viewForm"
                  #typeup>
 
-          <!--<div>{{typeup.classList}}</div>
-          <div>{{typeup.className}}</div>
-          <hr>
-          form summa: <div>{{ portfolioPictureForm.touched }}</div>-->
 
           <alert class="mt-1" type="danger" *ngIf="date.touched && date.invalid">Kötelező mező!</alert>
         </div>
@@ -54,7 +49,7 @@
           <select class="form-control mb-3"
                   id="nodeId"
                   required
-                  [(ngModel)]="portfolioPicture.nodeIdF"
+                  [(ngModel)]="portfolioPicture.nodeIdFunction"
                   name="nodeId"
                   #node="ngModel"
                   [disabled]="setNode"
@@ -69,7 +64,7 @@
 
         <div class="form-group">
           <ng-container
-            *ngIf="!portfolioPicture.idF; else imgThumbnail">
+            *ngIf="!portfolioPicture.idFunction; else imgThumbnail">
             <label for="pictureURL">Fájl kiválasztása</label>
             <input
               class="form-control"
@@ -80,15 +75,15 @@
               (change)="detectFiles($event)"
               [disabled]="viewForm"
             >
-            <img *ngIf="portfolioPicture.id && !viewForm"
+            <img *ngIf="portfolioPicture.idFunction && !viewForm"
                  class="img-fluid img-thumbnail mt-3"
                  width="400"
                  alt="thumbnail"
-                 [src]="portfolioPicture.filenameF">
+                 [src]="portfolioPicture.fileURLFunction">
           </ng-container>
           <ng-template #imgThumbnail>
-            <h5 *ngIf="portfolioPicture.idF && !viewForm">KÉP NEM MÓDOSÍTHATÓ</h5>
-            <img class="img-fluid img-thumbnail" width="400" [src]="portfolioPicture.filenameF" alt="thumbnail">
+            <h5 *ngIf="portfolioPicture.idFunction && !viewForm">KÉP NEM MÓDOSÍTHATÓ</h5>
+            <img class="img-fluid img-thumbnail" width="400" [src]="portfolioPicture.fileURLFunction" alt="thumbnail">
           </ng-template>
         </div>
 
@@ -104,13 +99,13 @@
             <ng-template #editButtons>
               <button type="submit"
                       class="btn btn-primary btn-lg mr-1"
-                      [disabled]="portfolioPictureForm.invalid || (!portfolioPicture.idF && !selectedFiles)"
+                      [disabled]="portfolioPictureForm.invalid || (!portfolioPicture.idFunction && !selectedFiles)"
               >Mentés
               </button>
               <button type="button"
                       class="btn btn-danger btn-lg"
                       (click)="delete()"
-                      *ngIf="portfolioPicture.idF"
+                      *ngIf="portfolioPicture.idFunction"
               >Törlés
               </button>
             </ng-template>
@@ -120,6 +115,13 @@
                   (click)="navigateBack()"
           >Vissza
           </button>
+        </div>
+        <div class="form-group font-weight-bold text-center mt-3">
+          <alert dismissible="true"
+                 type="danger"
+                 *ngIf="messageToWebmaster"
+          >Nem várt hiba! Kérem keresse a rendszergazdát
+          </alert>
         </div>
       </form>
 

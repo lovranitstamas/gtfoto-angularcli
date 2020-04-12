@@ -40,8 +40,8 @@ import {PortfolioModule} from './portfolio/portfolio.module'; // use in user and
     PortfolioService,
     LoggedInGuard,
     ContactService,
-    {provide: 'API_URL', useValue: 'http://localhost:1234/'}
-    // {provide: 'API_URL', useValue: './'},
+    // {provide: 'API_URL', useValue: 'http://localhost:1234/'}
+    {provide: 'API_URL', useValue: './'},
   ],
   bootstrap: [AppComponent]
 })

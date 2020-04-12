@@ -1,42 +1,54 @@
 import {Inject, Injectable} from '@angular/core';
 import {PortfolioPictureModel} from './portfolio-picture-model';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
 
-  constructor(private _httpClient: HttpClient,  @Inject('API_URL') private apiUrl: string) {
+  constructor(private _httpClient: HttpClient, @Inject('API_URL') private apiUrl: string) {
   }
 
-  getPictureList(subfolder): Observable<PortfolioPictureModel[]> {
-    return this._httpClient.get<PortfolioPictureModel[]>(`${this.apiUrl}api/getPictureList.php?subfolder=${subfolder}`);
+  handleError(error: HttpErrorResponse) {
+    // console.log(error);
+    return throwError(error);
   }
 
-  getPortfolioById(pictureId) {
-    return this._httpClient.get<PortfolioPictureModel>(`${this.apiUrl}api/getPictureDatas.php?id=${pictureId}`);
+  getPictureList(subfolder): Observable<any> {
+    return this._httpClient.get<any>(`${this.apiUrl}api/getPictureList.php?subfolder=${subfolder}`);
   }
 
-  delete(param: PortfolioPictureModel) {
-    console.log(param);
-    return this._httpClient.delete<PortfolioPictureModel>(`${this.apiUrl}api/delete.php/?id=${param.id}`);
+  getPortfolioById(pictureId): Observable<any> {
+    return this._httpClient.get<any>(`${this.apiUrl}api/getPictureDatas.php?id=${pictureId}`);
   }
 
-  update(param: PortfolioPictureModel) {
-    console.log(param);
-    return this._httpClient.put<PortfolioPictureModel>(`${this.apiUrl}api/update.php`, param);
+  delete(picture: PortfolioPictureModel): Observable<any> {
+    const id = picture.idFunction;
+    const paramsPicture = new HttpParams()
+      .set('id', id.toString());
+    return this._httpClient.delete(`${this.apiUrl}api/deletePicture.php`, {params: paramsPicture}).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  create(param, data: File) {
+  update(picture: PortfolioPictureModel): Observable<any> {
+    return this._httpClient.put(`${this.apiUrl}api/updatePicture.php`, {data: picture}).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  create(picture: PortfolioPictureModel, data: File) {
     const formData = new FormData();
-    formData.append('title', param.title);
-    formData.append('nodeId', param.nodeId);
+    formData.append('title', picture.titleFunction);
+    formData.append('nodeId', picture.nodeIdFunction);
     formData.append('pictureURL', data, data.name);
-    formData.append('createDate', param.createDate);
-    console.log(formData);
-    const uploadURL = `${this.apiUrl}api/upload.php`;
-    return this._httpClient.post<any>(uploadURL, formData);
+    formData.append('createDate', picture.dateOfEventFunction);
+    const uploadURL = `${this.apiUrl}api/uploadPicture.php`;
+    return this._httpClient.post<any>(uploadURL, formData).pipe(
+      catchError(this.handleError)
+    );
   }
 }

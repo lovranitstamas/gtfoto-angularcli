@@ -97,7 +97,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionPortrait = this._portfolioService.getPictureList('portrait')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -115,7 +115,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionChildAndFamily = this._portfolioService.getPictureList('child-and-family')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -133,7 +133,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionPregnant = this._portfolioService.getPictureList('pregnant')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -151,7 +151,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionChristening = this._portfolioService.getPictureList('christening')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -169,7 +169,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionKindergarten = this._portfolioService.getPictureList('kindergarten')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -187,7 +187,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionCreative = this._portfolioService.getPictureList('creative')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -206,7 +206,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionEngaged = this._portfolioService.getPictureList('engaged')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -224,7 +224,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionPreparation = this._portfolioService.getPictureList('preparation')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -242,7 +242,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionPermission = this._portfolioService.getPictureList('permission')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -260,7 +260,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionCivilCerenomy = this._portfolioService.getPictureList('civil-cerenomy')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -278,7 +278,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionLiturgy = this._portfolioService.getPictureList('liturgy')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,
@@ -296,7 +296,7 @@ export class PhotogalleryPicturesComponent implements OnInit {
     this._picturesSubscriptionDinnerParty = this._portfolioService.getPictureList('dinner-party')
       .subscribe(
         pictures => {
-          pictures.map(
+          pictures.body['pictures'].map(
             picture => {
               const item = {
                 small: `${this.apiUrl}uploads/gallery/${picture.subfolder}/${picture.filename}`,

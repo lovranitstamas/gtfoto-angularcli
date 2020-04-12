@@ -27,6 +27,7 @@ function emailValidator(control: FormControl): { [s: string]: boolean } {
 })
 export class LoginComponent {
   loginAuthInfo: boolean;
+  messageToWebmaster: boolean;
   onProcess = false;
   loginForm: FormGroup;
   loginPassword: any;
@@ -51,6 +52,7 @@ export class LoginComponent {
   login(form) {
     this.onProcess = true;
     this.loginAuthInfo = false;
+    this.messageToWebmaster = false;
 
     if (form.valid) {
       this._userService.login(form.value).subscribe(
@@ -71,7 +73,13 @@ export class LoginComponent {
             this._userService.setUserToActive(this.remoteUser);
             this._router.navigate(['/user']);
           } else {
-            this.loginAuthInfo = true;
+            switch (response.status_code_header) {
+              case 404:
+                this.messageToWebmaster = true;
+                break;
+              default:
+                this.loginAuthInfo = true;
+            }
             console.log(response.status_code_header);
           }
         });
@@ -81,5 +89,6 @@ export class LoginComponent {
   closeAlert() {
     this.onProcess = false;
     this.loginAuthInfo = false;
+    this.messageToWebmaster = false;
   }
 }
