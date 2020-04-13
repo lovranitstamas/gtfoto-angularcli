@@ -18,6 +18,7 @@ import {PortfoliocardComponent} from '../portfoliocard/portfoliocard.component';
 import {PortfolioUploadLinkComponent} from '../portfolio-upload-link/portfolio-upload-link.component';
 import {PortfolioHeaderComponent} from '../portfolio-header/portfolio-header.component';
 import {PortfolioListComponent} from '../portfolio-list/portfolio-list.component';
+import { PortfolioSearchingBoxComponent } from '../portfolio-searching-box/portfolio-searching-box.component';
 
 export const weddingRoutes: Routes = [
   {path: '', component: TopicsComponent, pathMatch: 'full'},
@@ -35,6 +36,7 @@ export const weddingRoutes: Routes = [
     PortfoliocardComponent,
     PortfolioHeaderComponent,
     PortfolioListComponent,
+    PortfolioSearchingBoxComponent,
     PortfolioUploadLinkComponent,
 
     TopicsComponent,
@@ -51,6 +53,7 @@ export const weddingRoutes: Routes = [
     PortfoliocardComponent,
     PortfolioHeaderComponent,
     PortfolioListComponent,
+    PortfolioSearchingBoxComponent,
     PortfolioUploadLinkComponent
   ],
   imports: [

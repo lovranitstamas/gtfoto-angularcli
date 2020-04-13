@@ -1,17 +1,17 @@
-import {AfterViewInit, Component, ElementRef, Inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import {PortfolioPictureModel} from '../../shared/portfolio-picture-model';
-import {BehaviorSubject, fromEvent, Subscription} from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
 import {PortfolioService} from '../../shared/portfolio.service';
 import {UserService} from '../../shared/user.service';
-import {delay, distinctUntilChanged, flatMap, map} from 'rxjs/operators';
+import {flatMap, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-portfolio-list',
   templateUrl: './portfolio-list.component.html',
   styleUrls: ['./portfolio-list.component.scss']
 })
-export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PortfolioListComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchInput') searchInput: ElementRef;
   @Input() node;
@@ -125,27 +125,6 @@ export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy 
     );
   }
 
-  public ngAfterViewInit() {
-    const input = document.querySelector('#search-input');
-    // this.searchInput.nativeElement
-    fromEvent(input, 'keyup').pipe(
-      delay(300),
-      map(
-        (event: Event) => {
-          return (event.srcElement as HTMLInputElement).value;
-        }
-      ),
-      distinctUntilChanged())
-      .subscribe(
-        text => {
-          if (text.length === 0) {
-            text = null;
-          }
-          this.filteredText$.next(text);
-        }
-      );
-  }
-
   ngOnDestroy(): void {
     this._picturesSubscription.unsubscribe();
     this._isLoggedInSubscription.unsubscribe();
@@ -154,6 +133,10 @@ export class PortfolioListComponent implements OnInit, AfterViewInit, OnDestroy 
   showMoreImages() {
     this.masonryImages = this.aModifiedResultObjects.slice(0, this.fullListLength);
     this.fullListView = true;
+  }
+
+  detectSearching(filteredText) {
+    this.filteredText$.next(filteredText);
   }
 
 }
