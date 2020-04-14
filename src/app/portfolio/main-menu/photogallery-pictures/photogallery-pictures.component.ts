@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from 'ngx-gallery';
-import {PortfolioService} from '../../../../shared/portfolio.service';
+import {PortfolioService} from '../../../shared/portfolio.service';
 import {Subscription} from 'rxjs';
 
 @Component({

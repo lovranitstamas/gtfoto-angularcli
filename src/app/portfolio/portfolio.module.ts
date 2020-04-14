@@ -7,56 +7,33 @@ import {NgxMasonryModule} from 'ngx-masonry';
 
 import {PortfolioDetailComponent} from './portfolio-detail/portfolio-detail.component';
 
-import {PhotogalleryComponent} from './main-menu/photogallery/photogallery.component';
-import {PhotogalleryPicturesComponent} from './main-menu/photogallery/photogallery-pictures/photogallery-pictures.component';
-import {PortraitComponent} from './main-menu/portrait/portrait.component';
-import {PortraitListComponent} from './main-menu/portrait/portrait-list/portrait-list.component';
-import {ChildAndFamilyListComponent} from './main-menu/child-and-family/child-and-family-list/child-and-family-list.component';
-import {ChildAndFamilyComponent} from './main-menu/child-and-family/child-and-family.component';
-import {PregnantComponent} from './main-menu/pregnant/pregnant.component';
-import {PregnantListComponent} from './main-menu/pregnant/pregnant-list/pregnant-list.component';
-import {ChristeningComponent} from './main-menu/christening/christening.component';
-import {ChristeningListComponent} from './main-menu/christening/christening-list/christening-list.component';
-import {KindergartenComponent} from './main-menu/kindergarten/kindergarten.component';
-import {KindergartenListComponent} from './main-menu/kindergarten/kindergarten-list/kindergarten-list.component';
+import {PhotogalleryPicturesComponent} from './main-menu/photogallery-pictures/photogallery-pictures.component';
+import {PortraitListComponent} from './main-menu/portrait-list/portrait-list.component';
+import {ChildAndFamilyListComponent} from './main-menu/child-and-family-list/child-and-family-list.component';
+import {PregnantListComponent} from './main-menu/pregnant-list/pregnant-list.component';
+import {ChristeningListComponent} from './main-menu/christening-list/christening-list.component';
+import {KindergartenListComponent} from './main-menu/kindergarten-list/kindergarten-list.component';
+
 import {WeddingComponent} from './wedding/wedding.component';
 import {WeddingModule, weddingRoutes as weddingChildRoutes} from './wedding/wedding.module';
+import {PortfolioMenuIndicatorComponent} from './portfolio-menu-indicator/portfolio-menu-indicator.component';
 
 import {LoggedInGuard} from '../shared/logged-in.guard';
 import {FormsModule} from '@angular/forms';
 import {AlertModule} from 'ngx-bootstrap';
 
+
 export const portfolioRoutes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: 'photogallery', component: PhotogalleryComponent, children: [
-          {path: '', component: PhotogalleryPicturesComponent}]
-      },
-      {
-        path: 'portrait', component: PortraitComponent, children: [
-          {path: '', component: PortraitListComponent}]
-      },
-      {
-        path: 'child-and-family', component: ChildAndFamilyComponent, children: [
-          {path: '', component: ChildAndFamilyListComponent}]
-      },
-      {
-        path: 'pregnant', component: PregnantComponent, children: [
-          {path: '', component: PregnantListComponent}]
-      },
-      {
-        path: 'christening', component: ChristeningComponent, children: [
-          {path: '', component: ChristeningListComponent}]
-      },
-      {
-        path: 'kindergarten', component: KindergartenComponent, children: [
-          {path: '', component: KindergartenListComponent}]
-      },
-      {
-        path: 'wedding', component: WeddingComponent, children: weddingChildRoutes
-      },
+      {path: 'photogallery', component: PhotogalleryPicturesComponent},
+      {path: 'portrait', component: PortraitListComponent},
+      {path: 'child-and-family', component: ChildAndFamilyListComponent},
+      {path: 'pregnant', component: PregnantListComponent},
+      {path: 'christening', component: ChristeningListComponent},
+      {path: 'kindergarten', component: KindergartenListComponent},
+      {path: 'wedding', component: WeddingComponent, children: weddingChildRoutes},
       {path: 'new', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]},
       {path: ':node/:id', component: PortfolioDetailComponent, canActivate: [LoggedInGuard]}
     ]
@@ -67,19 +44,15 @@ export const portfolioRoutes: Routes = [
   declarations: [
     PortfolioDetailComponent,
 
-    PhotogalleryComponent,
     PhotogalleryPicturesComponent,
-    PortraitComponent,
     PortraitListComponent,
-    ChildAndFamilyComponent,
     ChildAndFamilyListComponent,
-    PregnantComponent,
     PregnantListComponent,
-    ChristeningComponent,
     ChristeningListComponent,
-    KindergartenComponent,
     KindergartenListComponent,
-    WeddingComponent
+
+    WeddingComponent,
+    PortfolioMenuIndicatorComponent
   ],
   imports: [
     CommonModule,
@@ -91,8 +64,7 @@ export const portfolioRoutes: Routes = [
     AlertModule.forRoot(),
     WeddingModule
   ],
-  exports: [
-  ]
+  exports: []
 })
 export class PortfolioModule {
 }

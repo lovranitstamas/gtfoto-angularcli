@@ -16,18 +16,3 @@ body {
   min-height: 100vh;
   padding-bottom: 130px;
 }
-
-/* start indicator */
-#menuIndicator {
-  background-color: $yellow;
-  padding: 15px;
-  position: fixed;
-  top: 200px;
-  left: 0;
-  z-index: 1000;
-  color: $black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  font-weight: bold;
-  border: 1px double $light-blue;
-}
