@@ -64,7 +64,9 @@ export const portfolioRoutes: Routes = [
     AlertModule.forRoot(),
     WeddingModule
   ],
-  exports: []
+  exports: [
+    PortfolioMenuIndicatorComponent
+  ]
 })
 export class PortfolioModule {
 }
